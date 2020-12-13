@@ -1,0 +1,156 @@
+' @file   class_diagram.pu
+' @note   クラス図出力用のファイル
+' @note   java -jar plantuml.jar -graphvizdot C:\Graphviz\bin\dot.exe class_diagram.pu
+' @see    https://qiita.com/opengl-8080/items/98c510b8ca060bdd2ea3
+' @note   高度情報演習2C Team3
+' @auther AL18036 Kataoka Nagi
+
+@startuml
+scale 1.5
+skinparam DefaultFontName メイリオ
+' 可視性の変更
+skinparam classAttributeIconSize 0
+
+header 
+Team 3 : AL18036 Kataoka Nagi
+2020-12-14 Version 0.0
+Edit: New .pu file
+end header
+
+title
+**Kodo 2C Team 3: Class Diagram**
++ public
+~- private
+end title
+' __static__
+
+' class def
+' @see https://qiita.com/KeithYokoma/items/ee21fec6a3ebb5d1e9a8
+
+class ClassName
+
+note left
+  --Folder Tree--
+  2C_team3
+  |_ src
+    |_ foo.java
+    |_ bar.java
+  |_ out
+    |_ foo.class
+    |_ bar.class
+  |_ sql
+    |_ hoge.sql
+    |_ fuga.sql
+  |_ lib
+    |_ piyo.jar
+end note
+
+class ClassName implements Interface {
+  - fieldName: Type = Value
+
+  + methodName(): Returns
+}
+
+
+class Use {
+}
+
+class ClassName extends Extends {
+}
+
+ClassName ..> Use
+
+' ********** PlantUML Tutorial **********
+
+' note left
+
+'   --木構造--
+'   |_build.gradle
+'   |_src
+'     |_main
+'       |_java
+'         |_**bold**
+'         |_--strike--
+'         |_//itaric//
+'         |___underline__
+'         |_""monospace""
+'     |_test
+
+' end note
+
+' class Hello　<<StereoType>> {
+'     {abstract} one: String
+'     {static} three(param1: String, param2: int): boolean
+'     String two
+'     int four(List<String> param)
+' }
+' class World <Template>{
+'     - privateField: int
+'     # protectedField: int
+'     ~ packagePrivateField: int
+'     + publicField: int
+
+'     - privateMethod(): void
+'     # protectedMethod(): void
+'     ~ packagePrivateMethod(): void
+'     + publicMethod(): void
+' }
+' note left : note
+' note top of Hello: note
+
+' interface hoge
+' abstruct class hoge
+' enum HelloWorld {
+'     ONE
+'     TWO
+'     THREE
+' }
+
+' interface One
+' interface Two
+' interface Three extends Two
+' interface Four
+' class Five implements One, Three
+' class Six extends Five implements Four {
+'     field: String
+'     method(): void
+' }
+
+' Hello -- World
+' One --> Two
+' Three <-- Four
+' Five <--> Six
+' Seven x-- Eight
+' Nine --x Ten
+' One ..> Two
+' Three <.. Four
+' One --|> Two
+' Three <|-- Four
+' One ..|> Two
+' Three <|.. Four
+' One --o Two
+' Three o-- Four
+' One --* Two
+' Three *-- Four
+' One -- Two : Hoge
+' Three -- Four : Fuga >
+' Five -- Six : < Piyo
+' One "Foo" -- Two 
+' Three -- "Bar" Four
+' Five "1" -- "1..*" Six
+' Seven "1 Fizz" -- "~* Buzz" Eight
+
+' package one.two {
+'     class Hello
+' }
+' package three.four {
+'     World -- Hello
+' }
+
+' Hello -- World
+' note on link
+' hoge
+' fuga
+' end note
+
+@enduml
