@@ -5,7 +5,7 @@
 ' @note   高度情報演習2C Team3
 ' @auther AL18036 Kataoka Nagi
 
-@startuml
+@startuml ./class_diagram.png
 scale 1.5
 skinparam DefaultFontName メイリオ
 ' 可視性の変更
@@ -45,20 +45,40 @@ note left
     |_ piyo.jar
 end note
 
-class ClassName implements Interface {
-  - fieldName: Type = Value
+' ********** PlantUML Sample **********
 
-  + methodName(): Returns
-}
+' class ClassName
+
+' note left
+'   --Folder Tree--
+'   2C_team3
+'   |_ src
+'     |_ foo.java
+'     |_ bar.java
+'   |_ out
+'     |_ foo.class
+'     |_ bar.class
+'   |_ sql
+'     |_ hoge.sql
+'     |_ fuga.sql
+'   |_ lib
+'     |_ piyo.jar
+' end note
+
+' class ClassName implements Interface {
+'   - fieldName: Type = Value
+
+'   + methodName(): Returns
+' }
 
 
-class Use {
-}
+' class Use {
+' }
 
-class ClassName extends Extends {
-}
+' class ClassName extends Extends {
+' }
 
-ClassName ..> Use
+' ClassName ..> Use
 
 ' ********** PlantUML Tutorial **********
 
