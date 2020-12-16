@@ -31,22 +31,52 @@ end title
 ' class def
 ' @see https://qiita.com/KeithYokoma/items/ee21fec6a3ebb5d1e9a8
 
-class ClassName
+package com.github.stsubasa0804.mhdamagecalculator {
+  package com.github.stsubasa0804.mhdamagecalculator.application {
+  }
+  package com.github.stsubasa0804.mhdamagecalculator.ctrl {
+  }
+  package com.github.stsubasa0804.mhdamagecalculator.jdbc {
+  }
+}
+' package java.sql.* {
+' }
+' com.github.stsubasa0804.mhdamagecalculator.jdbc +-- java.sql.*
+
+
+package com.github.stsubasa0804.mhdamagecalculator.application {
+  ' @note Scene Builder (GUI tool)
+  ' @see  https://qiita.com/tarosa0001/items/05ac653a091b7d1290f9
+  class ApplicationMain
+}
+package com.github.stsubasa0804.mhdamagecalculator.ctrl {
+' @note Scene Builder (GUI tool)
+' @see  https://qiita.com/tarosa0001/items/05ac653a091b7d1290f9
+  class ApplicationController
+}
+package com.github.stsubasa0804.mhdamagecalculator.jdbc {
+  ' @note DAO pattern
+  ' @see https://kanda-it-school-kensyu.com/java-jdbc-contents/jj_ch04/jj_0401/
+  class DataAccessObject
+}
 
 note left
   --Folder Tree--
   2C_team3
-  |_ src
-    |_ foo.java
-    |_ bar.java
+  |_ src/main/java/com/github/stsubasa0804/mhdamagecalculator
+    |_ application
+      |_ ApplicationMain.java
+      |_ ApplicationMain.fxml
+      |_ application.css
+    |_ ctrl
+      |_ ApplicationController.java
+    |_ jdbc
+      |_ DataAccessObject.java
+    |_ sql
+      |_ hoge.sql
+      |_ fuga.sql
   |_ out
-    |_ foo.class
-    |_ bar.class
-  |_ sql
-    |_ hoge.sql
-    |_ fuga.sql
-  |_ lib
-    |_ piyo.jar
+    |_ ~*.class
 end note
 
 ' ********** PlantUML Sample **********
