@@ -44,11 +44,20 @@ package com.github.stsubasa0804.mhdamagecalculator {
   package com.github.stsubasa0804.mhdamagecalculator.jdbc {
   }
 }
-' package java.sql.* {
-' }
+package java.sql.* {
+}
+package javafx.* {
+}
 ' com.github.stsubasa0804.mhdamagecalculator.jdbc +-- java.sql.*
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+package javafx.* {
+  class Application
+  Interface Initializable
+}
+
+''''''''''''''''''''''''''''''''''''''''''''''''''
 
 ' @note クラスの命名規則
 ' @see  https://qiita.com/KeithYokoma/items/ee21fec6a3ebb5d1e9a8
@@ -56,7 +65,10 @@ package com.github.stsubasa0804.mhdamagecalculator {
 package com.github.stsubasa0804.mhdamagecalculator.application {
   ' @note Scene Builder (GUI tool)
   ' @see  https://qiita.com/tarosa0001/items/05ac653a091b7d1290f9
-  class ApplicationMain
+  class ApplicationMain extends Application {
+    + start(primaryStage: Stage): void
+    + {static} main(args: String[]): void
+  }
 }
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -64,7 +76,20 @@ package com.github.stsubasa0804.mhdamagecalculator.application {
 package com.github.stsubasa0804.mhdamagecalculator.ctrl {
 ' @note Scene Builder (GUI tool)
 ' @see  https://qiita.com/tarosa0001/items/05ac653a091b7d1290f9
-  class ApplicationController
+  class ApplicationController extends Initializable {
+    - dropDown: ChoiceBox<String>
+    - textBox: TextField
+    - button: Button
+
+    + initialize(location: URL, resources: ResourceBundle): void
+    + onClick(event: ActionEvent): void
+    + getToolType(): ChoiceBox<String>
+    + setToolType(toolType: ChoiceBox<String>): void
+    + getInputFile(): TextField
+    + setInputFile(textBox: TextField): void
+    + getReference(): Button
+    + setReference(button: Button): void
+  }
 }
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''
