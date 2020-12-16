@@ -9,17 +9,23 @@
 ' @note      java -jar plantuml.jar -graphvizdot C:\Graphviz\bin\dot.exe class_diagram.pu
 ' @see       https://qiita.com/opengl-8080/items/98c510b8ca060bdd2ea3
 
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
 @startuml ./class_diagram.png
 scale 1.5
 skinparam DefaultFontName メイリオ
 ' 可視性の変更
 skinparam classAttributeIconSize 0
 
+''''''''''''''''''''''''''''''''''''''''''''''''''
+
 header 
 Team 3 : AL18036 Kataoka Nagi
 2020-12-16 Version 1.0
 Edit: New draft diagram
 end header
+
+''''''''''''''''''''''''''''''''''''''''''''''''''
 
 title
 **Kodo 2C Team 3: Class Diagram**
@@ -28,8 +34,7 @@ title
 end title
 ' __static__
 
-' class def
-' @see https://qiita.com/KeithYokoma/items/ee21fec6a3ebb5d1e9a8
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
 package com.github.stsubasa0804.mhdamagecalculator {
   package com.github.stsubasa0804.mhdamagecalculator.application {
@@ -43,22 +48,34 @@ package com.github.stsubasa0804.mhdamagecalculator {
 ' }
 ' com.github.stsubasa0804.mhdamagecalculator.jdbc +-- java.sql.*
 
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+' @note クラスの命名規則
+' @see  https://qiita.com/KeithYokoma/items/ee21fec6a3ebb5d1e9a8
 
 package com.github.stsubasa0804.mhdamagecalculator.application {
   ' @note Scene Builder (GUI tool)
   ' @see  https://qiita.com/tarosa0001/items/05ac653a091b7d1290f9
   class ApplicationMain
 }
+
+''''''''''''''''''''''''''''''''''''''''''''''''''
+
 package com.github.stsubasa0804.mhdamagecalculator.ctrl {
 ' @note Scene Builder (GUI tool)
 ' @see  https://qiita.com/tarosa0001/items/05ac653a091b7d1290f9
   class ApplicationController
 }
+
+''''''''''''''''''''''''''''''''''''''''''''''''''
+
 package com.github.stsubasa0804.mhdamagecalculator.jdbc {
   ' @note DAO pattern
   ' @see https://kanda-it-school-kensyu.com/java-jdbc-contents/jj_ch04/jj_0401/
   class DataAccessObject
 }
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
 note left
   --Folder Tree--
