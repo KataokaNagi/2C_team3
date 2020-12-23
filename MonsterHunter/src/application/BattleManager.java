@@ -1,4 +1,5 @@
 package application;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class BattleManager {
@@ -7,11 +8,9 @@ public class BattleManager {
 	int element_player = 0;//*
 	int elementValue_player = 0;//*
 
+	ArrayList<String> log = new ArrayList<String>();
+
 	Random rnd = new Random();
-	public static void main(String[] args) {
-
-
-	}
 
 	public void PlayerAttack(int Parts_id) {
 		int HP_monster = 0;//*
@@ -28,7 +27,7 @@ public class BattleManager {
 
 		float damage = attack_player *( (float)hardness /100) * affinityCorrection * sharpnessCorrection + ElementDamage_PlayerAttack();
 		HP_monster -= damage;
-
+		SharpnessDecrease(sharpness);
 		if (HP_monster <= 0) {
 			//シーン遷移(終了)
 		}
@@ -66,5 +65,25 @@ public class BattleManager {
 
 		result = (100 - elementResistance)/100;
 		return result;
+	}
+
+	void AddLog(String addText) {
+		log.add(addText + "\n");
+		for(int i = log.size();i >= 0; --i) {
+
+		}
+		try {
+            Thread.sleep(1000);//1秒待機
+        } catch(InterruptedException e){
+            e.printStackTrace();
+        }
+	}
+
+	int SharpnessDecrease(int sharpness) {
+		sharpness -= 1;
+		if (sharpness < 0) {
+			//次の色に変更
+		}
+		return sharpness;
 	}
 }
