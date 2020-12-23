@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <libraryInfos>
+    <libraryInfo home="C:\Users\TsubasaSaito\Desktop\pleiades\eclipse\jre" version="11.0.6"/>
     <libraryInfo home="C:\pleiades\java\6" version="1.6.0_45">
         <bootpath>
             <entry path="C:\pleiades\java\6\jre\lib\resources.jar"/>
@@ -59,4 +60,5 @@
     </libraryInfo>
     <libraryInfo home="C:\pleiades\java\11" version="11.0.6"/>
     <libraryInfo home="C:\pleiades\java\14" version="14"/>
+    <libraryInfo home="C:\Users\TsubasaSaito\Desktop\pleiades\eclipse" version="11.0.6"/>
 </libraryInfos>
