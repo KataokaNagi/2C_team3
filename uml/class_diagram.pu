@@ -21,8 +21,10 @@ skinparam classAttributeIconSize 0
 
 header 
 Team 3 : AL18036 Kataoka Nagi
-2020-12-16 Version 1.0
-Edit: New draft diagram
+2020-12-23 15:01:29
+Version 1.1
+Add: Implement existing methods
+Edit: Change file structure
 end header
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -36,93 +38,137 @@ end title
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-package com.github.stsubasa0804.mhdamagecalculator {
-  package com.github.stsubasa0804.mhdamagecalculator.application {
-    class ApplicationMain
+package src {
+  package src.application {
+    class Main
   }
-  package com.github.stsubasa0804.mhdamagecalculator.ctrl {
+  package src.gameprocess {
   }
-  package com.github.stsubasa0804.mhdamagecalculator.jdbc {
+  package src.jdbc {
   }
 }
-package java.sql.* {
-}
-package javafx.* {
-}
-' com.github.stsubasa0804.mhdamagecalculator.jdbc +-- java.sql.*
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
 note left
   --Folder Tree--
   2C_team3
-  |_ src/main/java/com/github/stsubasa0804/mhdamagecalculator
+  |_ src
     |_ application
-      |_ ApplicationMain.java
-      |_ ApplicationMain.fxml
       |_ application.css
-    |_ ctrl
-      |_ ApplicationController.java
+      |_ Battle.fxml
+      |_ Menu.fxml
+      |_ BattleController.java
+      |_ Main.java
+      |_ MenuController.java
+    |_ gameprocess
+      |_ BattleManager.java
     |_ jdbc
       |_ DataAccessObject.java
-    |_ sql
-      |_ hoge.sql
-      |_ fuga.sql
-  |_ out
+      |_ sql
+        |_ hoge.sql
+        |_ fuga.sql
+  |_ bin/application
     |_ ~*.class
 end note
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-package javafx.* {
+package java.sql {
+}
+
+package javafx {
   class Application
   Interface Initializable
 }
+
+src.jdbc --+ java.sql
+src.application --+ javafx
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''
 
 ' @note クラスの命名規則
 ' @see  https://qiita.com/KeithYokoma/items/ee21fec6a3ebb5d1e9a8
 
-package com.github.stsubasa0804.mhdamagecalculator.application {
+package src.application {
   ' @note Scene Builder (GUI tool)
   ' @see  https://qiita.com/tarosa0001/items/05ac653a091b7d1290f9
-  class ApplicationMain extends Application {
+  class Main extends Application {
     + start(primaryStage: Stage): void
     + {static} main(args: String[]): void
   }
-}
+  
+  class MenuController {
+    - weapon_field: ComboBox<String>
+    - armor_field: ComboBox<String>
+    - monster_field: ComboBox<String>
+    -  StartButton: Button
+    -  EndButton: Button
+    -  Attack_value: Label
+    -  Defense_value: Label
 
-''''''''''''''''''''''''''''''''''''''''''''''''''
+    # OnEndButton(event: ActionEvent): void
+    # OnStartButton(event: ActionEvent): void
+    # selectArmor(event: ActionEvent): void
+    # selectWeapon(event: ActionEvent): void
+  }
 
-package com.github.stsubasa0804.mhdamagecalculator.ctrl {
-' @note Scene Builder (GUI tool)
-' @see  https://qiita.com/tarosa0001/items/05ac653a091b7d1290f9
-  class ApplicationController extends Initializable {
-    - dropDown: ChoiceBox<String>
-    - textBox: TextField
-    - button: Button
-
-    + initialize(location: URL, resources: ResourceBundle): void
-    + onClick(event: ActionEvent): void
-    + getToolType(): ChoiceBox<String>
-    + setToolType(toolType: ChoiceBox<String>): void
-    + getInputFile(): TextField
-    + setInputFile(textBox: TextField): void
-    + getReference(): Button
-    + setReference(button: Button): void
+  class BattleController {
+    - Attack_Log: Label
+    - HP_Value: Label
+    - Sharpmess_Value: Label
+    - AttackButton: Button
+    
+    # OnAttackButton(event: ActionEvent): void
   }
 }
 
+' 記事のクラス
+  ' class ApplicationController extends Initializable {
+  '   - dropDown: ChoiceBox<String>
+  '   - textBox: TextField
+  '   - button: Button
+
+  '   + initialize(location: URL, resources: ResourceBundle): void
+  '   + onClick(event: ActionEvent): void
+  '   + getToolType(): ChoiceBox<String>
+  '   + setToolType(toolType: ChoiceBox<String>): void
+  '   + getInputFile(): TextField
+  '   + setInputFile(textBox: TextField): void
+  '   + getReference(): Button
+  '   + setReference(button: Button): void
+  ' }
+
+
 ''''''''''''''''''''''''''''''''''''''''''''''''''
 
-package com.github.stsubasa0804.mhdamagecalculator.jdbc {
+package src.gameprocess {
+  class BattleManager {
+    - monster_id: int
+    - element_player: int
+    - elementValue_player: int
+    - rnd: Random
+
+    + PlayerAttack(Parts_id: int): void
+    - MonsterAttack(): void
+    - ElementDamage_PlayerAttack(): float
+    - ElementCompatibilityCalculation_EnemyAttack(attackElement: int): float
+}
+
+''''''''''''''''''''''''''''''''''''''''''''''''''
+
+package src.jdbc {
   ' @note DAO pattern
   ' @see https://kanda-it-school-kensyu.com/java-jdbc-contents/jj_ch04/jj_0401/
   class DataAccessObject
 }
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+
+
+''''''''''''''''''''''''''''''''''''''''''''''''''
+
 
 ' ********** PlantUML Sample **********
 
