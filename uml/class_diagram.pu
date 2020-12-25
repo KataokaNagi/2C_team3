@@ -2,10 +2,10 @@
 ' @brief     クラス図出力用のファイル
 ' @note      高度情報演習2C 後半 木村教授担当分 Team3
 ' @auther    AL18036 Kataoka Nagi
-' @date      2020-12-25 23:18:44
+' @date      2020-12-26 06:07:28
 ' $Version   1.0
-' $Revision  1.2
-' @par       変更点：追加されたコードを反映
+' $Revision  1.3
+' @par       変更点：jdbcの実装部分を反映
 ' @note      java -jar plantuml.jar -graphvizdot C:\Graphviz\bin\dot.exe class_diagram.pu
 ' @see       https://qiita.com/opengl-8080/items/98c510b8ca060bdd2ea3
 
@@ -21,10 +21,10 @@ skinparam classAttributeIconSize 0
 
 header 
 Team 3 : AL18036 Kataoka Nagi
-2020-12-23 15:01:29
-Version 1.1
-Add: Implement existing methods
-Edit: Change file structure
+2020-12-26 06:07:40
+Implement existing code
+Add: Implement existing code
+Edit: 
 end header
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -168,7 +168,34 @@ package src.gameprocess {
 package src.jdbc {
   ' @note DAO pattern
   ' @see https://kanda-it-school-kensyu.com/java-jdbc-contents/jj_ch04/jj_0401/
-  class DataAccessObject
+
+  abstract class DBConnector {
+    - {static} RDB_DRIVE: final String
+    - {static} URL: final String
+    - {static} USER: final String
+    - {static} PASSWD: final String
+
+    + {static} getConnection(): Connection
+  }
+
+  abstract class DataAccessObject extends DBConnector {
+    # selectColumn(columnName: String, tableName: String, primaryKeyName: String): ArrayList<String>
+    # toIntegerList(strList: ArrayList<String>): ArrayList<Integer>
+    # closeResources(statement: Statement, connection: Connection): void
+  }
+
+  class MenuDAO extends DataAccessObject {
+    + MenuDAO(): void
+    + selectAllWeaponName(): ArrayList<String>
+    + selectAllArmorName(): ArrayList<String>
+    + selectAllMonsterName(): ArrayList<String>
+    + selectAllWeaponAttackVal(): ArrayList<Integer>
+    + selectAllArmorDiffenceVal(): ArrayList<Integer>
+  }
+
+  class BattleDAO extends DataAccessObject {
+    
+  }
 }
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
