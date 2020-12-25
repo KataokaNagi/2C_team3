@@ -2,10 +2,10 @@
 ' @brief     クラス図出力用のファイル
 ' @note      高度情報演習2C 後半 木村教授担当分 Team3
 ' @auther    AL18036 Kataoka Nagi
-' @date      2020-12-16 09:55:44
+' @date      2020-12-25 23:18:44
 ' $Version   1.0
-' $Revision  1.1
-' @par       変更点：クラス図の草稿を作成
+' $Revision  1.2
+' @par       変更点：追加されたコードを反映
 ' @note      java -jar plantuml.jar -graphvizdot C:\Graphviz\bin\dot.exe class_diagram.pu
 ' @see       https://qiita.com/opengl-8080/items/98c510b8ca060bdd2ea3
 
@@ -153,6 +153,14 @@ package src.gameprocess {
     - MonsterAttack(): void
     - ElementDamage_PlayerAttack(): float
     - ElementCompatibilityCalculation_EnemyAttack(attackElement: int): float
+    - AddLog(addText: String): void
+    - SharpnessDecrease(sharpness: int): int 
+  }
+
+  class EquipmentManager {
+    + GetAttack(weaponName: String): int
+    + GetDeffence(equipmentName: String): int
+  }
 }
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''
