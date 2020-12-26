@@ -3,10 +3,10 @@
 * @brief     DAOの汎用部分を実装する抽象クラス
 * @note      高度情報演習2C 後半 木村教授担当分 Team3
 * @auther    AL18036 Kataoka Nagi
-* @date      2020-12-26 22:36:34
+* @date      2020-12-27 04:00:43
 * $Version   1.0
-* $Revision  1.0
-* @par       変更点　：MenuDAO.javaから、BattleDAOと共通する要素を取り出し
+* $Revision  1.1
+* @par       追加：createTableメソッド，dropTableメソッドの形のみ
 * @see       https://www.kenschool.jp/blog/?p=1644
  */
 
@@ -79,6 +79,22 @@ abstract class DataAccessObject extends DBConnector {
       intList.add(Integer.parseInt(str));
     }
     return intList;
+  }
+
+  /**
+   * @fn createTable
+   * @brief SQL文でよく使うカラムを非正規化する汎用メソッド
+   */
+  public void createTable(String tableName) {
+    // TODO
+  }
+
+  /**
+   * @fn dropTable
+   * @brief テーブルを削除する汎用メソッド
+   */
+  public void dropTable(String tableName) {
+    // TODO
   }
 
   /**
