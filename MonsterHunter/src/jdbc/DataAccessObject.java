@@ -85,7 +85,7 @@ abstract class DataAccessObject extends DBConnector {
    * @fn createTable
    * @brief SQL文でよく使うカラムを非正規化する汎用メソッド
    */
-  public void createTable(String tableName) {
+  protected void createTable(String tableName) {
     // TODO
   }
 
@@ -93,7 +93,7 @@ abstract class DataAccessObject extends DBConnector {
    * @fn dropTable
    * @brief テーブルを削除する汎用メソッド
    */
-  public void dropTable(String tableName) {
+  protected void dropTable(String tableName) {
     // TODO
   }
 
