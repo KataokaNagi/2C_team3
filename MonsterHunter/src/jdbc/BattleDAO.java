@@ -3,11 +3,10 @@
 * @brief     バトル画面で用いるデータアクセスオブジェクト
 * @note      高度情報演習2C 後半 木村教授担当分 Team3
 * @auther    AL18036 Kataoka Nagi
-* @date      2020-12-26 22:43:31
-* $Version   1.0
-* $Revision  1.1
-* @par       変更点　：メンバの追加と初期化
-* @par       変更点　：クラスの抽象化（非正規化のテーブルごとにクラスを作成予定）
+* @date      2020-12-28 02:15:41
+* $Version   1.1
+* $Revision  1.0
+* @par       追加：ゲッターとセッター
 * @see       https://www.kenschool.jp/blog/?p=1644
 */
 
@@ -23,8 +22,34 @@ abstract class BattleDAO extends DataAccessObject {
    * @brief メンバの初期化（メニュー画面で選択した項目名）
    */
   public BattleDAO(String weaponName, String armorName, String monsterName) {
+    this.setWeaponName(weaponName);
+    this.setArmorName(armorName);
+    this.setMonsterName(monsterName);
+  }
+
+  // Setter
+  public String getWeaponName() {
+    return this.weaponName;
+  }
+
+  public String getArmorName() {
+    return this.armorName;
+  }
+
+  public String getMonsterName() {
+    return this.monsterName;
+  }
+
+  // Getter
+  public void setWeaponName(String weaponName) {
     this.weaponName = weaponName;
+  }
+
+  public void setArmorName(String armorName) {
     this.armorName = armorName;
+  }
+
+  public void setMonsterName(String monsterName) {
     this.monsterName = monsterName;
   }
 }
