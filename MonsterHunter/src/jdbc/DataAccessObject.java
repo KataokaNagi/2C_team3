@@ -160,7 +160,8 @@ abstract class DataAccessObject extends DBConnector {
    * @param[in] primaryKeyColumnName: 更新したいフィールドが存在するテーブルの主キーの名前
    * @param[in] primaryKey: 更新したいフィールドに対応する主キー
    */
-  protected void updateField(String columnName, String tableName, String primaryKeyColumnName, String primaryKey) {
+  protected void updateField(String field, String columnName, String tableName, String primaryKeyColumnName,
+      String primaryKey) {
     // TODO
   }
 
