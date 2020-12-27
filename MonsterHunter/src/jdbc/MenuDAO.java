@@ -40,8 +40,8 @@ public class MenuDAO extends DataAccessObject {
   public ArrayList<String> selectAllWeaponName() {
     String columnName = "weapon_name";
     String tableName = "weapon";
-    String primaryKeyName = "weapon_id";
-    return selectColumn(columnName, tableName, primaryKeyName);
+    String primaryKeyColumnName = "weapon_id";
+    return selectColumn(columnName, tableName, primaryKeyColumnName);
   }
 
   /**
@@ -52,8 +52,8 @@ public class MenuDAO extends DataAccessObject {
   public ArrayList<String> selectAllArmorName() {
     String columnName = "armor_name";
     String tableName = "armor";
-    String primaryKeyName = "armor_id";
-    return selectColumn(columnName, tableName, primaryKeyName);
+    String primaryKeyColumnName = "armor_id";
+    return selectColumn(columnName, tableName, primaryKeyColumnName);
   }
 
   /**
@@ -64,8 +64,8 @@ public class MenuDAO extends DataAccessObject {
   public ArrayList<String> selectAllMonsterName() {
     String columnName = "monster_name";
     String tableName = "monster";
-    String primaryKeyName = "monster_id";
-    return selectColumn(columnName, tableName, primaryKeyName);
+    String primaryKeyColumnName = "monster_id";
+    return selectColumn(columnName, tableName, primaryKeyColumnName);
   }
 
   /**
@@ -76,8 +76,8 @@ public class MenuDAO extends DataAccessObject {
   public ArrayList<Integer> selectAllWeaponAttackVal() {
     String columnName = "weapon_attack_val";
     String tableName = "weapon";
-    String primaryKeyName = "weapon_id";
-    return toIntegerList(selectColumn(columnName, tableName, primaryKeyName));
+    String primaryKeyColumnName = "weapon_id";
+    return toIntegerList(selectColumn(columnName, tableName, primaryKeyColumnName));
   }
 
   /**
@@ -88,7 +88,7 @@ public class MenuDAO extends DataAccessObject {
   public ArrayList<Integer> selectAllArmorDiffenceVal() {
     String columnName = "armor_diffence_val";
     String tableName = "armor";
-    String primaryKeyName = "armor_id";
-    return toIntegerList(selectColumn(columnName, tableName, primaryKeyName));
+    String primaryKeyColumnName = "armor_id";
+    return toIntegerList(selectColumn(columnName, tableName, primaryKeyColumnName));
   }
 }

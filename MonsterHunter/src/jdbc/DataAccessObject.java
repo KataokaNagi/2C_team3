@@ -5,8 +5,8 @@
 * @auther    AL18036 Kataoka Nagi
 * @date      2020-12-27 22:02:07
 * $Version   1.0
-* $Revision  1.2
-* @par       編集：ResultSetをクローズ
+* $Revision  1.3
+* @par       編集：primaryKeyName -> primaryKeyColumnName
 * @see       https://www.kenschool.jp/blog/?p=1644
  */
 
@@ -26,10 +26,10 @@ abstract class DataAccessObject extends DBConnector {
    * @brief カラム内のフィールドを全て返す
    * @param[in] columnName: 検索したいカラムの名前
    * @param[in] tableName: 検索したいカラムが存在するテーブルの名前
-   * @param[in] primaryKeyName: 検索したいカラムの主キーの名前
+   * @param[in] primaryKeyColumnName: 検索したいカラムの主キーの名前
    * @return 指定されたカラムの全フィールドのオブジェクトリスト
    */
-  protected ArrayList<String> selectColumn(String columnName, String tableName, String primaryKeyName) {
+  protected ArrayList<String> selectColumn(String columnName, String tableName, String primaryKeyColumnName) {
     Connection connection = null; // ! DBコネクション
     Statement statement = null; // ! SQLステートメント
     ResultSet resultSet = null; // ! SQLリザルトセット
@@ -41,7 +41,7 @@ abstract class DataAccessObject extends DBConnector {
     String sql = "";
     sql += "SELECT " + columnName;
     sql += " FROM " + tableName;
-    sql += "ORDER BY " + primaryKeyName;
+    sql += "ORDER BY " + primaryKeyColumnName;
 
     try {
       // DBに接続

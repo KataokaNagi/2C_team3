@@ -2,9 +2,9 @@
 ' @brief     クラス図出力用のファイル
 ' @note      高度情報演習2C 後半 木村教授担当分 Team3
 ' @auther    AL18036 Kataoka Nagi
-' @date      2020-12-27 22:10:34
+' @date      2020-12-27 22:23:30
 ' $Version   1.0
-' $Revision  1.5
+' $Revision  1.6
 ' @par       変更点：closeDBResourcesメソッドを編集
 ' @note      java -jar plantuml.jar -graphvizdot C:\Graphviz\bin\dot.exe class_diagram.pu
 ' @see       https://qiita.com/opengl-8080/items/98c510b8ca060bdd2ea3
@@ -180,7 +180,7 @@ package src.jdbc {
   }
 
   abstract class DataAccessObject extends DBConnector {
-    # selectColumn(columnName: String, tableName: String, primaryKeyName: String): ArrayList<String>
+    # selectColumn(columnName: String, tableName: String, primaryKeyColumnName: String): ArrayList<String>
     # toIntegerList(strList: ArrayList<String>): ArrayList<Integer>
     # createTable(tableName: String): void
     # dropTable(tableName: String): void
