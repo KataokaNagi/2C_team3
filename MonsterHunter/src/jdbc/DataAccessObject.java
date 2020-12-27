@@ -3,10 +3,10 @@
 * @brief     DAOの汎用部分を実装する抽象クラス
 * @note      高度情報演習2C 後半 木村教授担当分 Team3
 * @auther    AL18036 Kataoka Nagi
-* @date      2020-12-27 04:00:43
+* @date      2020-12-27 22:02:07
 * $Version   1.0
-* $Revision  1.1
-* @par       追加：createTableメソッド，dropTableメソッドの形のみ
+* $Revision  1.2
+* @par       編集：ResultSetをクローズ
 * @see       https://www.kenschool.jp/blog/?p=1644
  */
 
@@ -32,6 +32,7 @@ abstract class DataAccessObject extends DBConnector {
   protected ArrayList<String> selectColumn(String columnName, String tableName, String primaryKeyName) {
     Connection connection = null; // ! DBコネクション
     Statement statement = null; // ! SQLステートメント
+    ResultSet resultSet = null; // ! SQLリザルトセット
     ArrayList<String> rtnColumnList = new ArrayList<String>();
 
     // SQL文の作成
@@ -48,11 +49,11 @@ abstract class DataAccessObject extends DBConnector {
       statement = connection.createStatement();
 
       // SQL文発行
-      ResultSet rs = statement.executeQuery(sql);
+      resultSet = statement.executeQuery(sql);
 
       // 検索結果をArrayListに格納
-      while (rs.next()) {
-        rtnColumnList.add(rs.getString("isbn"));
+      while (resultSet.next()) {
+        rtnColumnList.add(resultSet.getString("isbn"));
       }
 
       // 例外処理
@@ -61,7 +62,7 @@ abstract class DataAccessObject extends DBConnector {
 
       // 後処理
     } finally {
-      this.closeResources(statement, connection);
+      this.closeDBResources(resultSet, statement, connection);
     }
 
     return rtnColumnList;
@@ -86,7 +87,7 @@ abstract class DataAccessObject extends DBConnector {
    * @brief SQL文でよく使うカラムを非正規化する汎用メソッド
    */
   protected void createTable(String tableName) {
-    // TODO
+    // TOD
   }
 
   /**
@@ -98,12 +99,21 @@ abstract class DataAccessObject extends DBConnector {
   }
 
   /**
-   * @fn closeResources
-   * @brief ステートメントとコネクションをこの順番にクローズする
+   * @fn closeDBResources
+   * @brief 後処理
+   * @note 後処理の順番 = 前処理の順番の逆
    * @param[in] statement: DBのステートメント
    * @param[in] connection: DBの接続情報
    */
-  protected void closeResources(Statement statement, Connection connection) {
+  protected void closeDBResources(ResultSet resultSet, Statement statement, Connection connection) {
+    // resultsetの後処理
+    if (resultSet != null) {
+      try {
+        resultSet.close();
+      } catch (SQLException ignore) { // ! よくわかってないけど他のを真似した
+      }
+    }
+
     // statementの後処理
     if (statement != null) {
       try {
