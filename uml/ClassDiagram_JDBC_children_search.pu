@@ -1,17 +1,17 @@
-' @file      class_diagram.pu
+' @file      ClassDiagram_JDBC_children_search.pu
 ' @brief     クラス図出力用のファイル
 ' @note      高度情報演習2C 後半 木村教授担当分 Team3
 ' @auther    AL18036 Kataoka Nagi
 ' @date      2020-12-28 07:26:13
-' $Version   1.1
+' $Version   1.2
 ' $Revision  1.0
-' @par       修正：selectの引数
-' @note      java -jar plantuml.jar -graphvizdot C:\Graphviz\bin\dot.exe class_diagram.pu -charset UTF-8
+' @par       修正：DAOの部分を別ファイルに移動
+' @note      java -jar plantuml.jar -graphvizdot C:\Graphviz\bin\dot.exe ClassDiagram_JDBC_children_search.pu -charset UTF-8
 ' @see       https://qiita.com/opengl-8080/items/98c510b8ca060bdd2ea3
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-@startuml ./class_diagram.png
+@startuml ./ClassDiagram_JDBC_children_search.png
 scale 1.5
 skinparam DefaultFontName メイリオ
 ' 可視性の変更
@@ -22,13 +22,13 @@ skinparam classAttributeIconSize 0
 header 
 Team 3 : AL18036 Kataoka Nagi
 2020-12-28 07:26:50
-修正：selectの引数
+修正：DAOの部分を別ファイルに移動
 end header
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''
 
 title
-**Kodo 2C Team 3: Class Diagram**
+**Kodo 2C Team 3: ClassDiagram_JDBC_children_search**
 + public
 ~- private
 end title
@@ -66,6 +66,12 @@ note left
       |_ DataAccessObject.java
       |_ MenuDAO.java
       |_ BattleDAO.java
+      |_ ShapnessSearchDAO.java
+      |_ PlayerStatusSearchDAO.java
+      |_ MonsterAttackStatusSearchDAO.java
+      |_ PlayerHpDAO.java
+      |_ MonsterMainHpDAO.java
+      |_ MonsterPartsHpDAO.java
       |_ sql
         |_ hoge.sql
         |_ fuga.sql
@@ -92,36 +98,6 @@ src.application --+ javafx
 ' @see  https://qiita.com/KeithYokoma/items/ee21fec6a3ebb5d1e9a8
 
 package src.application {
-  ' @note Scene Builder (GUI tool)
-  ' @see  https://qiita.com/tarosa0001/items/05ac653a091b7d1290f9
-  class Main extends Application {
-    + start(primaryStage: Stage): void
-    + {static} main(args: String[]): void
-  }
-  
-  class MenuController {
-    - weapon_field: ComboBox<String>
-    - armor_field: ComboBox<String>
-    - monster_field: ComboBox<String>
-    -  StartButton: Button
-    -  EndButton: Button
-    -  Attack_value: Label
-    -  Defense_value: Label
-
-    # OnEndButton(event: ActionEvent): void
-    # OnStartButton(event: ActionEvent): void
-    # selectArmor(event: ActionEvent): void
-    # selectWeapon(event: ActionEvent): void
-  }
-
-  class BattleController {
-    - Attack_Log: Label
-    - HP_Value: Label
-    - Sharpmess_Value: Label
-    - AttackButton: Button
-    
-    # OnAttackButton(event: ActionEvent): void
-  }
 }
 
 ' 記事のクラス
@@ -144,24 +120,6 @@ package src.application {
 ''''''''''''''''''''''''''''''''''''''''''''''''''
 
 package src.gameprocess {
-  class BattleManager {
-    - monster_id: int
-    - element_player: int
-    - elementValue_player: int
-    - rnd: Random
-
-    + PlayerAttack(Parts_id: int): void
-    - MonsterAttack(): void
-    - ElementDamage_PlayerAttack(): float
-    - ElementCompatibilityCalculation_EnemyAttack(attackElement: int): float
-    - AddLog(addText: String): void
-    - SharpnessDecrease(sharpness: int): int 
-  }
-
-  class EquipmentManager {
-    + GetAttack(weaponName: String): int
-    + GetDeffence(equipmentName: String): int
-  }
 }
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -169,39 +127,7 @@ package src.gameprocess {
 package src.jdbc {
   ' @note DAO pattern
   ' @see https://kanda-it-school-kensyu.com/java-jdbc-contents/jj_ch04/jj_0401/
-
-  abstract class DBConnector {
-    - {static} RDB_DRIVE: final String
-    - {static} URL: final String
-    - {static} USER: final String
-    - {static} PASSWD: final String
-
-    + {static} getConnection(): Connection
-  }
-
-  abstract class DataAccessObject extends DBConnector {
-    # createTable(tableName: String): void
-    # dropTable(tableName: String): void
-    # selectColumn(columnName: String, tableName: String, primaryKeyColumnName: String): ArrayList<String>
-    # toIntegerList(strList: ArrayList<String>): ArrayList<Integer>
-    # toFloatList(strList: ArrayList<String>): ArrayList<Float>
-    # selectField(columnName: String, tableName: String, primaryKeyColumnName: String, primaryKey: String): String
-    # selectFirstField(columnName: String, tableName: String, primaryKeyColumnName: String): String
-    # updateField(field: String, columnName: String, tableName: String, primaryKeyColumnName: String, primaryKey: String): void
-    # updateFirstField(field: String, columnName: String, tableName: String, primaryKeyColumnName: String): void
-    # closeDBResources(resultSet: ResultSet, statement: Statement, connection: Connection)
-  }
-
-  class MenuDAO extends DataAccessObject {
-    + MenuDAO()
-    + selectAllWeaponName(): ArrayList<String>
-    + selectAllArmorName(): ArrayList<String>
-    + selectAllMonsterName(): ArrayList<String>
-    + selectAllWeaponAttackVal(): ArrayList<Integer>
-    + selectAllArmorDiffenceVal(): ArrayList<Integer>
-  }
-
-  abstract class BattleDAO extends DataAccessObject {
+  abstract class BattleDAO {
   + getWeaponName(): String
   + getArmorName(): String
   + getMonsterName(): String
@@ -252,32 +178,6 @@ package src.jdbc {
     + selectAllMonsterAttackName(): ArrayList<String>
     + selectAllMonsterAttackVal(): ArrayList<Integer>
     + selectAllMonsterAttackMissProb(): ArrayList<Float>
-  }
-
-  class PlayerHpDAO extends BattleDAO {
-    + PlayerHpDAO(weaponName: String, armorName: String, monsterName: String) {
-    - createPlayerHpTable(): void
-    + dropPlayerHpTable(): void
-    + selectFirstPlayerHp(): int
-    + updateFirstPlayerHp(playerHp: int): void
-  }
-
-  class MonsterMainHpDAO extends BattleDAO {
-    + MonsterMainHpDAO(weaponName: String, armorName: String, monsterName: String) {
-    - createMonsterMainHpTable(): void
-    + dropMonsterMainHpTable(): void
-    + selectFirstMonsterMainHp(): int
-    + updateFirstMonsterMainHp(monsterMainHp: int): void
-  }
-
-  class MonsterPartsHpDAO extends BattleDAO {
-    + MonsterPartsHpDAO(weaponName: String, armorName: String, monsterName: String)
-    - createMonsterPartsHpTable() : void
-    + dropMonsterPartsHpTable() : void
-    + selectAllMonsterPartsHp(): ArrayList<Integer>
-    + selectAllMonsterPartsHardness(): ArrayList<Integer>
-    + updateMonsterPartsHp(monsterPartsHp: int, primaryKey: String) : void
-    + updateMonsterPartsHardness(monsterPartsHardness: int, primaryKey: String) : void
   }
 }
 

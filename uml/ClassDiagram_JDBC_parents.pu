@@ -1,0 +1,174 @@
+' @file      ClassDiagram_JDBC_parents.pu
+' @brief     クラス図出力用のファイル
+' @note      高度情報演習2C 後半 木村教授担当分 Team3
+' @auther    AL18036 Kataoka Nagi
+' @date      2020-12-28 07:26:13
+' $Version   1.2
+' $Revision  1.0
+' @par       修正：DAOの部分を別ファイルに移動
+' @note      java -jar plantuml.jar -graphvizdot C:\Graphviz\bin\dot.exe ClassDiagram_JDBC_parents.pu -charset UTF-8
+' @see       https://qiita.com/opengl-8080/items/98c510b8ca060bdd2ea3
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+@startuml ./ClassDiagram_JDBC_parents.png
+scale 1.5
+skinparam DefaultFontName メイリオ
+' 可視性の変更
+skinparam classAttributeIconSize 0
+
+''''''''''''''''''''''''''''''''''''''''''''''''''
+
+header 
+Team 3 : AL18036 Kataoka Nagi
+2020-12-28 07:26:50
+修正：DAOの部分を別ファイルに移動
+end header
+
+''''''''''''''''''''''''''''''''''''''''''''''''''
+
+title
+**Kodo 2C Team 3: ClassDiagram_JDBC_parents**
++ public
+~- private
+end title
+' __static__
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+package src {
+  package src.application {
+    class Main
+  }
+  package src.gameprocess {
+  }
+  package src.jdbc {
+  }
+}
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+note left
+  --Folder Tree--
+  2C_team3
+  |_ src
+    |_ application
+      |_ application.css
+      |_ Battle.fxml
+      |_ Menu.fxml
+      |_ BattleController.java
+      |_ Main.java
+      |_ MenuController.java
+    |_ gameprocess
+      |_ BattleManager.java
+    |_ jdbc
+      |_ DBConnector.java
+      |_ DataAccessObject.java
+      |_ MenuDAO.java
+      |_ BattleDAO.java
+      |_ ShapnessSearchDAO.java
+      |_ PlayerStatusSearchDAO.java
+      |_ MonsterAttackStatusSearchDAO.java
+      |_ PlayerHpDAO.java
+      |_ MonsterMainHpDAO.java
+      |_ MonsterPartsHpDAO.java
+      |_ sql
+        |_ hoge.sql
+        |_ fuga.sql
+  |_ bin/application
+    |_ ~*.class
+end note
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+package java.sql {
+}
+
+package javafx {
+  class Application
+  Interface Initializable
+}
+
+src.jdbc --+ java.sql
+src.application --+ javafx
+
+''''''''''''''''''''''''''''''''''''''''''''''''''
+
+' @note クラスの命名規則
+' @see  https://qiita.com/KeithYokoma/items/ee21fec6a3ebb5d1e9a8
+
+package src.application {
+}
+
+' 記事のクラス
+  ' class ApplicationController extends Initializable {
+  '   - dropDown: ChoiceBox<String>
+  '   - textBox: TextField
+  '   - button: Button
+
+  '   + initialize(location: URL, resources: ResourceBundle): void
+  '   + onClick(event: ActionEvent): void
+  '   + getToolType(): ChoiceBox<String>
+  '   + setToolType(toolType: ChoiceBox<String>): void
+  '   + getInputFile(): TextField
+  '   + setInputFile(textBox: TextField): void
+  '   + getReference(): Button
+  '   + setReference(button: Button): void
+  ' }
+
+
+''''''''''''''''''''''''''''''''''''''''''''''''''
+
+package src.gameprocess {
+}
+
+''''''''''''''''''''''''''''''''''''''''''''''''''
+
+package src.jdbc {
+  ' @note DAO pattern
+  ' @see https://kanda-it-school-kensyu.com/java-jdbc-contents/jj_ch04/jj_0401/
+
+  abstract class DBConnector {
+    - {static} RDB_DRIVE: final String
+    - {static} URL: final String
+    - {static} USER: final String
+    - {static} PASSWD: final String
+
+    + {static} getConnection(): Connection
+  }
+
+  abstract class DataAccessObject extends DBConnector {
+    # createTable(tableName: String): void
+    # dropTable(tableName: String): void
+    # selectColumn(columnName: String, tableName: String, primaryKeyColumnName: String): ArrayList<String>
+    # toIntegerList(strList: ArrayList<String>): ArrayList<Integer>
+    # toFloatList(strList: ArrayList<String>): ArrayList<Float>
+    # selectField(columnName: String, tableName: String, primaryKeyColumnName: String, primaryKey: String): String
+    # selectFirstField(columnName: String, tableName: String, primaryKeyColumnName: String): String
+    # updateField(field: String, columnName: String, tableName: String, primaryKeyColumnName: String, primaryKey: String): void
+    # updateFirstField(field: String, columnName: String, tableName: String, primaryKeyColumnName: String): void
+    # closeDBResources(resultSet: ResultSet, statement: Statement, connection: Connection)
+  }
+
+  class MenuDAO extends DataAccessObject {
+    + MenuDAO()
+    + selectAllWeaponName(): ArrayList<String>
+    + selectAllArmorName(): ArrayList<String>
+    + selectAllMonsterName(): ArrayList<String>
+    + selectAllWeaponAttackVal(): ArrayList<Integer>
+    + selectAllArmorDiffenceVal(): ArrayList<Integer>
+  }
+
+  abstract class BattleDAO extends DataAccessObject {
+  + getWeaponName(): String
+  + getArmorName(): String
+  + getMonsterName(): String
+  + setWeaponName(weaponName: String): void
+  + setArmorName(armorName: String): void
+  + setMonsterName(monsterName: String): void
+  }
+}
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+@enduml
