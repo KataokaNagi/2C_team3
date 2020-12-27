@@ -12,6 +12,75 @@
 
 package jdbc;
 
-public class MonsterAttackStatusSearchDAO extends BattleDAO {
+import java.util.ArrayList;
 
+/**
+ * @class MonsterAttackStatusSearchDAO
+ * @brief 「モンスター攻撃ステータス検索」テーブルのDAO
+ */
+public class MonsterAttackStatusSearchDAO extends BattleDAO {
+  /**
+   * @fn MonsterAttackStatusSearchDAO
+   * @brief 「モンスター攻撃ステータス検索」テーブルの作成を行うコンストラクタ
+   */
+  public MonsterAttackStatusSearchDAO(String weaponName, String armorName, String monsterName) {
+    super(weaponName, armorName, monsterName);
+    MonsterAttackStatusSearchTable();
+  }
+
+  /**
+   * @fn MonsterAttackStatusSearchTable
+   * @brief 「モンスター攻撃ステータス検索」テーブルの作成
+   */
+  private void MonsterAttackStatusSearchTable() {
+    // TODO
+  }
+
+  /**
+   * @fn dropPlayerStatusSearchTable
+   * @brief 「モンスター攻撃ステータス検索」テーブルの削除
+   */
+  public void dropMonsterAttackStatusSearchTable() {
+    // TODO
+  }
+
+  //////////////////////////////////////////////////
+  // 以降、全て selectFirst
+  //////////////////////////////////////////////////
+
+  /**
+   * @fn selectAllMonsterAttackName
+   * @brief 「モンスター攻撃ステータス検索」テーブルの、モンスター攻撃名カラムの全てのフィールドを返す
+   * @return モンスター攻撃名のリスト
+   */
+  public ArrayList<String> selectAllMonsterAttackName() {
+    String columnName = "monster_attack_name";
+    String tableName = "monster_attack_status_search";
+    String primaryKeyColumnName = "monster_attack_code";
+    return selectColumn(columnName, tableName, primaryKeyColumnName);
+  }
+
+  /**
+   * @fn selectAllMonsterAttackVal
+   * @brief 「モンスター攻撃ステータス検索」テーブルの、モンスター攻撃力カラムの全てのフィールドを返す
+   * @return モンスター攻撃力のリスト
+   */
+  public ArrayList<String> selectAllMonsterAttackVal() {
+    String columnName = "monster_attack_val";
+    String tableName = "monster_attack_status_search";
+    String primaryKeyColumnName = "monster_attack_code";
+    return selectColumn(columnName, tableName, primaryKeyColumnName);
+  }
+
+  /**
+   * @fn selectAllMonsterAttackMissProb
+   * @brief 「モンスター攻撃ステータス検索」テーブルの、モンスター攻撃ミス確率カラムの全てのフィールドを返す
+   * @return モンスター攻撃ミス確率のリスト
+   */
+  public ArrayList<String> selectAllMonsterAttackMissProb() {
+    String columnName = "monster_attack_miss_prob";
+    String tableName = "monster_attack_status_search";
+    String primaryKeyColumnName = "monster_attack_code";
+    return selectColumn(columnName, tableName, primaryKeyColumnName);
+  }
 }
