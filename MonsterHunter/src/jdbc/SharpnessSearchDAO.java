@@ -45,6 +45,10 @@ public class SharpnessSearchDAO extends BattleDAO {
     // TODO
   }
 
+  //////////////////////////////////////////////////
+  // 以降、全て selectAll
+  //////////////////////////////////////////////////
+
   /**
    * @fn selectAllSharpnessColorName
    * @brief 切れ味色ごと検索テーブルの、切れ味色名カラムの全てのフィールドを返す
