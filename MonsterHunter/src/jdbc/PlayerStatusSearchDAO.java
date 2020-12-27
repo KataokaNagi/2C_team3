@@ -76,11 +76,11 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    * @brief 「プレイヤーステータス検索」テーブルの、武器攻撃力カラムの先頭のフィールドを返す
    * @return 武器攻撃力の先頭のフィールド
    */
-  public String selectFirstWeaponAttackVal() {
+  public int selectFirstWeaponAttackVal() {
     String columnName = "weapon_val";
     String tableName = "player_status";
     String primaryKeyColumnName = "player_code";
-    return selectFirstField(columnName, tableName, primaryKeyColumnName);
+    return Integer.parseInt(selectFirstField(columnName, tableName, primaryKeyColumnName));
   }
 
   /**
@@ -88,11 +88,11 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    * @brief 「プレイヤーステータス検索」テーブルの、武器会心率カラムの先頭のフィールドを返す
    * @return 武器会心率の先頭のフィールド
    */
-  public String selectFirstWeaponCriticalRate() {
+  public float selectFirstWeaponCriticalRate() {
     String columnName = "weapon_criticalRate";
     String tableName = "player_status";
     String primaryKeyColumnName = "player_code";
-    return selectFirstField(columnName, tableName, primaryKeyColumnName);
+    return Float.parseFloat(selectFirstField(columnName, tableName, primaryKeyColumnName));
   }
 
   /**
@@ -100,11 +100,11 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    * @brief 「プレイヤーステータス検索」テーブルの、武器属性数値カラムの先頭のフィールドを返す
    * @return 武器属性数値の先頭のフィールド
    */
-  public String selectFirstWeaponElementVal() {
+  public int selectFirstWeaponElementVal() {
     String columnName = "weapon_element_val";
     String tableName = "player_status";
     String primaryKeyColumnName = "player_code";
-    return selectFirstField(columnName, tableName, primaryKeyColumnName);
+    return Integer.parseInt(selectFirstField(columnName, tableName, primaryKeyColumnName));
   }
 
   /**
@@ -160,11 +160,11 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    * @brief 「プレイヤーステータス検索」テーブルの、防具防御力カラムの先頭のフィールドを返す
    * @return 防具防御力の先頭のフィールド
    */
-  public String selectFirstArmorDiffenceVal() {
+  public int selectFirstArmorDiffenceVal() {
     String columnName = "aromor_diffence_val";
     String tableName = "player_status";
     String primaryKeyColumnName = "player_code";
-    return selectFirstField(columnName, tableName, primaryKeyColumnName);
+    return Integer.parseInt(selectFirstField(columnName, tableName, primaryKeyColumnName));
   }
 
   /**
@@ -208,11 +208,11 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    * @brief 「プレイヤーステータス検索」テーブルの、防具スキル上昇数値カラムの先頭のフィールドを返す
    * @return 防具スキル上昇数値の先頭のフィールド
    */
-  public String selectFirstArmorIncreasingSkillVal() {
+  public int selectFirstArmorIncreasingSkillVal() {
     String columnName = "aromor_increasing_skill_val";
     String tableName = "player_status";
     String primaryKeyColumnName = "player_code";
-    return selectFirstField(columnName, tableName, primaryKeyColumnName);
+    return Integer.parseInt(selectFirstField(columnName, tableName, primaryKeyColumnName));
   }
 
   /**
@@ -232,11 +232,11 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    * @brief 「プレイヤーステータス検索」テーブルの、防具火耐性カラムの先頭のフィールドを返す
    * @return 防具火耐性の先頭のフィールド
    */
-  public String selectFirstArmorFireResistance() {
+  public int selectFirstArmorFireResistance() {
     String columnName = "aromor_fire_resistance";
     String tableName = "player_status";
     String primaryKeyColumnName = "player_code";
-    return selectFirstField(columnName, tableName, primaryKeyColumnName);
+    return Integer.parseInt(selectFirstField(columnName, tableName, primaryKeyColumnName));
   }
 
   /**
@@ -244,11 +244,11 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    * @brief 「プレイヤーステータス検索」テーブルの、防具水耐性カラムの先頭のフィールドを返す
    * @return 防具水耐性の先頭のフィールド
    */
-  public String selectFirstArmorWaterResistance() {
+  public int selectFirstArmorWaterResistance() {
     String columnName = "aromor_water_resistance";
     String tableName = "player_status";
     String primaryKeyColumnName = "player_code";
-    return selectFirstField(columnName, tableName, primaryKeyColumnName);
+    return Integer.parseInt(selectFirstField(columnName, tableName, primaryKeyColumnName));
   }
 
   /**
@@ -256,11 +256,11 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    * @brief 「プレイヤーステータス検索」テーブルの、防具雷耐性カラムの先頭のフィールドを返す
    * @return 防具雷耐性の先頭のフィールド
    */
-  public String selectFirstArmorElectricResistance() {
+  public int selectFirstArmorElectricResistance() {
     String columnName = "aromor_electric_resistance";
     String tableName = "player_status";
     String primaryKeyColumnName = "player_code";
-    return selectFirstField(columnName, tableName, primaryKeyColumnName);
+    return Integer.parseInt(selectFirstField(columnName, tableName, primaryKeyColumnName));
   }
 
   /**
@@ -268,11 +268,11 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    * @brief 「プレイヤーステータス検索」テーブルの、防こ氷耐性カラムの先頭のフィールドを返す
    * @return 防こ氷耐性の先頭のフィールド
    */
-  public String selectFirstArmorIceResistance() {
+  public int selectFirstArmorIceResistance() {
     String columnName = "aromor_ice_resistance";
     String tableName = "player_status";
     String primaryKeyColumnName = "player_code";
-    return selectFirstField(columnName, tableName, primaryKeyColumnName);
+    return Integer.parseInt(selectFirstField(columnName, tableName, primaryKeyColumnName));
   }
 
   /**
@@ -280,10 +280,10 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    * @brief 「プレイヤーステータス検索」テーブルの、防具龍耐性カラムの先頭のフィールドを返す
    * @return 防具龍耐性の先頭のフィールド
    */
-  public String selectFirstArmorDragonResistance() {
+  public int selectFirstArmorDragonResistance() {
     String columnName = "aromor_dragon_resistance";
     String tableName = "player_status";
     String primaryKeyColumnName = "player_code";
-    return selectFirstField(columnName, tableName, primaryKeyColumnName);
+    return Integer.parseInt(selectFirstField(columnName, tableName, primaryKeyColumnName));
   }
 }

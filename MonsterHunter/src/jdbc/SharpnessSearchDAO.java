@@ -62,11 +62,11 @@ public class SharpnessSearchDAO extends BattleDAO {
    * @brief 切れ味色ごと検索テーブルの切れ味ゲージ量名カラムの全てのフィールドを返す
    * @return 全切れ味ゲージ量名のリスト
    */
-  public ArrayList<String> selectAllSharpnessGaugeAmount() {
+  public ArrayList<Integer> selectAllSharpnessGaugeAmount() {
     String columnName = "sharpness_gauge_amount";
     String tableName = "sharpness_search";
     String primaryKeyColumnName = "sharpness_color_code";
-    return selectColumn(columnName, tableName, primaryKeyColumnName);
+    return this.toIntegerList(selectColumn(columnName, tableName, primaryKeyColumnName));
   }
 
   /**
@@ -74,10 +74,10 @@ public class SharpnessSearchDAO extends BattleDAO {
    * @brief 切れ味色ごと検索テーブルの切れ味攻撃力倍率カラムの全てのフィールドを返す
    * @return 全切れ味攻撃力倍率のリスト
    */
-  public ArrayList<String> selectAllSharpnessIncreasingAttackValueRate() {
+  public ArrayList<Float> selectAllSharpnessIncreasingAttackValueRate() {
     String columnName = "sharpness_increasing_attack_value_rate";
     String tableName = "sharpness_search";
     String primaryKeyColumnName = "sharpness_color_code";
-    return selectColumn(columnName, tableName, primaryKeyColumnName);
+    return this.toFloatList(selectColumn(columnName, tableName, primaryKeyColumnName));
   }
 }

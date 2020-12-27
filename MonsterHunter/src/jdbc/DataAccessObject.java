@@ -99,6 +99,20 @@ abstract class DataAccessObject extends DBConnector {
   }
 
   /**
+   * @fn toFloatList
+   * @brief StringのリストをFloatのリストに変換
+   * @param[in] strList
+   * @return floatList
+   */
+  protected ArrayList<Float> toFloatList(ArrayList<String> strList) {
+    ArrayList<Float> floatList = new ArrayList<Float>();
+    for (String str : strList) {
+      floatList.add(Float.parseFloat(str));
+    }
+    return floatList;
+  }
+
+  /**
    * @fn selectField
    * @brief 主キーで指定したフィールドを返す
    * @param[in] columnName: 検索したいフィールドが存在するカラムの名前

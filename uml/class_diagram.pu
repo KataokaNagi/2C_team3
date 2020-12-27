@@ -2,10 +2,10 @@
 ' @brief     クラス図出力用のファイル
 ' @note      高度情報演習2C 後半 木村教授担当分 Team3
 ' @auther    AL18036 Kataoka Nagi
-' @date      2020-12-28 04:42:07
+' @date      2020-12-28 05:48:28
 ' $Version   1.0
-' $Revision  1.10
-' @par       追加：MonsterAttackStatusSearchDAO
+' $Revision  1.11
+' @par       追加：検索テーブルの返り値の型を変更
 ' @note      java -jar plantuml.jar -graphvizdot C:\Graphviz\bin\dot.exe class_diagram.pu -charset UTF-8
 ' @see       https://qiita.com/opengl-8080/items/98c510b8ca060bdd2ea3
 
@@ -21,8 +21,8 @@ skinparam classAttributeIconSize 0
 
 header 
 Team 3 : AL18036 Kataoka Nagi
-2020-12-28 04:42:10
-追加：MonsterAttackStatusSearchDAO
+2020-12-28 05:47:55
+追加：検索テーブルの返り値の型を変更
 end header
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -184,6 +184,7 @@ package src.jdbc {
     # dropTable(tableName: String): void
     # selectColumn(columnName: String, tableName: String, primaryKeyColumnName: String): ArrayList<String>
     # toIntegerList(strList: ArrayList<String>): ArrayList<Integer>
+    # toFloatList(strList: ArrayList<String>): ArrayList<Float>
     # selectField(columnName: String, tableName: String, primaryKeyColumnName: String, primaryKey: String): String
     # selectFirstField(columnName: String, tableName: String, primaryKeyColumnName: String): String
     # updateField(columnName: String, tableName: String, primaryKeyColumnName: String, primaryKey: String): void
@@ -214,8 +215,8 @@ package src.jdbc {
     - createSharpnessSearchTable(): void
     + dropSharpnessSearchTable(): void
     + selectAllSharpnessColorName(): ArrayList<String>
-    + selectAllSharpnessGaugeAmount(): ArrayList<String>
-    + selectAllSharpnessIncreasingAttackValueRate(): ArrayList<String>
+    + selectAllSharpnessGaugeAmount(): ArrayList<Integer>
+    + selectAllSharpnessIncreasingAttackValueRate(): ArrayList<Float>
   }
 
   class PlayerStatusSearchDAO extends BattleDAO {
@@ -224,24 +225,24 @@ package src.jdbc {
     + dropPlayerStatusSearchTable(): void
     + selectFirstWeaponCode(): String
     + selectFirstWeaponName(): String
-    + selectFirstWeaponAttackVal(): String
-    + selectFirstWeaponCriticalRate(): String
-    + selectFirstWeaponElementVal(): String
+    + selectFirstWeaponAttackVal(): int
+    + selectFirstWeaponCriticalRate(): float
+    + selectFirstWeaponElementVal(): int
     + selectFirstWeaponElementCode(): String
     + selectFirstWeaponElementName(): String
     + selectFirstArmorCode(): String
     + selectFirstArmorName(): String
-    + selectFirstArmorDiffenceVal(): String
+    + selectFirstArmorDiffenceVal(): int
     + selectFirstArmorSkillCode(): String
     + selectFirstArmorSkillName(): String
     + selectFirstArmorIncreasingSkillTarget(): String
-    + selectFirstArmorIncreasingSkillVal(): String
+    + selectFirstArmorIncreasingSkillVal(): int
     + selectFirstArmorElementResistanceCode(): String
-    + selectFirstArmorFireResistance(): String
-    + selectFirstArmorWaterResistance(): String
-    + selectFirstArmorElectricResistance(): String
-    + selectFirstArmorIceResistance(): String
-    + selectFirstArmorDragonResistance(): String
+    + selectFirstArmorFireResistance(): int
+    + selectFirstArmorWaterResistance(): int
+    + selectFirstArmorElectricResistance(): int
+    + selectFirstArmorIceResistance(): int
+    + selectFirstArmorDragonResistance(): int
   }
 
   class MonsterAttackStatusSearchDAO extends BattleDAO {
@@ -249,8 +250,8 @@ package src.jdbc {
     - MonsterAttackStatusSearchTable(): void
     + dropMonsterAttackStatusSearchTable(): void
     + selectAllMonsterAttackName(): ArrayList<String>
-    + selectAllMonsterAttackVal(): ArrayList<String>
-    + selectAllMonsterAttackMissProb(): ArrayList<String>
+    + selectAllMonsterAttackVal(): ArrayList<Integer>
+    + selectAllMonsterAttackMissProb(): ArrayList<Float>
   }
 }
 

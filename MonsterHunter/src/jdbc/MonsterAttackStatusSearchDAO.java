@@ -65,11 +65,11 @@ public class MonsterAttackStatusSearchDAO extends BattleDAO {
    * @brief 「モンスター攻撃ステータス検索」テーブルの、モンスター攻撃力カラムの全てのフィールドを返す
    * @return モンスター攻撃力のリスト
    */
-  public ArrayList<String> selectAllMonsterAttackVal() {
+  public ArrayList<Integer> selectAllMonsterAttackVal() {
     String columnName = "monster_attack_val";
     String tableName = "monster_attack_status_search";
     String primaryKeyColumnName = "monster_attack_code";
-    return selectColumn(columnName, tableName, primaryKeyColumnName);
+    return this.toIntegerList(selectColumn(columnName, tableName, primaryKeyColumnName));
   }
 
   /**
@@ -77,10 +77,10 @@ public class MonsterAttackStatusSearchDAO extends BattleDAO {
    * @brief 「モンスター攻撃ステータス検索」テーブルの、モンスター攻撃ミス確率カラムの全てのフィールドを返す
    * @return モンスター攻撃ミス確率のリスト
    */
-  public ArrayList<String> selectAllMonsterAttackMissProb() {
+  public ArrayList<Float> selectAllMonsterAttackMissProb() {
     String columnName = "monster_attack_miss_prob";
     String tableName = "monster_attack_status_search";
     String primaryKeyColumnName = "monster_attack_code";
-    return selectColumn(columnName, tableName, primaryKeyColumnName);
+    return this.toFloatList(selectColumn(columnName, tableName, primaryKeyColumnName));
   }
 }
