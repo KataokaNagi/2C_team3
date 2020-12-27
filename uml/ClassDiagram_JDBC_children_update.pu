@@ -2,10 +2,10 @@
 ' @brief     クラス図出力用のファイル
 ' @note      高度情報演習2C 後半 木村教授担当分 Team3
 ' @auther    AL18036 Kataoka Nagi
-' @date      2020-12-28 07:26:13
+' @date      2020-12-28 08:05:03
 ' $Version   1.2
-' $Revision  1.0
-' @par       修正：DAOの部分を別ファイルに移動
+' $Revision  1.1
+' @par       修正：MonsterPartsName
 ' @note      java -jar plantuml.jar -graphvizdot C:\Graphviz\bin\dot.exe ClassDiagram_JDBC_children_update.pu -charset UTF-8
 ' @see       https://qiita.com/opengl-8080/items/98c510b8ca060bdd2ea3
 
@@ -157,8 +157,10 @@ package src.jdbc {
     + MonsterPartsHpDAO(weaponName: String, armorName: String, monsterName: String)
     - createMonsterPartsHpTable() : void
     + dropMonsterPartsHpTable() : void
+    + selectAllMonsterPartsName(): ArrayList<String>
     + selectAllMonsterPartsHp(): ArrayList<Integer>
     + selectAllMonsterPartsHardness(): ArrayList<Integer>
+    + updateMonsterPartsName(monsterPartsName: String, primaryKey: String): void
     + updateMonsterPartsHp(monsterPartsHp: int, primaryKey: String) : void
     + updateMonsterPartsHardness(monsterPartsHardness: int, primaryKey: String) : void
   }

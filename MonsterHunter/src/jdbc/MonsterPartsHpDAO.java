@@ -49,17 +49,17 @@ public class MonsterPartsHpDAO extends BattleDAO {
   // SELECT SELECT ALL
   //////////////////////////////////////////////////
 
-  // /**
-  // * @fn selectAllMonsterPartsName
-  // * @brief 「モンスター部位体力」テーブルの、モンスター部位名カラムの全てのフィールドを返す
-  // * @return 全モンスター部位名のリスト
-  // */
-  // public ArrayList<String> selectAllMonsterPartsName() {
-  // String columnName = "monster_parts_name";
-  // String tableName = "monster_parts_hp_table";
-  // String primaryKeyColumnName = "monster_code";
-  // return selectColumn(columnName, tableName, primaryKeyColumnName);
-  // }
+  /**
+   * @fn selectAllMonsterPartsName
+   * @brief 「モンスター部位体力」テーブルの、モンスター部位名カラムの全てのフィールドを返す
+   * @return 全モンスター部位名のリスト
+   */
+  public ArrayList<String> selectAllMonsterPartsName() {
+    String columnName = "monster_parts_name";
+    String tableName = "monster_parts_hp_table";
+    String primaryKeyColumnName = "monster_code";
+    return selectColumn(columnName, tableName, primaryKeyColumnName);
+  }
 
   /**
    * @fn selectAllMonsterPartsHp
@@ -89,18 +89,16 @@ public class MonsterPartsHpDAO extends BattleDAO {
   // UPADATE
   //////////////////////////////////////////////////
 
-  // /**
-  // * @fn updateMonsterPartsName
-  // * @brief 「モンスター部位体力」テーブルの、モンスター部位名カラムの先頭のフィールドを更新
-  // */
-  // public void updateMonsterPartsName(String monsterPartsName, String
-  // primaryKey) {
-  // String columnName = "monster_parts_name";
-  // String tableName = "monster_parts_hp_table";
-  // String primaryKeyColumnName = "monster_code";
-  // this.updateField(monsterPartsName, columnName, tableName,
-  // primaryKeyColumnName, primaryKey);
-  // }
+  /**
+   * @fn updateMonsterPartsName
+   * @brief 「モンスター部位体力」テーブルの、モンスター部位名カラムの先頭のフィールドを更新
+   */
+  public void updateMonsterPartsName(String monsterPartsName, String primaryKey) {
+    String columnName = "monster_parts_name";
+    String tableName = "monster_parts_hp_table";
+    String primaryKeyColumnName = "monster_code";
+    this.updateField(monsterPartsName, columnName, tableName, primaryKeyColumnName, primaryKey);
+  }
 
   /**
    * @fn updateMonsterPartsHp
