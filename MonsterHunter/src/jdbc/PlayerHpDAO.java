@@ -54,4 +54,5 @@ public class PlayerHpDAO extends BattleDAO {
     String primaryKeyColumnName = "player_code";
     return selectFirstField(columnName, tableName, primaryKeyColumnName);
   }
-
+  
+}

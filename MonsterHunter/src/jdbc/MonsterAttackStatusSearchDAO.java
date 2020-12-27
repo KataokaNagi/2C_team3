@@ -55,7 +55,7 @@ public class MonsterAttackStatusSearchDAO extends BattleDAO {
    */
   public ArrayList<String> selectAllMonsterAttackName() {
     String columnName = "monster_attack_name";
-    String tableName = "monster_attack_status_search";
+    String tableName = "monster_attack_status_search_table";
     String primaryKeyColumnName = "monster_attack_code";
     return selectColumn(columnName, tableName, primaryKeyColumnName);
   }
@@ -67,7 +67,7 @@ public class MonsterAttackStatusSearchDAO extends BattleDAO {
    */
   public ArrayList<Integer> selectAllMonsterAttackVal() {
     String columnName = "monster_attack_val";
-    String tableName = "monster_attack_status_search";
+    String tableName = "monster_attack_status_search_table";
     String primaryKeyColumnName = "monster_attack_code";
     return this.toIntegerList(selectColumn(columnName, tableName, primaryKeyColumnName));
   }
@@ -79,7 +79,7 @@ public class MonsterAttackStatusSearchDAO extends BattleDAO {
    */
   public ArrayList<Float> selectAllMonsterAttackMissProb() {
     String columnName = "monster_attack_miss_prob";
-    String tableName = "monster_attack_status_search";
+    String tableName = "monster_attack_status_search_table";
     String primaryKeyColumnName = "monster_attack_code";
     return this.toFloatList(selectColumn(columnName, tableName, primaryKeyColumnName));
   }

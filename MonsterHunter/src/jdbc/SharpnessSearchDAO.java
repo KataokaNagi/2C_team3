@@ -56,7 +56,7 @@ public class SharpnessSearchDAO extends BattleDAO {
    */
   public ArrayList<String> selectAllSharpnessColorName() {
     String columnName = "sharpness_color_name";
-    String tableName = "sharpness_search";
+    String tableName = "sharpness_search_table";
     String primaryKeyColumnName = "sharpness_color_code";
     return selectColumn(columnName, tableName, primaryKeyColumnName);
   }
@@ -68,7 +68,7 @@ public class SharpnessSearchDAO extends BattleDAO {
    */
   public ArrayList<Integer> selectAllSharpnessGaugeAmount() {
     String columnName = "sharpness_gauge_amount";
-    String tableName = "sharpness_search";
+    String tableName = "sharpness_search_table";
     String primaryKeyColumnName = "sharpness_color_code";
     return this.toIntegerList(selectColumn(columnName, tableName, primaryKeyColumnName));
   }
@@ -80,7 +80,7 @@ public class SharpnessSearchDAO extends BattleDAO {
    */
   public ArrayList<Float> selectAllSharpnessIncreasingAttackValueRate() {
     String columnName = "sharpness_increasing_attack_value_rate";
-    String tableName = "sharpness_search";
+    String tableName = "sharpness_search_table";
     String primaryKeyColumnName = "sharpness_color_code";
     return this.toFloatList(selectColumn(columnName, tableName, primaryKeyColumnName));
   }
