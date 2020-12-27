@@ -29,7 +29,8 @@ public class MenuDAO extends DataAccessObject {
    * @return 全武器名のリスト
    */
   public MenuDAO() {
-    // TODO: クエスト後に検索が不要になるようにリストに退避
+    // TODO: クエスト後に検索が不要になるようにリストに退避？
+    // ↑ GUIの方でやる（やらなくてもよい）仕事ですね恐らく
   }
 
   /**
