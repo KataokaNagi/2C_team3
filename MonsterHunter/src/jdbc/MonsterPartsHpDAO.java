@@ -3,10 +3,10 @@
 * @brief     「モンスター部位体力」テーブルのDAO
 * @note      高度情報演習2C 後半 木村教授担当分 Team3
 * @auther    AL18036 Kataoka Nagi
-* @date      2020-12-28 07:13:32
-* $Version   1.0
+* @date      2020-12-28 07:23:34
+* $Version   1.1
 * $Revision  1.0
-* @par       追加：仮組の作成
+* @par       修正：括弧の凡ミス
 * @see       https://www.kenschool.jp/blog/?p=1644
 */
 
@@ -70,7 +70,7 @@ public class MonsterPartsHpDAO extends BattleDAO {
     String columnName = "monster_parts_hp";
     String tableName = "monster_parts_hp_table";
     String primaryKeyColumnName = "monster_code";
-    return this.toIntegerList(selectColumn(columnName, tableName, primaryKeyColumnName)));
+    return this.toIntegerList(selectColumn(columnName, tableName, primaryKeyColumnName));
   }
 
   /**

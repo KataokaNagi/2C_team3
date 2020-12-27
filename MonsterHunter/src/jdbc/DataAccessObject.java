@@ -155,6 +155,7 @@ abstract class DataAccessObject extends DBConnector {
   /**
    * @fn updateField
    * @brief 主キーで指定したフィールドを更新する
+   * @param[in] field: 更新したいフィールド
    * @param[in] columnName: 更新したいフィールドが存在するカラムの名前
    * @param[in] tableName: 更新したいフィールドが存在するテーブルの名前
    * @param[in] primaryKeyColumnName: 更新したいフィールドが存在するテーブルの主キーの名前
@@ -168,14 +169,15 @@ abstract class DataAccessObject extends DBConnector {
   /**
    * @fn updateFirstField
    * @brief 指定したカラムの1番目のフィールドを更新する
+   * @param[in] field: 更新したいフィールド
    * @param[in] columnName: 更新したいフィールドが存在するカラムの名前
    * @param[in] tableName: 更新したいフィールドが存在するテーブルの名前
    * @param[in] primaryKeyColumnName: 更新したいフィールドが存在するテーブルの主キーの名前
    * @param[in] primaryKey: 更新したいフィールドに対応する主キー
    */
-  protected void updateFirstField(String columnName, String tableName, String primaryKeyColumnName) {
+  protected void updateFirstField(String field, String columnName, String tableName, String primaryKeyColumnName) {
     String primaryKey = "0"; // ! @attention primaryKeyが数字で張られているときにしか通用しない
-    updateField(columnName, tableName, primaryKeyColumnName, primaryKey);
+    updateField(field, columnName, tableName, primaryKeyColumnName, primaryKey);
   }
 
   /**

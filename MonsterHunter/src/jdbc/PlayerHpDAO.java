@@ -3,10 +3,10 @@
 * @brief     「プレイヤー体力」テーブル
 * @note      高度情報演習2C 後半 木村教授担当分 Team3
 * @auther    AL18036 Kataoka Nagi
-* @date      2020-12-28 06:31:02
-* $Version   1.0
-* $Revision  1.1
-* @par       ADD: 仮組の作成
+* @date      2020-12-28 07:26:44
+* $Version   1.1
+* $Revision  1.0
+* @par       修正：selectの引数
 * @see       https://www.kenschool.jp/blog/?p=1644
 */
 
@@ -59,10 +59,10 @@ public class PlayerHpDAO extends BattleDAO {
    * @fn updateFirstPlayerHp
    * @brief 「プレイヤー体力」テーブルの、プレイヤー体力カラムの先頭のフィールドを更新
    */
-  public void updateFirstPlayerHp() {
+  public void updateFirstPlayerHp(int playerHp) {
     String columnName = "player_hp";
     String tableName = "player_hp_table";
     String primaryKeyColumnName = "player_code";
-    this.updateFirstField(columnName, tableName, primaryKeyColumnName);
+    this.updateFirstField(Integer.toString(playerHp), columnName, tableName, primaryKeyColumnName);
   }
 }
