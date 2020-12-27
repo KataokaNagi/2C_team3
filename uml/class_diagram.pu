@@ -253,6 +253,14 @@ package src.jdbc {
     + selectAllMonsterAttackVal(): ArrayList<Integer>
     + selectAllMonsterAttackMissProb(): ArrayList<Float>
   }
+
+  class PlayerHpDAO extends BattleDAO {
+    + PlayerHpDAO(weaponName: String, armorName: String, monsterName: String) {
+    - createPlayerHpTable(): void
+    + dropPlayerHpTable(): void
+    + selectFirstPlayerHp(): int
+    + updateFirstPlayerHp(): void
+  }
 }
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
