@@ -2,11 +2,11 @@
 ' @brief     クラス図出力用のファイル
 ' @note      高度情報演習2C 後半 木村教授担当分 Team3
 ' @auther    AL18036 Kataoka Nagi
-' @date      2020-12-27 22:23:30
+' @date      2020-12-27 23:49:57
 ' $Version   1.0
-' $Revision  1.6
+' $Revision  1.7
 ' @par       変更点：closeDBResourcesメソッドを編集
-' @note      java -jar plantuml.jar -graphvizdot C:\Graphviz\bin\dot.exe class_diagram.pu
+' @note      java -jar plantuml.jar -graphvizdot C:\Graphviz\bin\dot.exe class_diagram.pu -charset UTF-8
 ' @see       https://qiita.com/opengl-8080/items/98c510b8ca060bdd2ea3
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -21,8 +21,8 @@ skinparam classAttributeIconSize 0
 
 header 
 Team 3 : AL18036 Kataoka Nagi
-2020-12-27 22:11:01
-Edit: closeDBResources
+2020-12-27 23:51:02
+追加：メソッドの仮組みを全て作成
 end header
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -180,10 +180,14 @@ package src.jdbc {
   }
 
   abstract class DataAccessObject extends DBConnector {
-    # selectColumn(columnName: String, tableName: String, primaryKeyColumnName: String): ArrayList<String>
-    # toIntegerList(strList: ArrayList<String>): ArrayList<Integer>
     # createTable(tableName: String): void
     # dropTable(tableName: String): void
+    # selectColumn(columnName: String, tableName: String, primaryKeyColumnName: String): ArrayList<String>
+    # toIntegerList(strList: ArrayList<String>): ArrayList<Integer>
+    # selectField(columnName: String, tableName: String, primaryKeyColumnName: String, primaryKey: String): String
+    # selectFirstField(columnName: String, tableName: String, primaryKeyColumnName: String): String
+    # updateField(columnName: String, tableName: String, primaryKeyColumnName: String, primaryKey: String): void
+    # updateFirstField(columnName: String, tableName: String, primaryKeyColumnName: String): void
     # closeDBResources(resultSet: ResultSet, statement: Statement, connection: Connection)
   }
 

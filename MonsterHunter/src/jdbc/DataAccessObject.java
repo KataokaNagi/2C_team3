@@ -3,10 +3,10 @@
 * @brief     DAOの汎用部分を実装する抽象クラス
 * @note      高度情報演習2C 後半 木村教授担当分 Team3
 * @auther    AL18036 Kataoka Nagi
-* @date      2020-12-27 22:02:07
-* $Version   1.0
-* $Revision  1.3
-* @par       編集：primaryKeyName -> primaryKeyColumnName
+* @date      2020-12-27 23:46:35
+* $Version   1.1
+* $Revision  1.0
+* @par       追加：メソッドの仮組みを全て作成
 * @see       https://www.kenschool.jp/blog/?p=1644
  */
 
@@ -22,11 +22,27 @@ import java.util.ArrayList;
 abstract class DataAccessObject extends DBConnector {
 
   /**
+   * @fn createTable
+   * @brief SQL文でよく使うカラムを非正規化する汎用メソッド
+   */
+  protected void createTable(String tableName) {
+    // TOD
+  }
+
+  /**
+   * @fn dropTable
+   * @brief テーブルを削除する汎用メソッド
+   */
+  protected void dropTable(String tableName) {
+    // TODO
+  }
+
+  /**
    * @fn selectColumn
    * @brief カラム内のフィールドを全て返す
    * @param[in] columnName: 検索したいカラムの名前
    * @param[in] tableName: 検索したいカラムが存在するテーブルの名前
-   * @param[in] primaryKeyColumnName: 検索したいカラムの主キーの名前
+   * @param[in] primaryKeyColumnName: 検索したいカラムの存在するテーブルの主キーの名前
    * @return 指定されたカラムの全フィールドのオブジェクトリスト
    */
   protected ArrayList<String> selectColumn(String columnName, String tableName, String primaryKeyColumnName) {
@@ -83,19 +99,67 @@ abstract class DataAccessObject extends DBConnector {
   }
 
   /**
-   * @fn createTable
-   * @brief SQL文でよく使うカラムを非正規化する汎用メソッド
+   * @fn selectField
+   * @brief 主キーで指定したフィールドを返す
+   * @param[in] columnName: 検索したいフィールドが存在するカラムの名前
+   * @param[in] tableName: 検索したいフィールドが存在するテーブルの名前
+   * @param[in] primaryKeyColumnName: 検索したいフィールドが存在するテーブルの主キーの名前
+   * @param[in] primaryKey: 検索したいフィールドに対応する主キー
+   * @return String: 主キーで指定したフィールド
    */
-  protected void createTable(String tableName) {
-    // TOD
+  protected String selectField(String columnName, String tableName, String primaryKeyColumnName, String primaryKey) {
+    // TODO
   }
 
   /**
-   * @fn dropTable
-   * @brief テーブルを削除する汎用メソッド
+   * @fn selectFirstField
+   * @brief 指定したカラムの1番目のフィールドを返す
+   * @param[in] columnName: 検索したいフィールドが存在するカラムの名前
+   * @param[in] tableName: 検索したいフィールドが存在するテーブルの名前
+   * @param[in] primaryKeyColumnName: 検索したいフィールドが存在するテーブルの主キーの名前
+   * @param[in] primaryKey: 検索したいフィールドに対応する主キー
+   * @return String: 主キーで指定したフィールド
    */
-  protected void dropTable(String tableName) {
+  protected String selectFirstField(String columnName, String tableName, String primaryKeyColumnName) {
+    String primaryKey = "0"; // ! @attention primaryKeyが数字で張られているときにしか通用しない
+    return selectField(columnName, tableName, primaryKeyColumnName, primaryKey);
+
+    // // 1番目のレコードの取り出し方がわからなかったのでコラムを全て取得
+    // // 本来なら激重コードになるので控えるべき
+    // ArrayList<String> fieldsList = selectColumn(columnName, tableName,
+    // primaryKeyColumnName);
+    // if (!fieldsList.isEmpty()) {
+    // return fieldsList.get(0);
+    // } else {
+    // System.out.println("Error: null refelence @ selectFirstField() in
+    // DataAccessObject.java");
+    // return "error";
+    // }
+  }
+
+  /**
+   * @fn updateField
+   * @brief 主キーで指定したフィールドを更新する
+   * @param[in] columnName: 更新したいフィールドが存在するカラムの名前
+   * @param[in] tableName: 更新したいフィールドが存在するテーブルの名前
+   * @param[in] primaryKeyColumnName: 更新したいフィールドが存在するテーブルの主キーの名前
+   * @param[in] primaryKey: 更新したいフィールドに対応する主キー
+   */
+  protected void updateField(String columnName, String tableName, String primaryKeyColumnName, String primaryKey) {
     // TODO
+  }
+
+  /**
+   * @fn updateFirstField
+   * @brief 指定したカラムの1番目のフィールドを更新する
+   * @param[in] columnName: 更新したいフィールドが存在するカラムの名前
+   * @param[in] tableName: 更新したいフィールドが存在するテーブルの名前
+   * @param[in] primaryKeyColumnName: 更新したいフィールドが存在するテーブルの主キーの名前
+   * @param[in] primaryKey: 更新したいフィールドに対応する主キー
+   */
+  protected void updateFirstField(String columnName, String tableName, String primaryKeyColumnName) {
+    String primaryKey = "0"; // ! @attention primaryKeyが数字で張られているときにしか通用しない
+    updateField(columnName, tableName, primaryKeyColumnName, primaryKey);
   }
 
   /**
