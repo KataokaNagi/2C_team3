@@ -2,10 +2,10 @@
 ' @brief     クラス図出力用のファイル
 ' @note      高度情報演習2C 後半 木村教授担当分 Team3
 ' @auther    AL18036 Kataoka Nagi
-' @date      2020-12-28 05:48:28
+' @date      2020-12-28 06:42:28
 ' $Version   1.0
-' $Revision  1.11
-' @par       追加：検索テーブルの返り値の型を変更
+' $Revision  1.12
+' @par       追加：MonsterMainHpDAO
 ' @note      java -jar plantuml.jar -graphvizdot C:\Graphviz\bin\dot.exe class_diagram.pu -charset UTF-8
 ' @see       https://qiita.com/opengl-8080/items/98c510b8ca060bdd2ea3
 
@@ -21,8 +21,8 @@ skinparam classAttributeIconSize 0
 
 header 
 Team 3 : AL18036 Kataoka Nagi
-2020-12-28 05:47:55
-追加：検索テーブルの返り値の型を変更
+2020-12-28 06:42:22
+追加：MonsterMainHpDAO
 end header
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -260,6 +260,14 @@ package src.jdbc {
     + dropPlayerHpTable(): void
     + selectFirstPlayerHp(): int
     + updateFirstPlayerHp(): void
+  }
+
+  class MonsterMainHpDAO extends BattleDAO {
+    + MonsterMainHpDAO(weaponName: String, armorName: String, monsterName: String) {
+    - createMonsterMainHpTable(): void
+    + dropMonsterMainHpTable(): void
+    + selectFirstMonsterMainHp(): int
+    + updateFirstMonsterMainHp(): void
   }
 }
 

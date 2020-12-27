@@ -123,6 +123,7 @@ abstract class DataAccessObject extends DBConnector {
    */
   protected String selectField(String columnName, String tableName, String primaryKeyColumnName, String primaryKey) {
     // TODO
+    return "tmp";
   }
 
   /**
