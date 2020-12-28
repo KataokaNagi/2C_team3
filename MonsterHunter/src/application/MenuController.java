@@ -30,13 +30,21 @@ public class MenuController {
     private Label Defense_value;
 
     @FXML
-    void OnEndButton(ActionEvent event) {
+    private Label Error;
 
+
+    @FXML
+    void OnEndButton(ActionEvent event) {
+    	System.exit(0);
     }
 
     @FXML
     void OnStartButton(ActionEvent event) {
-
+    	if(weapon_field.getValue()==null || armor_field.getValue()==null || monster_field==null) {
+    		Error.setVisible(true);
+    		return;
+    	}
+    	new Main().changeView("Battle.fxml");
     }
 
     @FXML
@@ -46,7 +54,24 @@ public class MenuController {
 
     @FXML
     void selectWeapon(ActionEvent event) {
+    	if(armor_field.getValue()==null)
+    		return;
+    	System.out.println("ok");
+    }
 
+    @FXML
+    void initialize() {
+    	for(int i=0;i<10;++i) {
+    		weapon_field.getItems().add(""+i);
+    	}
+    	for(int i = 0;i<10;++i) {
+    		armor_field.getItems().add(""+i);
+    	}
+    	for(int i=0;i<10;++i) {
+    		monster_field.getItems().add(""+i);
+    	}
+
+    	Error.setVisible(false);
     }
 
 }
