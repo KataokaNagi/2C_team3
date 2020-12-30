@@ -2,10 +2,10 @@
 ' @brief     クラス図出力用のファイル
 ' @note      高度情報演習2C 後半 木村教授担当分 Team3
 ' @auther    AL18036 Kataoka Nagi
-' @date      2020-12-31 00:51:45
+' @date      2020-12-31 03:00:30
 ' $Version   1.2
-' $Revision  1.2
-' @par       リファクタリング：exeSQLメソッドを作成して分離するなど
+' $Revision  1.3
+' @par       編集：JavaFX関係をコメントアウト
 ' @par       追加：createTableメソッドの完成' @note      java -jar plantuml.jar -graphvizdot C:\Graphviz\bin\dot.exe ClassDiagram_JDBC_parents.pu -charset UTF-8
 ' @see       https://qiita.com/opengl-8080/items/98c510b8ca060bdd2ea3
 
@@ -21,9 +21,8 @@ skinparam classAttributeIconSize 0
 
 header 
 Team 3 : AL18036 Kataoka Nagi
-2020-12-31 00:51:26
-リファクタリング：exeSQLメソッドを作成して分離するなど
-追加：createTableメソッドの完成
+2020-12-31 03:00:49
+編集：JavaFX関係をコメントアウト
 end header
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -85,13 +84,13 @@ end note
 package java.sql {
 }
 
-package javafx {
-  class Application
-  Interface Initializable
-}
+' package javafx {
+'   class Application
+'   Interface Initializable
+' }
 
 src.jdbc --+ java.sql
-src.application --+ javafx
+' src.application --+ javafx
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''
 

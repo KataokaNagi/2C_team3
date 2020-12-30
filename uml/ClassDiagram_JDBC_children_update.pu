@@ -2,10 +2,10 @@
 ' @brief     クラス図出力用のファイル
 ' @note      高度情報演習2C 後半 木村教授担当分 Team3
 ' @auther    AL18036 Kataoka Nagi
-' @date      2020-12-30 19:33:23
+' @date      2020-12-31 02:59:36
 ' $Version   1.2
-' $Revision  1.4
-' @par       編集：create*Idx()の仮組の作成
+' $Revision  1.5
+' @par       編集：JavaFX関係をコメントアウト
 ' @note      java -jar plantuml.jar -graphvizdot C:\Graphviz\bin\dot.exe ClassDiagram_JDBC_children_update.pu -charset UTF-8
 ' @see       https://qiita.com/opengl-8080/items/98c510b8ca060bdd2ea3
 
@@ -21,8 +21,8 @@ skinparam classAttributeIconSize 0
 
 header 
 Team 3 : AL18036 Kataoka Nagi
-2020-12-30 19:33:30
-リファクタリング：テーブル名とPK名をメンバ変数へ
+2020-12-31 03:00:49
+編集：JavaFX関係をコメントアウト
 end header
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -84,13 +84,13 @@ end note
 package java.sql {
 }
 
-package javafx {
-  class Application
-  Interface Initializable
-}
+' package javafx {
+'   class Application
+'   Interface Initializable
+' }
 
 src.jdbc --+ java.sql
-src.application --+ javafx
+' src.application --+ javafx
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''
 
