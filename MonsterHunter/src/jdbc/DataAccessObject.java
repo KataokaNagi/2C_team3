@@ -3,10 +3,12 @@
 * @brief     DAOの汎用部分を実装する抽象クラス
 * @note      高度情報演習2C 後半 木村教授担当分 Team3
 * @auther    AL18036 Kataoka Nagi
-* @date      2020-12-30 18:33:31
+* @date      2020-12-31 00:39:44
 * $Version   1.1
-* $Revision  1.1
-* @par       追加：createIdxメソッドの仮組みを作成
+* $Revision  1.2
+* @par       リファクタリング：exeSQLメソッドを作成して分離するなど
+* @par       追加：createTableメソッドの完成
+* @par       メモ：SQL文の最後に;が必要である可能性がある
 * @see       https://www.kenschool.jp/blog/?p=1644
  */
 
@@ -26,8 +28,46 @@ abstract class DataAccessObject extends DBConnector {
    * @brief SQL文でよく使うカラムを非正規化する汎用メソッド
    * @param[in] tableName 作成するテーブル名
    */
-  protected void createTable(String tableName) {
-    // TODO
+  protected void createTable(String tableName, String tableRecordDetailSQL, String primaryKeyColumnName) {
+
+    Connection connection = null; // ! DBコネクション
+    Statement statement = null; // ! SQLステートメント
+    ResultSet resultSet = null; // ! SQLリザルトセット
+    String createTableSQL = ""; // ! 実行SQL文
+
+    // SQL文の作成
+
+    // // Example
+    // //! @see
+    // https://www.codeflow.site/ja/article/jdbc__jdbc-statement-example-create-a-table
+    // String createTableSQL = "CREATE TABLE DBUSER("
+    // createTableSQL += "USER__ID NUMBER(5) NOT NULL, ";
+    // createTableSQL += "USERNAME VARCHAR(20) NOT NULL, ";
+    // createTableSQL += "CREATED__BY VARCHAR(20) NOT NULL, ";
+    // createTableSQL += "CREATED__DATE DATE NOT NULL, ";
+    // createTableSQL += "PRIMARY KEY (USER__ID) ";
+    // createTableSQL += ")";
+
+    createTableSQL += "CREATE TABLE " + tableName;
+    createTableSQL += tableRecordDetailSQL;
+    createTableSQL += "PRIMARY KEY (" + primaryKeyColumnName + ") ";
+    createTableSQL += ")";
+    System.out.println(createTableSQL);
+
+    // 実行
+    try {
+      // DBの接続と実行
+      resultSet = this.exeSQL(connection, statement, createTableSQL);
+      System.out.println("Table \"" + tableName + "\" is created.");
+
+      // 例外処理
+    } catch (SQLException e) {
+      System.err.println(e.getMessage());
+
+      // 後処理
+    } finally {
+      this.closeDBResources(resultSet, statement, connection);
+    }
   }
 
   /**
@@ -63,22 +103,18 @@ abstract class DataAccessObject extends DBConnector {
     Statement statement = null; // ! SQLステートメント
     ResultSet resultSet = null; // ! SQLリザルトセット
     ArrayList<String> rtnColumnList = new ArrayList<String>();
+    String selectColumnSQL = ""; // ! 実行SQL文
 
     // SQL文の作成
     // 主キーで整列することでSELECT文の順序を保証し、
     // 武器名と武器スキルを同じインデックスで取得できるようにする
-    String sql = "";
-    sql += "SELECT " + columnName;
-    sql += " FROM " + tableName;
-    sql += "ORDER BY " + primaryKeyColumnName;
+    selectColumnSQL += "SELECT " + columnName;
+    selectColumnSQL += " FROM " + tableName;
+    selectColumnSQL += "ORDER BY " + primaryKeyColumnName;
 
     try {
-      // DBに接続
-      connection = DBConnector.getConnection();
-      statement = connection.createStatement();
-
-      // SQL文発行
-      resultSet = statement.executeQuery(sql);
+      // DBの接続と実行
+      resultSet = this.exeSQL(connection, statement, selectColumnSQL);
 
       // 検索結果をArrayListに格納
       while (resultSet.next()) {
@@ -87,7 +123,7 @@ abstract class DataAccessObject extends DBConnector {
 
       // 例外処理
     } catch (SQLException e) {
-      System.out.println("Error: Failed to select column" + e);
+      System.err.println(e.getSQLState());
 
       // 後処理
     } finally {
@@ -156,10 +192,10 @@ abstract class DataAccessObject extends DBConnector {
     // // 本来なら激重コードになるので控えるべき
     // ArrayList<String> fieldsList = selectColumn(columnName, tableName,
     // primaryKeyColumnName);
-    // if (!fieldsList.isEmpty()) {
+    // if (!fieldsList.isEmpty() || fieldsList.size() != 0) {
     // return fieldsList.get(0);
     // } else {
-    // System.out.println("Error: null refelence @ selectFirstField() in
+    // System.err.println("Error: null refelence @ selectFirstField() in
     // DataAccessObject.java");
     // return "error";
     // }
@@ -194,18 +230,35 @@ abstract class DataAccessObject extends DBConnector {
   }
 
   /**
+   * @fn exeSQL
+   * @brief DBの接続とSQLの実行
+   * @param[in] connection: DBの接続情報
+   * @param[in] statement: DBのステートメント
+   * @param[in] sql: SQL文
+   */
+  private ResultSet exeSQL(Connection connection, Statement statement, String sql) throws SQLException {
+    // DBに接続
+    connection = DBConnector.getConnection();
+    statement = connection.createStatement();
+
+    // SQL文発行
+    return statement.executeQuery(sql);
+  }
+
+  /**
    * @fn closeDBResources
    * @brief 後処理
    * @note 後処理の順番 = 前処理の順番の逆
+   * @param[in] resultSet: SQLの実行結果
    * @param[in] statement: DBのステートメント
    * @param[in] connection: DBの接続情報
    */
-  protected void closeDBResources(ResultSet resultSet, Statement statement, Connection connection) {
+  private void closeDBResources(ResultSet resultSet, Statement statement, Connection connection) {
     // resultsetの後処理
     if (resultSet != null) {
       try {
         resultSet.close();
-      } catch (SQLException ignore) { // ! よくわかってないけど他のを真似した
+      } catch (SQLException ignore) {
       }
     }
 

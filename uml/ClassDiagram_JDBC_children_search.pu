@@ -174,8 +174,12 @@ package src.jdbc {
   }
 
   class MonsterAttackStatusSearchDAO extends BattleDAO {
+    - FROM_TABLE_NAME: final String
     - TABLE_NAME: final String
     - PRIMARY_KEY_COLUMN_NAME: final String
+    - MONSTER_ATTACK_NAME: final String
+    - MONSTER_ATTACK_VAL: final String
+    - MONSTER_ATTACK_MISS_PROB: final String
 
     + MonsterAttackStatusSearchDAO(weaponName: String, armorName: String, monsterName: String)
     - MonsterAttackStatusSearchTable(): void

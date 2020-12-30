@@ -3,10 +3,11 @@
 * @brief     「モンスター攻撃ステータス検索」テーブルのDAO
 * @note      高度情報演習2C 後半 木村教授担当分 Team3
 * @auther    AL18036 Kataoka Nagi
-* @date      2020-12-30 19:32:24
+* @date      2020-12-31 02:28:02
 * $Version   1.0
-* $Revision  1.3
-* @par       リファクタリング：テーブル名とPK名をメンバ変数へ
+* $Revision  1.4
+* @par       追加：createTableメソッドの完成
+* @par       変更予定：BattleDAOにgetMonsterCodeメソッドを実装
 * @see       https://www.kenschool.jp/blog/?p=1644
 */
 
@@ -20,8 +21,13 @@ import java.util.ArrayList;
  */
 public class MonsterAttackStatusSearchDAO extends BattleDAO {
 
+  private final String FROM_TABLE_NAME = "monsters_attacks";
   private final String TABLE_NAME = "monster_attack_statuses_searches";
+
   private final String PRIMARY_KEY_COLUMN_NAME = "monster_attack_code";
+  private final String MONSTER_ATTACK_NAME = "monster_attack_name";
+  private final String MONSTER_ATTACK_VAL = "monster_attack_value";
+  private final String MONSTER_ATTACK_MISS_PROB = "monster_attack_miss_probability";
 
   /**
    * @fn MonsterAttackStatusSearchDAO
@@ -38,7 +44,20 @@ public class MonsterAttackStatusSearchDAO extends BattleDAO {
    * @brief 「モンスター攻撃ステータス検索」テーブルの作成
    */
   private void MonsterAttackStatusSearchTable() {
-    // TODO
+    String tableRecordDetailSQL = ""; // ! CREATE TABLE () の中身
+
+    // SQLの作成
+    tableRecordDetailSQL += "AS ";
+    tableRecordDetailSQL += "SELECT ";
+    tableRecordDetailSQL += "ATTACKS." + MONSTER_ATTACK_NAME + ", ";
+    tableRecordDetailSQL += "ATTACKS." + MONSTER_ATTACK_VAL + ", ";
+    tableRecordDetailSQL += "ATTACKS." + MONSTER_ATTACK_MISS_PROB + " ";
+    tableRecordDetailSQL += "FROM" + FROM_TABLE_NAME + " ATTACKS";
+    tableRecordDetailSQL += "WHERE " + PRIMARY_KEY_COLUMN_NAME;
+    tableRecordDetailSQL += " = " + super.getMonsterCode();
+
+    // テーブルの作成
+    createTable(TABLE_NAME, tableRecordDetailSQL, PRIMARY_KEY_COLUMN_NAME);
   }
 
   /**
@@ -69,7 +88,7 @@ public class MonsterAttackStatusSearchDAO extends BattleDAO {
    * @return モンスター攻撃名のリスト
    */
   public ArrayList<String> selectAllMonsterAttackName() {
-    String columnName = "monster_attack_name";
+    String columnName = MONSTER_ATTACK_NAME;
     return selectColumn(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME);
   }
 
@@ -79,7 +98,7 @@ public class MonsterAttackStatusSearchDAO extends BattleDAO {
    * @return モンスター攻撃力のリスト
    */
   public ArrayList<Integer> selectAllMonsterAttackVal() {
-    String columnName = "monster_attack_value";
+    String columnName = MONSTER_ATTACK_VAL;
     return this.toIntegerList(selectColumn(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
   }
 
@@ -89,7 +108,7 @@ public class MonsterAttackStatusSearchDAO extends BattleDAO {
    * @return モンスター攻撃ミス確率のリスト
    */
   public ArrayList<Float> selectAllMonsterAttackMissProb() {
-    String columnName = "monster_attack_miss_probability";
+    String columnName = MONSTER_ATTACK_MISS_PROB;
     return this.toFloatList(selectColumn(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
   }
 }
