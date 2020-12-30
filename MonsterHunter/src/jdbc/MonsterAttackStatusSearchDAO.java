@@ -3,10 +3,10 @@
 * @brief     「モンスター攻撃ステータス検索」テーブルのDAO
 * @note      高度情報演習2C 後半 木村教授担当分 Team3
 * @auther    AL18036 Kataoka Nagi
-* @date      2020-12-30 18:58:15
+* @date      2020-12-30 19:32:24
 * $Version   1.0
-* $Revision  1.2
-* @par       編集：create*Idx()の仮組の作成
+* $Revision  1.3
+* @par       リファクタリング：テーブル名とPK名をメンバ変数へ
 * @see       https://www.kenschool.jp/blog/?p=1644
 */
 
@@ -19,6 +19,10 @@ import java.util.ArrayList;
  * @brief 「モンスター攻撃ステータス検索」テーブルのDAO
  */
 public class MonsterAttackStatusSearchDAO extends BattleDAO {
+
+  private final String TABLE_NAME = "monster_attack_statuses_searches";
+  private final String PRIMARY_KEY_COLUMN_NAME = "monster_attack_code";
+
   /**
    * @fn MonsterAttackStatusSearchDAO
    * @brief 「モンスター攻撃ステータス検索」テーブルの作成を行うコンストラクタ
@@ -50,7 +54,9 @@ public class MonsterAttackStatusSearchDAO extends BattleDAO {
    * @brief テーブルのインデックスを張る
    */
   private void createMonsterAttackStatusSearchIdx() {
-    createIdx(IDX_NAME, TABLE_NAME, COLUMN_NAME);
+    String idxName = "idx_" + TABLE_NAME;
+    String idxColumnName = PRIMARY_KEY_COLUMN_NAME;
+    createIdx(idxName, TABLE_NAME, idxColumnName);
   }
 
   //////////////////////////////////////////////////
@@ -64,9 +70,7 @@ public class MonsterAttackStatusSearchDAO extends BattleDAO {
    */
   public ArrayList<String> selectAllMonsterAttackName() {
     String columnName = "monster_attack_name";
-    String tableName = "monster_attack_statuses_searches";
-    String primaryKeyColumnName = "monster_attack_code";
-    return selectColumn(columnName, tableName, primaryKeyColumnName);
+    return selectColumn(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME);
   }
 
   /**
@@ -76,9 +80,7 @@ public class MonsterAttackStatusSearchDAO extends BattleDAO {
    */
   public ArrayList<Integer> selectAllMonsterAttackVal() {
     String columnName = "monster_attack_value";
-    String tableName = "monster_attack_statuses_searches";
-    String primaryKeyColumnName = "monster_attack_code";
-    return this.toIntegerList(selectColumn(columnName, tableName, primaryKeyColumnName));
+    return this.toIntegerList(selectColumn(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
   }
 
   /**
@@ -88,8 +90,6 @@ public class MonsterAttackStatusSearchDAO extends BattleDAO {
    */
   public ArrayList<Float> selectAllMonsterAttackMissProb() {
     String columnName = "monster_attack_miss_probability";
-    String tableName = "monster_attack_statuses_searches";
-    String primaryKeyColumnName = "monster_attack_code";
-    return this.toFloatList(selectColumn(columnName, tableName, primaryKeyColumnName));
+    return this.toFloatList(selectColumn(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
   }
 }

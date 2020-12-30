@@ -3,10 +3,10 @@
 * @brief     「プレイヤー体力」テーブル
 * @note      高度情報演習2C 後半 木村教授担当分 Team3
 * @auther    AL18036 Kataoka Nagi
-* @date      2020-12-30 18:59:17
+* @date      2020-12-30 19:31:47
 * $Version   1.1
-* $Revision  1.2
-* @par       編集：create*Idx()の仮組の作成
+* $Revision  1.3
+* @par       リファクタリング：テーブル名とPK名をメンバ変数へ
 * @see       https://www.kenschool.jp/blog/?p=1644
 */
 
@@ -17,6 +17,9 @@ package jdbc;
  * @brief 「プレイヤー体力」テーブルのDAO
  */
 public class PlayerHpDAO extends BattleDAO {
+
+  private final String TABLE_NAME = "players_hitpoints";
+  private final String PRIMARY_KEY_COLUMN_NAME = "player_code";
 
   /**
    * @fn PlayerHpDAO
@@ -49,7 +52,9 @@ public class PlayerHpDAO extends BattleDAO {
    * @brief テーブルのインデックスを張る
    */
   private void createPlayerHpIdx() {
-    createIdx(IDX_NAME, TABLE_NAME, COLUMN_NAME);
+    String idxName = "idx_" + TABLE_NAME;
+    String idxColumnName = PRIMARY_KEY_COLUMN_NAME;
+    createIdx(idxName, TABLE_NAME, idxColumnName);
   }
 
   /**
@@ -59,9 +64,7 @@ public class PlayerHpDAO extends BattleDAO {
    */
   public int selectFirstPlayerHp() {
     String columnName = "player_hitpoint";
-    String tableName = "players_hitpoints";
-    String primaryKeyColumnName = "player_code";
-    return Integer.parseInt(selectFirstField(columnName, tableName, primaryKeyColumnName));
+    return Integer.parseInt(selectFirstField(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
   }
 
   /**
@@ -70,8 +73,6 @@ public class PlayerHpDAO extends BattleDAO {
    */
   public void updateFirstPlayerHp(int playerHp) {
     String columnName = "player_hitpoint";
-    String tableName = "players_hitpoints";
-    String primaryKeyColumnName = "player_code";
-    this.updateFirstField(Integer.toString(playerHp), columnName, tableName, primaryKeyColumnName);
+    this.updateFirstField(Integer.toString(playerHp), columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME);
   }
 }

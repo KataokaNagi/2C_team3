@@ -3,10 +3,10 @@
 * @brief     「モンスター総合体力」テーブルのDAO
 * @note      高度情報演習2C 後半 木村教授担当分 Team3
 * @auther    AL18036 Kataoka Nagi
-* @date      2020-12-30 18:58:46
+* @date      2020-12-30 19:32:08
 * $Version   1.1
-* $Revision  1.2
-* @par       編集：create*Idx()の仮組の作成
+* $Revision  1.3
+* @par       リファクタリング：テーブル名とPK名をメンバ変数へ
 * @see       https://www.kenschool.jp/blog/?p=1644
 */
 
@@ -17,6 +17,9 @@ package jdbc;
  * @brief 「モンスター総合体力」テーブルのDAO
  */
 public class MonsterMainHpDAO extends BattleDAO {
+
+  private final String TABLE_NAME = "monster_main_hitpoints";
+  private final String PRIMARY_KEY_COLUMN_NAME = "monster_code";
 
   /**
    * @fn MonsterMainHpDAO
@@ -49,7 +52,9 @@ public class MonsterMainHpDAO extends BattleDAO {
    * @brief テーブルのインデックスを張る
    */
   private void createMonsterMainHpIdx() {
-    createIdx(IDX_NAME, TABLE_NAME, COLUMN_NAME);
+    String idxName = "idx_" + TABLE_NAME;
+    String idxColumnName = PRIMARY_KEY_COLUMN_NAME;
+    createIdx(idxName, TABLE_NAME, idxColumnName);
   }
 
   /**
@@ -59,9 +64,7 @@ public class MonsterMainHpDAO extends BattleDAO {
    */
   public int selectFirstMonsterMainHp() {
     String columnName = "monster_main_hitpoint";
-    String tableName = "monster_main_hitpoints";
-    String primaryKeyColumnName = "monster_code";
-    return Integer.parseInt(selectFirstField(columnName, tableName, primaryKeyColumnName));
+    return Integer.parseInt(selectFirstField(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
   }
 
   /**
@@ -70,8 +73,6 @@ public class MonsterMainHpDAO extends BattleDAO {
    */
   public void updateFirstMonsterMainHp(int monsterMainHp) {
     String columnName = "monster_main_hitpoint";
-    String tableName = "monster_main_hitpoints";
-    String primaryKeyColumnName = "monster_code";
-    this.updateFirstField(Integer.toString(monsterMainHp), columnName, tableName, primaryKeyColumnName);
+    this.updateFirstField(Integer.toString(monsterMainHp), columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME);
   }
 }

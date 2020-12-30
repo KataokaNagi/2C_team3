@@ -3,10 +3,10 @@
 * @brief     「モンスター部位体力」テーブルのDAO
 * @note      高度情報演習2C 後半 木村教授担当分 Team3
 * @auther    AL18036 Kataoka Nagi
-* @date      2020-12-30 18:59:07
+* @date      2020-12-30 19:31:59
 * $Version   1.1
-* $Revision  1.2
-* @par       編集：create*Idx()の仮組の作成
+* $Revision  1.3
+* @par       リファクタリング：テーブル名とPK名をメンバ変数へ
 * @see       https://www.kenschool.jp/blog/?p=1644
 */
 
@@ -19,6 +19,9 @@ import java.util.ArrayList;
  * @brief 「モンスター部位体力」テーブルのDAO
  */
 public class MonsterPartsHpDAO extends BattleDAO {
+
+  private final String TABLE_NAME = "monster_parts_hitpoints";
+  private final String PRIMARY_KEY_COLUMN_NAME = "monster_code";
 
   /**
    * @fn MonsterPartsHpDAO
@@ -51,7 +54,9 @@ public class MonsterPartsHpDAO extends BattleDAO {
    * @brief テーブルのインデックスを張る
    */
   private void createMonsterPartsHpIdx() {
-    createIdx(IDX_NAME, TABLE_NAME, COLUMN_NAME);
+    String idxName = "idx_" + TABLE_NAME;
+    String idxColumnName = PRIMARY_KEY_COLUMN_NAME;
+    createIdx(idxName, TABLE_NAME, idxColumnName);
   }
 
   //////////////////////////////////////////////////
@@ -65,9 +70,7 @@ public class MonsterPartsHpDAO extends BattleDAO {
    */
   public ArrayList<String> selectAllMonsterPartsName() {
     String columnName = "monster_part_name";
-    String tableName = "monster_parts_hitpoints";
-    String primaryKeyColumnName = "monster_code";
-    return selectColumn(columnName, tableName, primaryKeyColumnName);
+    return selectColumn(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME);
   }
 
   /**
@@ -77,9 +80,7 @@ public class MonsterPartsHpDAO extends BattleDAO {
    */
   public ArrayList<Integer> selectAllMonsterPartsHp() {
     String columnName = "monster_part_hitpoint";
-    String tableName = "monster_parts_hitpoints";
-    String primaryKeyColumnName = "monster_code";
-    return this.toIntegerList(selectColumn(columnName, tableName, primaryKeyColumnName));
+    return this.toIntegerList(selectColumn(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
   }
 
   /**
@@ -89,9 +90,7 @@ public class MonsterPartsHpDAO extends BattleDAO {
    */
   public ArrayList<Integer> selectAllMonsterPartsHardness() {
     String columnName = "monster_part_hardness";
-    String tableName = "monster_parts_hitpoints";
-    String primaryKeyColumnName = "monster_code";
-    return this.toIntegerList((selectColumn(columnName, tableName, primaryKeyColumnName)));
+    return this.toIntegerList((selectColumn(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME)));
   }
 
   //////////////////////////////////////////////////
@@ -104,9 +103,7 @@ public class MonsterPartsHpDAO extends BattleDAO {
    */
   public void updateMonsterPartsName(String monsterPartsName, String primaryKey) {
     String columnName = "monster_part_name";
-    String tableName = "monster_parts_hitpoints";
-    String primaryKeyColumnName = "monster_code";
-    this.updateField(monsterPartsName, columnName, tableName, primaryKeyColumnName, primaryKey);
+    this.updateField(monsterPartsName, columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME, primaryKey);
   }
 
   /**
@@ -115,9 +112,7 @@ public class MonsterPartsHpDAO extends BattleDAO {
    */
   public void updateMonsterPartsHp(int monsterPartsHp, String primaryKey) {
     String columnName = "monster_part_hitpoint";
-    String tableName = "monster_parts_hitpoints";
-    String primaryKeyColumnName = "monster_code";
-    this.updateField(Integer.toString(monsterPartsHp), columnName, tableName, primaryKeyColumnName, primaryKey);
+    this.updateField(Integer.toString(monsterPartsHp), columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME, primaryKey);
   }
 
   /**
@@ -126,8 +121,7 @@ public class MonsterPartsHpDAO extends BattleDAO {
    */
   public void updateMonsterPartsHardness(int monsterPartsHardness, String primaryKey) {
     String columnName = "monster_part_hardness";
-    String tableName = "monster_parts_hitpoints";
-    String primaryKeyColumnName = "monster_code";
-    this.updateField(Integer.toString(monsterPartsHardness), columnName, tableName, primaryKeyColumnName, primaryKey);
+    this.updateField(Integer.toString(monsterPartsHardness), columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME,
+        primaryKey);
   }
 }

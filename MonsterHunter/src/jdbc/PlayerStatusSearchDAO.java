@@ -3,10 +3,10 @@
 * @brief     「プレイヤーステータス検索」テーブルのDAO
 * @note      高度情報演習2C 後半 木村教授担当分 Team3
 * @auther    AL18036 Kataoka Nagi
-* @date      2020-12-30 18:59:28
+* @date      2020-12-30 19:31:42
 * $Version   1.0
-* $Revision  1.2
-* @par       編集：create*Idx()の仮組の作成
+* $Revision  1.3
+* @par       リファクタリング：テーブル名とPK名をメンバ変数へ
 * @see       https://www.kenschool.jp/blog/?p=1644
 */
 
@@ -17,6 +17,9 @@ package jdbc;
  * @brief 「プレイヤーステータス検索」テーブルのDAO
  */
 public class PlayerStatusSearchDAO extends BattleDAO {
+
+  private final String TABLE_NAME = "players_statuses";
+  private final String PRIMARY_KEY_COLUMN_NAME = "player_code";
 
   /**
    * @fn PlayerStatusSearchDAO
@@ -49,7 +52,9 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    * @brief テーブルのインデックスを張る
    */
   private void createPlayerStatusSearchIdx() {
-    createIdx(IDX_NAME, TABLE_NAME, COLUMN_NAME);
+    String idxName = "idx_" + TABLE_NAME;
+    String idxColumnName = PRIMARY_KEY_COLUMN_NAME;
+    createIdx(idxName, TABLE_NAME, idxColumnName);
   }
 
   //////////////////////////////////////////////////
@@ -63,9 +68,7 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    */
   public String selectFirstWeaponCode() {
     String columnName = "weapon_code";
-    String tableName = "players_statuses";
-    String primaryKeyColumnName = "player_code";
-    return selectFirstField(columnName, tableName, primaryKeyColumnName);
+    return selectFirstField(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME);
   }
 
   /**
@@ -75,9 +78,7 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    */
   public String selectFirstWeaponName() {
     String columnName = "weapon_name";
-    String tableName = "players_statuses";
-    String primaryKeyColumnName = "player_code";
-    return selectFirstField(columnName, tableName, primaryKeyColumnName);
+    return selectFirstField(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME);
   }
 
   /**
@@ -87,9 +88,7 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    */
   public int selectFirstWeaponAttackVal() {
     String columnName = "weapon_value";
-    String tableName = "players_statuses";
-    String primaryKeyColumnName = "player_code";
-    return Integer.parseInt(selectFirstField(columnName, tableName, primaryKeyColumnName));
+    return Integer.parseInt(selectFirstField(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
   }
 
   /**
@@ -99,9 +98,7 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    */
   public float selectFirstWeaponCriticalRate() {
     String columnName = "weapon_criticalRate";
-    String tableName = "players_statuses";
-    String primaryKeyColumnName = "player_code";
-    return Float.parseFloat(selectFirstField(columnName, tableName, primaryKeyColumnName));
+    return Float.parseFloat(selectFirstField(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
   }
 
   /**
@@ -111,9 +108,7 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    */
   public int selectFirstWeaponElementVal() {
     String columnName = "weapon_element_value";
-    String tableName = "players_statuses";
-    String primaryKeyColumnName = "player_code";
-    return Integer.parseInt(selectFirstField(columnName, tableName, primaryKeyColumnName));
+    return Integer.parseInt(selectFirstField(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
   }
 
   /**
@@ -123,9 +118,7 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    */
   public String selectFirstWeaponElementCode() {
     String columnName = "weapon_element_code";
-    String tableName = "players_statuses";
-    String primaryKeyColumnName = "player_code";
-    return selectFirstField(columnName, tableName, primaryKeyColumnName);
+    return selectFirstField(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME);
   }
 
   /**
@@ -135,9 +128,7 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    */
   public String selectFirstWeaponElementName() {
     String columnName = "weapon_element_name";
-    String tableName = "players_statuses";
-    String primaryKeyColumnName = "player_code";
-    return selectFirstField(columnName, tableName, primaryKeyColumnName);
+    return selectFirstField(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME);
   }
 
   /**
@@ -147,9 +138,7 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    */
   public String selectFirstArmorCode() {
     String columnName = "armor_code";
-    String tableName = "players_statuses";
-    String primaryKeyColumnName = "player_code";
-    return selectFirstField(columnName, tableName, primaryKeyColumnName);
+    return selectFirstField(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME);
   }
 
   /**
@@ -159,9 +148,7 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    */
   public String selectFirstArmorName() {
     String columnName = "aromor_name";
-    String tableName = "players_statuses";
-    String primaryKeyColumnName = "player_code";
-    return selectFirstField(columnName, tableName, primaryKeyColumnName);
+    return selectFirstField(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME);
   }
 
   /**
@@ -171,9 +158,7 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    */
   public int selectFirstArmorDiffenceVal() {
     String columnName = "aromor_diffence_value";
-    String tableName = "players_statuses";
-    String primaryKeyColumnName = "player_code";
-    return Integer.parseInt(selectFirstField(columnName, tableName, primaryKeyColumnName));
+    return Integer.parseInt(selectFirstField(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
   }
 
   /**
@@ -183,9 +168,7 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    */
   public String selectFirstArmorSkillCode() {
     String columnName = "aromor_skill_code";
-    String tableName = "players_statuses";
-    String primaryKeyColumnName = "player_code";
-    return selectFirstField(columnName, tableName, primaryKeyColumnName);
+    return selectFirstField(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME);
   }
 
   /**
@@ -195,9 +178,7 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    */
   public String selectFirstArmorSkillName() {
     String columnName = "aromor_skill_name";
-    String tableName = "players_statuses";
-    String primaryKeyColumnName = "player_code";
-    return selectFirstField(columnName, tableName, primaryKeyColumnName);
+    return selectFirstField(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME);
   }
 
   /**
@@ -207,9 +188,7 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    */
   public String selectFirstArmorIncreasingSkillTarget() {
     String columnName = "aromor_increasing_skill_target";
-    String tableName = "players_statuses";
-    String primaryKeyColumnName = "player_code";
-    return selectFirstField(columnName, tableName, primaryKeyColumnName);
+    return selectFirstField(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME);
   }
 
   /**
@@ -219,9 +198,7 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    */
   public int selectFirstArmorIncreasingSkillVal() {
     String columnName = "aromor_increasing_skill_value";
-    String tableName = "players_statuses";
-    String primaryKeyColumnName = "player_code";
-    return Integer.parseInt(selectFirstField(columnName, tableName, primaryKeyColumnName));
+    return Integer.parseInt(selectFirstField(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
   }
 
   /**
@@ -231,9 +208,7 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    */
   public String selectFirstArmorElementResistanceCode() {
     String columnName = "aromor_element_resistance_code";
-    String tableName = "players_statuses";
-    String primaryKeyColumnName = "player_code";
-    return selectFirstField(columnName, tableName, primaryKeyColumnName);
+    return selectFirstField(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME);
   }
 
   /**
@@ -243,9 +218,7 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    */
   public int selectFirstArmorFireResistance() {
     String columnName = "aromor_fire_resistance";
-    String tableName = "players_statuses";
-    String primaryKeyColumnName = "player_code";
-    return Integer.parseInt(selectFirstField(columnName, tableName, primaryKeyColumnName));
+    return Integer.parseInt(selectFirstField(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
   }
 
   /**
@@ -255,9 +228,7 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    */
   public int selectFirstArmorWaterResistance() {
     String columnName = "aromor_water_resistance";
-    String tableName = "players_statuses";
-    String primaryKeyColumnName = "player_code";
-    return Integer.parseInt(selectFirstField(columnName, tableName, primaryKeyColumnName));
+    return Integer.parseInt(selectFirstField(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
   }
 
   /**
@@ -267,9 +238,7 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    */
   public int selectFirstArmorElectricResistance() {
     String columnName = "aromor_electric_resistance";
-    String tableName = "players_statuses";
-    String primaryKeyColumnName = "player_code";
-    return Integer.parseInt(selectFirstField(columnName, tableName, primaryKeyColumnName));
+    return Integer.parseInt(selectFirstField(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
   }
 
   /**
@@ -279,9 +248,7 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    */
   public int selectFirstArmorIceResistance() {
     String columnName = "aromor_ice_resistance";
-    String tableName = "players_statuses";
-    String primaryKeyColumnName = "player_code";
-    return Integer.parseInt(selectFirstField(columnName, tableName, primaryKeyColumnName));
+    return Integer.parseInt(selectFirstField(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
   }
 
   /**
@@ -291,8 +258,6 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    */
   public int selectFirstArmorDragonResistance() {
     String columnName = "aromor_dragon_resistance";
-    String tableName = "players_statuses";
-    String primaryKeyColumnName = "player_code";
-    return Integer.parseInt(selectFirstField(columnName, tableName, primaryKeyColumnName));
+    return Integer.parseInt(selectFirstField(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
   }
 }
