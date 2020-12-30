@@ -11,7 +11,7 @@
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-@startuml ./ClassDiagram_GUI_and_GameProess.png
+@startuml ./out/ClassDiagram_GUI_and_GameProess.png
 scale 1.5
 skinparam DefaultFontName メイリオ
 ' 可視性の変更

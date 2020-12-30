@@ -11,7 +11,7 @@
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-@startuml ./ClassDiagram_JDBC_parents.png
+@startuml ./out/ClassDiagram_JDBC_parents.png
 scale 1.5
 skinparam DefaultFontName メイリオ
 ' 可視性の変更
