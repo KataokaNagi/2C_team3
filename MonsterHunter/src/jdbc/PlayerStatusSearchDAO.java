@@ -3,10 +3,10 @@
 * @brief     「プレイヤーステータス検索」テーブルのDAO
 * @note      高度情報演習2C 後半 木村教授担当分 Team3
 * @auther    AL18036 Kataoka Nagi
-* @date      2020-12-30 18:21:04
+* @date      2020-12-30 18:59:28
 * $Version   1.0
-* $Revision  1.1
-* @par       編集：カラム、テーブル名を命名規則に合わせて変更（https://qiita.com/genzouw/items/35022fa96c120e67c637）
+* $Revision  1.2
+* @par       編集：create*Idx()の仮組の作成
 * @see       https://www.kenschool.jp/blog/?p=1644
 */
 
@@ -24,7 +24,8 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    */
   public PlayerStatusSearchDAO(String weaponName, String armorName, String monsterName) {
     super(weaponName, armorName, monsterName);
-    createPlayerStatusSearchTable();
+    this.createPlayerStatusSearchTable();
+    this.createPlayerStatusSearchIdx();
   }
 
   /**
@@ -41,6 +42,14 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    */
   public void dropPlayerStatusSearchTable() {
     // TODO
+  }
+
+  /**
+   * @fn createPlayerStatusSearchIdx
+   * @brief テーブルのインデックスを張る
+   */
+  private void createPlayerStatusSearchIdx() {
+    createIdx(IDX_NAME, TABLE_NAME, COLUMN_NAME);
   }
 
   //////////////////////////////////////////////////

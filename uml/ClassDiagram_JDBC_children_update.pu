@@ -2,10 +2,10 @@
 ' @brief     クラス図出力用のファイル
 ' @note      高度情報演習2C 後半 木村教授担当分 Team3
 ' @auther    AL18036 Kataoka Nagi
-' @date      2020-12-28 08:05:03
+' @date      2020-12-30 19:01:23
 ' $Version   1.2
-' $Revision  1.1
-' @par       修正：MonsterPartsName
+' $Revision  1.3
+' @par       編集：create*Idx()の仮組の作成
 ' @note      java -jar plantuml.jar -graphvizdot C:\Graphviz\bin\dot.exe ClassDiagram_JDBC_children_update.pu -charset UTF-8
 ' @see       https://qiita.com/opengl-8080/items/98c510b8ca060bdd2ea3
 
@@ -21,8 +21,8 @@ skinparam classAttributeIconSize 0
 
 header 
 Team 3 : AL18036 Kataoka Nagi
-2020-12-28 07:26:50
-修正：DAOの部分を別ファイルに移動
+2020-12-30 18:36:48
+修正：DAOの部分を削除（他の図と重複するため）
 end header
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -129,17 +129,12 @@ package src.jdbc {
   ' @see https://kanda-it-school-kensyu.com/java-jdbc-contents/jj_ch04/jj_0401/
 
   abstract class BattleDAO {
-  + getWeaponName(): String
-  + getArmorName(): String
-  + getMonsterName(): String
-  + setWeaponName(weaponName: String): void
-  + setArmorName(armorName: String): void
-  + setMonsterName(monsterName: String): void
   }
 
   class PlayerHpDAO extends BattleDAO {
     + PlayerHpDAO(weaponName: String, armorName: String, monsterName: String) {
     - createPlayerHpTable(): void
+    - createPlayerHpIdx(): void
     + dropPlayerHpTable(): void
     + selectFirstPlayerHp(): int
     + updateFirstPlayerHp(playerHp: int): void
@@ -148,6 +143,7 @@ package src.jdbc {
   class MonsterMainHpDAO extends BattleDAO {
     + MonsterMainHpDAO(weaponName: String, armorName: String, monsterName: String) {
     - createMonsterMainHpTable(): void
+    - createMonsterMainHpIdx(): void
     + dropMonsterMainHpTable(): void
     + selectFirstMonsterMainHp(): int
     + updateFirstMonsterMainHp(monsterMainHp: int): void
@@ -156,6 +152,7 @@ package src.jdbc {
   class MonsterPartsHpDAO extends BattleDAO {
     + MonsterPartsHpDAO(weaponName: String, armorName: String, monsterName: String)
     - createMonsterPartsHpTable() : void
+    - createMonsterPartsHpIdx() : void
     + dropMonsterPartsHpTable() : void
     + selectAllMonsterPartsName(): ArrayList<String>
     + selectAllMonsterPartsHp(): ArrayList<Integer>

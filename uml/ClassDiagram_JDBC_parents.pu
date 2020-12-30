@@ -2,10 +2,10 @@
 ' @brief     クラス図出力用のファイル
 ' @note      高度情報演習2C 後半 木村教授担当分 Team3
 ' @auther    AL18036 Kataoka Nagi
-' @date      2020-12-28 07:26:13
+' @date      2020-12-30 18:34:00
 ' $Version   1.2
-' $Revision  1.0
-' @par       修正：DAOの部分を別ファイルに移動
+' $Revision  1.1
+' @par       追加：createIdxメソッドの仮組みを作成
 ' @note      java -jar plantuml.jar -graphvizdot C:\Graphviz\bin\dot.exe ClassDiagram_JDBC_parents.pu -charset UTF-8
 ' @see       https://qiita.com/opengl-8080/items/98c510b8ca060bdd2ea3
 
@@ -21,8 +21,8 @@ skinparam classAttributeIconSize 0
 
 header 
 Team 3 : AL18036 Kataoka Nagi
-2020-12-28 07:26:50
-修正：DAOの部分を別ファイルに移動
+2020-12-30 18:36:22
+追加：createIdxメソッドの仮組みを作成
 end header
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -140,6 +140,7 @@ package src.jdbc {
   abstract class DataAccessObject extends DBConnector {
     # createTable(tableName: String): void
     # dropTable(tableName: String): void
+    # createIdx(idxName: String, tableName: String, columnName: String): void
     # selectColumn(columnName: String, tableName: String, primaryKeyColumnName: String): ArrayList<String>
     # toIntegerList(strList: ArrayList<String>): ArrayList<Integer>
     # toFloatList(strList: ArrayList<String>): ArrayList<Float>

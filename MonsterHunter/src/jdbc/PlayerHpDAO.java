@@ -3,10 +3,10 @@
 * @brief     「プレイヤー体力」テーブル
 * @note      高度情報演習2C 後半 木村教授担当分 Team3
 * @auther    AL18036 Kataoka Nagi
-* @date      2020-12-30 18:21:24
+* @date      2020-12-30 18:59:17
 * $Version   1.1
-* $Revision  1.1
-* @par       編集：カラム、テーブル名を命名規則に合わせて変更（https://qiita.com/genzouw/items/35022fa96c120e67c637）
+* $Revision  1.2
+* @par       編集：create*Idx()の仮組の作成
 * @see       https://www.kenschool.jp/blog/?p=1644
 */
 
@@ -24,7 +24,8 @@ public class PlayerHpDAO extends BattleDAO {
    */
   public PlayerHpDAO(String weaponName, String armorName, String monsterName) {
     super(weaponName, armorName, monsterName);
-    createPlayerHpTable();
+    this.createPlayerHpTable();
+    this.createPlayerHpIdx();
   }
 
   /**
@@ -41,6 +42,14 @@ public class PlayerHpDAO extends BattleDAO {
    */
   public void dropPlayerHpTable() {
     // TODO
+  }
+
+  /**
+   * @fn createIdx
+   * @brief テーブルのインデックスを張る
+   */
+  private void createPlayerHpIdx() {
+    createIdx(IDX_NAME, TABLE_NAME, COLUMN_NAME);
   }
 
   /**

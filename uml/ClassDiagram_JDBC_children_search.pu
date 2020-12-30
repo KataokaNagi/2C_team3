@@ -2,10 +2,10 @@
 ' @brief     クラス図出力用のファイル
 ' @note      高度情報演習2C 後半 木村教授担当分 Team3
 ' @auther    AL18036 Kataoka Nagi
-' @date      2020-12-28 07:26:13
+' @date      2020-12-30 19:01:06
 ' $Version   1.2
-' $Revision  1.0
-' @par       修正：DAOの部分を別ファイルに移動
+' $Revision  1.2
+' @par       編集：create*Idx()の仮組の作成
 ' @note      java -jar plantuml.jar -graphvizdot C:\Graphviz\bin\dot.exe ClassDiagram_JDBC_children_search.pu -charset UTF-8
 ' @see       https://qiita.com/opengl-8080/items/98c510b8ca060bdd2ea3
 
@@ -21,8 +21,8 @@ skinparam classAttributeIconSize 0
 
 header 
 Team 3 : AL18036 Kataoka Nagi
-2020-12-28 07:26:50
-修正：DAOの部分を別ファイルに移動
+2020-12-30 18:39:02
+修正：DAOの部分を削除（他の図と重複するため）
 end header
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -139,6 +139,7 @@ package src.jdbc {
   class SharpnessSearchDAO extends BattleDAO {
     + SharpnessSearchDAO(weaponName: String, armorName: String, monsterName: String)
     - createSharpnessSearchTable(): void
+    - createSharpnessSearchIdx(): void
     + dropSharpnessSearchTable(): void
     + selectAllSharpnessColorName(): ArrayList<String>
     + selectAllSharpnessGaugeAmount(): ArrayList<Integer>
@@ -148,6 +149,7 @@ package src.jdbc {
   class PlayerStatusSearchDAO extends BattleDAO {
     + PlayerStatusSearchDAO(weaponName: String, armorName: String, monsterName: String)
     - createPlayerStatusSearchTable(): void
+    - createPlayerStatusSearchIdx(): void
     + dropPlayerStatusSearchTable(): void
     + selectFirstWeaponCode(): String
     + selectFirstWeaponName(): String
@@ -174,6 +176,7 @@ package src.jdbc {
   class MonsterAttackStatusSearchDAO extends BattleDAO {
     + MonsterAttackStatusSearchDAO(weaponName: String, armorName: String, monsterName: String)
     - MonsterAttackStatusSearchTable(): void
+    - createMonsterAttackStatusSearchIdx(): void
     + dropMonsterAttackStatusSearchTable(): void
     + selectAllMonsterAttackName(): ArrayList<String>
     + selectAllMonsterAttackVal(): ArrayList<Integer>

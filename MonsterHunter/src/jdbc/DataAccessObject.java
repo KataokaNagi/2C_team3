@@ -3,10 +3,10 @@
 * @brief     DAOの汎用部分を実装する抽象クラス
 * @note      高度情報演習2C 後半 木村教授担当分 Team3
 * @auther    AL18036 Kataoka Nagi
-* @date      2020-12-27 23:46:35
+* @date      2020-12-30 18:33:31
 * $Version   1.1
-* $Revision  1.0
-* @par       追加：メソッドの仮組みを全て作成
+* $Revision  1.1
+* @par       追加：createIdxメソッドの仮組みを作成
 * @see       https://www.kenschool.jp/blog/?p=1644
  */
 
@@ -24,16 +24,29 @@ abstract class DataAccessObject extends DBConnector {
   /**
    * @fn createTable
    * @brief SQL文でよく使うカラムを非正規化する汎用メソッド
+   * @param[in] tableName 作成するテーブル名
    */
   protected void createTable(String tableName) {
-    // TOD
+    // TODO
   }
 
   /**
    * @fn dropTable
-   * @brief テーブルを削除する汎用メソッド
+   * @brief 指定したテーブルを削除する
+   * @param[in] tableName 削除するテーブル名
    */
   protected void dropTable(String tableName) {
+    // TODO
+  }
+
+  /**
+   * @fn createIdx
+   * @param[in] idxName 張るインデックス名
+   * @param[in] tableName インデックスを張るテーブル名
+   * @param[in] columnName インデックスを張るコラム名
+   * @brief テーブルのインデックスを張る
+   */
+  protected void createIdx(String idxName, String tableName, String columnName) {
     // TODO
   }
 
