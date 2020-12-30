@@ -3,10 +3,10 @@
 * @brief     「モンスター部位体力」テーブルのDAO
 * @note      高度情報演習2C 後半 木村教授担当分 Team3
 * @auther    AL18036 Kataoka Nagi
-* @date      2020-12-28 07:23:34
+* @date      2020-12-30 18:21:43
 * $Version   1.1
-* $Revision  1.0
-* @par       修正：括弧の凡ミス
+* $Revision  1.1
+* @par       編集：カラム、テーブル名を命名規則に合わせて変更（https://qiita.com/genzouw/items/35022fa96c120e67c637）
 * @see       https://www.kenschool.jp/blog/?p=1644
 */
 
@@ -55,8 +55,8 @@ public class MonsterPartsHpDAO extends BattleDAO {
    * @return 全モンスター部位名のリスト
    */
   public ArrayList<String> selectAllMonsterPartsName() {
-    String columnName = "monster_parts_name";
-    String tableName = "monster_parts_hp_table";
+    String columnName = "monster_part_name";
+    String tableName = "monster_parts_hitpoints";
     String primaryKeyColumnName = "monster_code";
     return selectColumn(columnName, tableName, primaryKeyColumnName);
   }
@@ -67,8 +67,8 @@ public class MonsterPartsHpDAO extends BattleDAO {
    * @return 全モンスター部位体力のリスト
    */
   public ArrayList<Integer> selectAllMonsterPartsHp() {
-    String columnName = "monster_parts_hp";
-    String tableName = "monster_parts_hp_table";
+    String columnName = "monster_part_hitpoint";
+    String tableName = "monster_parts_hitpoints";
     String primaryKeyColumnName = "monster_code";
     return this.toIntegerList(selectColumn(columnName, tableName, primaryKeyColumnName));
   }
@@ -79,8 +79,8 @@ public class MonsterPartsHpDAO extends BattleDAO {
    * @return 全モンスター部位肉質のリスト
    */
   public ArrayList<Integer> selectAllMonsterPartsHardness() {
-    String columnName = "monster_parts_hardness";
-    String tableName = "monster_parts_hp_table";
+    String columnName = "monster_part_hardness";
+    String tableName = "monster_parts_hitpoints";
     String primaryKeyColumnName = "monster_code";
     return this.toIntegerList((selectColumn(columnName, tableName, primaryKeyColumnName)));
   }
@@ -94,8 +94,8 @@ public class MonsterPartsHpDAO extends BattleDAO {
    * @brief 「モンスター部位体力」テーブルの、モンスター部位名カラムの先頭のフィールドを更新
    */
   public void updateMonsterPartsName(String monsterPartsName, String primaryKey) {
-    String columnName = "monster_parts_name";
-    String tableName = "monster_parts_hp_table";
+    String columnName = "monster_part_name";
+    String tableName = "monster_parts_hitpoints";
     String primaryKeyColumnName = "monster_code";
     this.updateField(monsterPartsName, columnName, tableName, primaryKeyColumnName, primaryKey);
   }
@@ -105,8 +105,8 @@ public class MonsterPartsHpDAO extends BattleDAO {
    * @brief 「モンスター部位体力」テーブルの、モンスター部位体力カラムの先頭のフィールドを更新
    */
   public void updateMonsterPartsHp(int monsterPartsHp, String primaryKey) {
-    String columnName = "monster_parts_hp";
-    String tableName = "monster_parts_hp_table";
+    String columnName = "monster_part_hitpoint";
+    String tableName = "monster_parts_hitpoints";
     String primaryKeyColumnName = "monster_code";
     this.updateField(Integer.toString(monsterPartsHp), columnName, tableName, primaryKeyColumnName, primaryKey);
   }
@@ -116,8 +116,8 @@ public class MonsterPartsHpDAO extends BattleDAO {
    * @brief 「モンスター部位体力」テーブルの、モンスター部位肉質カラムの先頭のフィールドを更新
    */
   public void updateMonsterPartsHardness(int monsterPartsHardness, String primaryKey) {
-    String columnName = "monster_parts_hardness";
-    String tableName = "monster_parts_hp_table";
+    String columnName = "monster_part_hardness";
+    String tableName = "monster_parts_hitpoints";
     String primaryKeyColumnName = "monster_code";
     this.updateField(Integer.toString(monsterPartsHardness), columnName, tableName, primaryKeyColumnName, primaryKey);
   }

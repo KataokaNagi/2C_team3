@@ -3,10 +3,10 @@
 * @brief     メニュー画面で用いるデータアクセスオブジェクト
 * @note      高度情報演習2C 後半 木村教授担当分 Team3
 * @auther    AL18036 Kataoka Nagi
-* @date      2020-12-26 22:30:14
+* @date      2020-12-30 18:22:25
 * $Version   1.1
-* $Revision  1.0
-* @par       EDIT：汎用的なコードをDataAccessObject.javaに移動
+* $Revision  1.1
+* @par       編集：カラム、テーブル名を命名規則に合わせて変更（https://qiita.com/genzouw/items/35022fa96c120e67c637）
 * @par       TODO：クエスト後に検索が不要になるようにリストに退避
 * @par       TODO：ConnectionとStatementのタイミングが頻繁すぎる気がする
 * @par       TODO：Debianへの対応
@@ -40,7 +40,7 @@ public class MenuDAO extends DataAccessObject {
    */
   public ArrayList<String> selectAllWeaponName() {
     String columnName = "weapon_name";
-    String tableName = "weapon_table";
+    String tableName = "weapons";
     String primaryKeyColumnName = "weapon_id";
     return selectColumn(columnName, tableName, primaryKeyColumnName);
   }
@@ -52,7 +52,7 @@ public class MenuDAO extends DataAccessObject {
    */
   public ArrayList<String> selectAllArmorName() {
     String columnName = "armor_name";
-    String tableName = "armor_table";
+    String tableName = "armors";
     String primaryKeyColumnName = "armor_id";
     return selectColumn(columnName, tableName, primaryKeyColumnName);
   }
@@ -64,7 +64,7 @@ public class MenuDAO extends DataAccessObject {
    */
   public ArrayList<String> selectAllMonsterName() {
     String columnName = "monster_name";
-    String tableName = "monster_table";
+    String tableName = "monsters";
     String primaryKeyColumnName = "monster_id";
     return selectColumn(columnName, tableName, primaryKeyColumnName);
   }
@@ -75,8 +75,8 @@ public class MenuDAO extends DataAccessObject {
    * @return 全武器攻撃力のリスト
    */
   public ArrayList<Integer> selectAllWeaponAttackVal() {
-    String columnName = "weapon_attack_val";
-    String tableName = "weapon_table";
+    String columnName = "weapon_attack_value";
+    String tableName = "weapons";
     String primaryKeyColumnName = "weapon_id";
     return toIntegerList(selectColumn(columnName, tableName, primaryKeyColumnName));
   }
@@ -87,8 +87,8 @@ public class MenuDAO extends DataAccessObject {
    * @return 全防具防御力のリスト
    */
   public ArrayList<Integer> selectAllArmorDiffenceVal() {
-    String columnName = "armor_diffence_val";
-    String tableName = "armor_table";
+    String columnName = "armor_diffence_value";
+    String tableName = "armors";
     String primaryKeyColumnName = "armor_id";
     return toIntegerList(selectColumn(columnName, tableName, primaryKeyColumnName));
   }

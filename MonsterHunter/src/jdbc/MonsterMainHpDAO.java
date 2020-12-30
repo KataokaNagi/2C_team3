@@ -3,10 +3,10 @@
 * @brief     「モンスター総合体力」テーブルのDAO
 * @note      高度情報演習2C 後半 木村教授担当分 Team3
 * @auther    AL18036 Kataoka Nagi
-* @date      2020-12-28 07:22:47
+* @date      2020-12-30 18:21:55
 * $Version   1.1
-* $Revision  1.0
-* @par       修正：selectの引数
+* $Revision  1.1
+* @par       編集：カラム、テーブル名を命名規則に合わせて変更（https://qiita.com/genzouw/items/35022fa96c120e67c637）
 * @see       https://www.kenschool.jp/blog/?p=1644
 */
 
@@ -49,8 +49,8 @@ public class MonsterMainHpDAO extends BattleDAO {
    * @return モンスター体力の先頭のフィールド
    */
   public int selectFirstMonsterMainHp() {
-    String columnName = "monster_main_hp";
-    String tableName = "monster_main_hp_table";
+    String columnName = "monster_main_hitpoint";
+    String tableName = "monster_main_hitpoints";
     String primaryKeyColumnName = "monster_code";
     return Integer.parseInt(selectFirstField(columnName, tableName, primaryKeyColumnName));
   }
@@ -60,8 +60,8 @@ public class MonsterMainHpDAO extends BattleDAO {
    * @brief 「モンスター総合体力」テーブルの、モンスター体力カラムの先頭のフィールドを更新
    */
   public void updateFirstMonsterMainHp(int monsterMainHp) {
-    String columnName = "monster_main_hp";
-    String tableName = "monster_main_hp_table";
+    String columnName = "monster_main_hitpoint";
+    String tableName = "monster_main_hitpoints";
     String primaryKeyColumnName = "monster_code";
     this.updateFirstField(Integer.toString(monsterMainHp), columnName, tableName, primaryKeyColumnName);
   }

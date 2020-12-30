@@ -3,10 +3,10 @@
 * @brief     「モンスター攻撃ステータス検索」テーブルのDAO
 * @note      高度情報演習2C 後半 木村教授担当分 Team3
 * @auther    AL18036 Kataoka Nagi
-* @date      2020-12-28 00:54:39
+* @date      2020-12-30 18:22:11
 * $Version   1.0
-* $Revision  1.0
-* @par       ADD: 新規作成
+* $Revision  1.1
+* @par       編集：カラム、テーブル名を命名規則に合わせて変更（https://qiita.com/genzouw/items/35022fa96c120e67c637）
 * @see       https://www.kenschool.jp/blog/?p=1644
 */
 
@@ -55,7 +55,7 @@ public class MonsterAttackStatusSearchDAO extends BattleDAO {
    */
   public ArrayList<String> selectAllMonsterAttackName() {
     String columnName = "monster_attack_name";
-    String tableName = "monster_attack_status_search_table";
+    String tableName = "monster_attack_statuses_searches";
     String primaryKeyColumnName = "monster_attack_code";
     return selectColumn(columnName, tableName, primaryKeyColumnName);
   }
@@ -66,8 +66,8 @@ public class MonsterAttackStatusSearchDAO extends BattleDAO {
    * @return モンスター攻撃力のリスト
    */
   public ArrayList<Integer> selectAllMonsterAttackVal() {
-    String columnName = "monster_attack_val";
-    String tableName = "monster_attack_status_search_table";
+    String columnName = "monster_attack_value";
+    String tableName = "monster_attack_statuses_searches";
     String primaryKeyColumnName = "monster_attack_code";
     return this.toIntegerList(selectColumn(columnName, tableName, primaryKeyColumnName));
   }
@@ -78,8 +78,8 @@ public class MonsterAttackStatusSearchDAO extends BattleDAO {
    * @return モンスター攻撃ミス確率のリスト
    */
   public ArrayList<Float> selectAllMonsterAttackMissProb() {
-    String columnName = "monster_attack_miss_prob";
-    String tableName = "monster_attack_status_search_table";
+    String columnName = "monster_attack_miss_probability";
+    String tableName = "monster_attack_statuses_searches";
     String primaryKeyColumnName = "monster_attack_code";
     return this.toFloatList(selectColumn(columnName, tableName, primaryKeyColumnName));
   }
