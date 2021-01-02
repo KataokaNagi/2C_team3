@@ -57,7 +57,7 @@ public class MonsterAttackStatusSearchDAO extends BattleDAO {
     tableRecordDetailSQL += " = " + super.getMonsterCode();
 
     // テーブルの作成
-    createTable(TABLE_NAME, tableRecordDetailSQL, PRIMARY_KEY_COLUMN_NAME);
+    super.createTable(TABLE_NAME, tableRecordDetailSQL, PRIMARY_KEY_COLUMN_NAME);
   }
 
   /**
@@ -75,7 +75,7 @@ public class MonsterAttackStatusSearchDAO extends BattleDAO {
   private void createMonsterAttackStatusSearchIdx() {
     String idxName = "idx_" + TABLE_NAME;
     String idxColumnName = PRIMARY_KEY_COLUMN_NAME;
-    createIdx(idxName, TABLE_NAME, idxColumnName);
+    super.createIdx(idxName, TABLE_NAME, idxColumnName);
   }
 
   //////////////////////////////////////////////////
@@ -89,7 +89,7 @@ public class MonsterAttackStatusSearchDAO extends BattleDAO {
    */
   public ArrayList<String> selectAllMonsterAttackName() {
     String columnName = MONSTER_ATTACK_NAME;
-    return selectColumn(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME);
+    return super.selectColumn(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME);
   }
 
   /**
@@ -99,7 +99,7 @@ public class MonsterAttackStatusSearchDAO extends BattleDAO {
    */
   public ArrayList<Integer> selectAllMonsterAttackVal() {
     String columnName = MONSTER_ATTACK_VAL;
-    return this.toIntegerList(selectColumn(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
+    return super.toIntegerList(super.selectColumn(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
   }
 
   /**
@@ -109,6 +109,6 @@ public class MonsterAttackStatusSearchDAO extends BattleDAO {
    */
   public ArrayList<Float> selectAllMonsterAttackMissProb() {
     String columnName = MONSTER_ATTACK_MISS_PROB;
-    return this.toFloatList(selectColumn(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
+    return super.toFloatList(super.selectColumn(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
   }
 }

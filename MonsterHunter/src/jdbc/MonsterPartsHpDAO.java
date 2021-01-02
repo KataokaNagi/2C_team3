@@ -56,7 +56,7 @@ public class MonsterPartsHpDAO extends BattleDAO {
   private void createMonsterPartsHpIdx() {
     String idxName = "idx_" + TABLE_NAME;
     String idxColumnName = PRIMARY_KEY_COLUMN_NAME;
-    createIdx(idxName, TABLE_NAME, idxColumnName);
+    super.createIdx(idxName, TABLE_NAME, idxColumnName);
   }
 
   //////////////////////////////////////////////////
@@ -70,7 +70,7 @@ public class MonsterPartsHpDAO extends BattleDAO {
    */
   public ArrayList<String> selectAllMonsterPartsName() {
     String columnName = "monster_part_name";
-    return selectColumn(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME);
+    return super.selectColumn(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME);
   }
 
   /**
@@ -80,7 +80,7 @@ public class MonsterPartsHpDAO extends BattleDAO {
    */
   public ArrayList<Integer> selectAllMonsterPartsHp() {
     String columnName = "monster_part_hitpoint";
-    return this.toIntegerList(selectColumn(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
+    return super.toIntegerList(super.selectColumn(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
   }
 
   /**
@@ -90,7 +90,7 @@ public class MonsterPartsHpDAO extends BattleDAO {
    */
   public ArrayList<Integer> selectAllMonsterPartsHardness() {
     String columnName = "monster_part_hardness";
-    return this.toIntegerList((selectColumn(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME)));
+    return super.toIntegerList(super.selectColumn(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
   }
 
   //////////////////////////////////////////////////

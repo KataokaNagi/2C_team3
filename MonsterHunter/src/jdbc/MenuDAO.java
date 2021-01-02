@@ -42,7 +42,7 @@ public class MenuDAO extends DataAccessObject {
     String columnName = "weapon_name";
     String tableName = "weapons";
     String primaryKeyColumnName = "weapon_id";
-    return selectColumn(columnName, tableName, primaryKeyColumnName);
+    return super.selectColumn(columnName, tableName, primaryKeyColumnName);
   }
 
   /**
@@ -54,7 +54,7 @@ public class MenuDAO extends DataAccessObject {
     String columnName = "armor_name";
     String tableName = "armors";
     String primaryKeyColumnName = "armor_id";
-    return selectColumn(columnName, tableName, primaryKeyColumnName);
+    return super.selectColumn(columnName, tableName, primaryKeyColumnName);
   }
 
   /**
@@ -66,7 +66,7 @@ public class MenuDAO extends DataAccessObject {
     String columnName = "monster_name";
     String tableName = "monsters";
     String primaryKeyColumnName = "monster_id";
-    return selectColumn(columnName, tableName, primaryKeyColumnName);
+    return super.selectColumn(columnName, tableName, primaryKeyColumnName);
   }
 
   /**
@@ -78,7 +78,7 @@ public class MenuDAO extends DataAccessObject {
     String columnName = "weapon_attack_value";
     String tableName = "weapons";
     String primaryKeyColumnName = "weapon_id";
-    return toIntegerList(selectColumn(columnName, tableName, primaryKeyColumnName));
+    return super.toIntegerList(super.selectColumn(columnName, tableName, primaryKeyColumnName));
   }
 
   /**
@@ -90,6 +90,6 @@ public class MenuDAO extends DataAccessObject {
     String columnName = "armor_diffence_value";
     String tableName = "armors";
     String primaryKeyColumnName = "armor_id";
-    return toIntegerList(selectColumn(columnName, tableName, primaryKeyColumnName));
+    return super.toIntegerList(super.selectColumn(columnName, tableName, primaryKeyColumnName));
   }
 }

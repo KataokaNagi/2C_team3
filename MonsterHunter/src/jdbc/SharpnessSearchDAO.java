@@ -56,7 +56,7 @@ public class SharpnessSearchDAO extends BattleDAO {
   private void createSharpnessSearchIdx() {
     String idxName = "idx_" + TABLE_NAME;
     String idxColumnName = PRIMARY_KEY_COLUMN_NAME;
-    createIdx(idxName, TABLE_NAME, idxColumnName);
+    super.createIdx(idxName, TABLE_NAME, idxColumnName);
   }
 
   //////////////////////////////////////////////////
@@ -70,7 +70,7 @@ public class SharpnessSearchDAO extends BattleDAO {
    */
   public ArrayList<String> selectAllSharpnessColorName() {
     String columnName = "sharpness_color_name";
-    return selectColumn(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME);
+    return super.selectColumn(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME);
   }
 
   /**
@@ -80,7 +80,7 @@ public class SharpnessSearchDAO extends BattleDAO {
    */
   public ArrayList<Integer> selectAllSharpnessGaugeAmount() {
     String columnName = "sharpness_gauge_amount";
-    return this.toIntegerList(selectColumn(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
+    return super.toIntegerList(super.selectColumn(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
   }
 
   /**
@@ -90,6 +90,6 @@ public class SharpnessSearchDAO extends BattleDAO {
    */
   public ArrayList<Float> selectAllSharpnessIncreasingAttackValueRate() {
     String columnName = "sharpness_increasing_attack_value_rate";
-    return this.toFloatList(selectColumn(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
+    return super.toFloatList(super.selectColumn(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
   }
 }

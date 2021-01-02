@@ -54,7 +54,7 @@ public class MonsterMainHpDAO extends BattleDAO {
   private void createMonsterMainHpIdx() {
     String idxName = "idx_" + TABLE_NAME;
     String idxColumnName = PRIMARY_KEY_COLUMN_NAME;
-    createIdx(idxName, TABLE_NAME, idxColumnName);
+    super.createIdx(idxName, TABLE_NAME, idxColumnName);
   }
 
   /**
@@ -64,7 +64,7 @@ public class MonsterMainHpDAO extends BattleDAO {
    */
   public int selectFirstMonsterMainHp() {
     String columnName = "monster_main_hitpoint";
-    return Integer.parseInt(selectFirstField(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
+    return Integer.parseInt(super.selectFirstField(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
   }
 
   /**
@@ -73,6 +73,6 @@ public class MonsterMainHpDAO extends BattleDAO {
    */
   public void updateFirstMonsterMainHp(int monsterMainHp) {
     String columnName = "monster_main_hitpoint";
-    this.updateFirstField(Integer.toString(monsterMainHp), columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME);
+    super.updateFirstField(Integer.toString(monsterMainHp), columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME);
   }
 }
