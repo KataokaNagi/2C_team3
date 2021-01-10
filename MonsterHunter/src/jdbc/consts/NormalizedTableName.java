@@ -1,5 +1,5 @@
 /**
-* @file      NormalizedTablesNames.java
+* @file      NormalizedTableName.java
 * @brief     正規化テーブル名（定数）の列挙
 * @note      高度情報演習2C 後半 木村教授担当分 Team3
 * @auther    AL18036 Kataoka Nagi
@@ -14,7 +14,7 @@
 
 package jdbc.consts;
 
-public enum NormalizedTablesNames {
+public enum NormalizedTableName {
 
   // ユーザー選択
   USERS_SELECTES, // ユーザー選択
@@ -40,10 +40,10 @@ public enum NormalizedTablesNames {
   MONSTERS_ATTACKS; // モンスター攻撃
 
   /**
-   * @fn NormalizedTablesNames
+   * @fn NormalizedTableName
    * @brief コンストラクタ
    */
-  private NormalizedTablesNames() {
+  private NormalizedTableName() {
   }
 
   /**

@@ -17,6 +17,9 @@ package jdbc;
 import java.sql.*;
 import java.util.ArrayList;
 
+import jdbc.consts.ColumnName;
+import jdbc.consts.DenormalizedTableName;
+
 /**
  * @class DataAccessObject
  * @brief DAOの汎用部分を実装する抽象クラス
@@ -28,7 +31,7 @@ abstract class DataAccessObject extends DBConnector {
    * @brief SQL文でよく使うカラムを非正規化する汎用メソッド
    * @param[in] tableName 作成するテーブル名
    */
-  protected void createTable(String tableName, String tableRecordDetailSQL, String primaryKeyColumnName) {
+  protected void createTable(DenormalizedTableName tableName, String tableRecordDetailSQL, ColumnName primaryKeyColumnName) {
 
     Connection connection = null; // ! DBコネクション
     Statement statement = null; // ! SQLステートメント
@@ -48,9 +51,9 @@ abstract class DataAccessObject extends DBConnector {
     // createTableSQL += "PRIMARY KEY (USER__ID) ";
     // createTableSQL += ")";
 
-    createTableSQL += "CREATE TABLE " + tableName;
+    createTableSQL += "CREATE TABLE " + tableName.toLowerCase();
     createTableSQL += tableRecordDetailSQL;
-    createTableSQL += "PRIMARY KEY (" + primaryKeyColumnName + ") ";
+    createTableSQL += "PRIMARY KEY (" + primaryKeyColumnName.toLowerCase() + ") ";
     createTableSQL += ")";
     System.out.println(createTableSQL);
 
@@ -58,7 +61,7 @@ abstract class DataAccessObject extends DBConnector {
     try {
       // DBの接続と実行
       resultSet = this.exeSQL(connection, statement, createTableSQL);
-      System.out.println("Table \"" + tableName + "\" is created.");
+      System.out.println("Table \"" + tableName.toLowerCase() + "\" is created.");
 
       // 例外処理
     } catch (SQLException e) {
@@ -75,7 +78,7 @@ abstract class DataAccessObject extends DBConnector {
    * @brief 指定したテーブルを削除する
    * @param[in] tableName 削除するテーブル名
    */
-  protected void dropTable(String tableName) {
+  protected void dropTable(DenormalizedTableName tableName) {
     // TODO
   }
 
@@ -86,7 +89,7 @@ abstract class DataAccessObject extends DBConnector {
    * @param[in] columnName インデックスを張るコラム名
    * @brief テーブルのインデックスを張る
    */
-  protected void createIdx(String idxName, String tableName, String columnName) {
+  protected void createIdx(String idxName, DenormalizedTableName tableName, String columnName) {
     // TODO
   }
 

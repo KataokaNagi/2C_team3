@@ -76,9 +76,9 @@ note left
       |_ MonsterMainHpDAO.java
       |_ MonsterPartsHpDAO.java
       |_ consts
-        |_ ColumnNames.java
-        |_ DenormalizedTablesNames.java
-        |_ NormalizedTablesNames.java
+        |_ ColumnName.java
+        |_ DenormalizedTableName.java
+        |_ NormalizedTableName.java
       |_ sql
         |_ hoge.sql
         |_ fuga.sql
@@ -150,8 +150,8 @@ package src.jdbc {
   }
 
   abstract class DataAccessObject extends DBConnector {
-    # createTable(tableName: String, tableRecordDetailSQL: String, primaryKeyColumnName: String): void
-    # dropTable(tableName: String): void
+    # createTable(tableName: DenormalizedTableName, tableRecordDetailSQL: String, primaryKeyColumnName: ColumnName): void
+    # dropTable(tableName: DenormalizedTableName): void
     # createIdx(tableName: String, columnInfoList: ArrayList<String>, primaryKeyColumnName: String): void
     # selectColumn(columnName: String, tableName: String, primaryKeyColumnName: String): ArrayList<String>
     # toIntegerList(strList: ArrayList<String>): ArrayList<Integer>

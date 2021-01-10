@@ -1,5 +1,5 @@
 /**
-* @file      ColumnNames.java
+* @file      ColumnName.java
 * @brief     カラム名（定数）の列挙
 * @note      高度情報演習2C 後半 木村教授担当分 Team3
 * @auther    AL18036 Kataoka Nagi
@@ -14,7 +14,7 @@
 
 package jdbc.consts;
 
-public enum ColumnNames {
+public enum ColumnName {
 
   /////////////////////////
   // ユーザー選択
@@ -100,10 +100,10 @@ public enum ColumnNames {
   MONSTER_ATTACK_MISS_PROBABILITY; // モンスター攻撃ミス確率
 
   /**
-   * @fn ColumnNames
+   * @fn ColumnName
    * @brief コンストラクタ
    */
-  private ColumnNames() {
+  private ColumnName() {
   }
 
   /**

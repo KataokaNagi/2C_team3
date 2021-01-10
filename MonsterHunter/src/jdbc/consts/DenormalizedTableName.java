@@ -1,5 +1,5 @@
 /**
-* @file      DenormalizedTablesNames.java
+* @file      DenormalizedTableName.java
 * @brief     非正規化テーブル名（定数）の列挙
 * @note      高度情報演習2C 後半 木村教授担当分 Team3
 * @auther    AL18036 Kataoka Nagi
@@ -14,7 +14,7 @@
 
 package jdbc.consts;
 
-public enum DenormalizedTablesNames {
+public enum DenormalizedTableName {
 
   // ユーザー選択関係
   // なし
@@ -30,10 +30,10 @@ public enum DenormalizedTablesNames {
   MONSTERS_ATTACKS_STATUSES_SEARCH; // モンスター攻撃ステータス検索
 
   /**
-   * @fn DenormalizedTablesNames
+   * @fn DenormalizedTableName
    * @brief コンストラクタ
    */
-  private DenormalizedTablesNames() {
+  private DenormalizedTableName() {
   }
 
   /**

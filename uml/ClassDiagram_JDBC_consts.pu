@@ -74,9 +74,9 @@ note left
       |_ MonsterMainHpDAO.java
       |_ MonsterPartsHpDAO.java
       |_ consts
-        |_ ColumnNames.java
-        |_ DenormalizedTablesNames.java
-        |_ NormalizedTablesNames.java
+        |_ ColumnName.java
+        |_ DenormalizedTableName.java
+        |_ NormalizedTableName.java
       |_ sql
         |_ hoge.sql
         |_ fuga.sql
@@ -136,7 +136,7 @@ package src.gameprocess {
 
 package src.jdbc {
   package src.jdbc.consts {
-  enum ColumnNames {
+  enum ColumnName {
 
   ' /////////////////////////
   ' // ユーザー選択
@@ -221,13 +221,13 @@ package src.jdbc {
   MONSTER_ATTACK_VALUE
   MONSTER_ATTACK_MISS_PROBABILITY
 
-  - ColumnNames()
+  - ColumnName()
   + toLowerCase: String
   }
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  
 
-enum NormalizedTablesNames {
+enum NormalizedTableName {
 
   ' // ユーザー選択
   USERS_SELECTES
@@ -252,13 +252,13 @@ enum NormalizedTablesNames {
   MONSTERS_PARTS_NAMES
   MONSTERS_ATTACKS
 
-  - NormalizedTablesNames()
+  - NormalizedTableName()
   + toLowerCase(): String
   }
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  
 
-enum DenormalizedTablesNames {
+enum DenormalizedTableName {
 
   ' // ユーザー選択関係
   ' // なし
@@ -273,7 +273,7 @@ enum DenormalizedTablesNames {
   MONSTERS_PARTS_HITPOINTS
   MONSTERS_ATTACKS_STATUSES_SEARCH
 
-  - DenormalizedTablesNames()
+  - DenormalizedTableName()
   + toLowerCase(): String
 }
 
