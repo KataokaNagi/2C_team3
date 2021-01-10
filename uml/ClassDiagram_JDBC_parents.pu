@@ -32,6 +32,7 @@ end header
 title
 **Kodo 2C Team 3: ClassDiagram_JDBC_parents**
 + public
+~# protected
 ~- private
 end title
 ' __static__
@@ -74,6 +75,10 @@ note left
       |_ PlayerHpDAO.java
       |_ MonsterMainHpDAO.java
       |_ MonsterPartsHpDAO.java
+      |_ consts
+        |_ ColumnNames.java
+        |_ DenormalizedTablesNames.java
+        |_ NormalizedTablesNames.java
       |_ sql
         |_ hoge.sql
         |_ fuga.sql
@@ -90,6 +95,11 @@ package java.sql {
 '   class Application
 '   Interface Initializable
 ' }
+
+package src.jdbc {
+  package src.jdbc.consts {
+  }
+}
 
 src.jdbc --+ java.sql
 ' src.application --+ javafx
@@ -164,15 +174,15 @@ package src.jdbc {
   }
 
   abstract class BattleDAO extends DataAccessObject {
-  + selectWeaponCode(weaponName: String): String
-  + selectArmorCode(armorName: String): String
-  + selectMonsterCode(monsterName: String): String
-  + setWeaponName(weaponName: String): void
-  + setWeaponCode(weaponCode: String): void
-  + setArmorName(armorName: String): void
-  + setArmorCode(armorCode: String): void
-  + setMonsterName(monsterName: String): void
-  + setMonsterCode(monsterCode: String): void
+  - selectWeaponCode(weaponName: String): String
+  - selectArmorCode(armorName: String): String
+  - selectMonsterCode(monsterName: String): String
+  - setWeaponName(weaponName: String): void
+  - setWeaponCode(weaponCode: String): void
+  - setArmorName(armorName: String): void
+  - setArmorCode(armorCode: String): void
+  - setMonsterName(monsterName: String): void
+  - setMonsterCode(monsterCode: String): void
   + getWeaponName(): String
   + getWeaponCode(): String
   + getArmorName(): String

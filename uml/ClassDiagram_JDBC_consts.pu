@@ -1,0 +1,285 @@
+' @file      ClassDiagram_JDBC_consts.pu
+' @brief     クラス図出力用のファイル（DB定数）
+' @note      高度情報演習2C 後半 木村教授担当分 Team3
+' @auther    AL18036 Kataoka Nagi
+' @date      2021-01-11 06:18:14
+' $Version   1.0
+' $Revision  1.0
+' @par       変更点：新規作成
+' @note      java -jar plantuml.jar -graphvizdot C:\Graphviz\bin\dot.exe ClassDiagram_JDBC_consts.pu -charset UTF-8
+' @see       https://qiita.com/opengl-8080/items/98c510b8ca060bdd2ea3
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+@startuml ./out/ClassDiagram_JDBC_consts.png
+scale 1.5
+skinparam DefaultFontName メイリオ
+' 可視性の変更
+skinparam classAttributeIconSize 0
+
+''''''''''''''''''''''''''''''''''''''''''''''''''
+
+header 
+Team 3 : AL18036 Kataoka Nagi
+2021-01-11 06:19:29
+変更点：新規作成
+end header
+
+''''''''''''''''''''''''''''''''''''''''''''''''''
+
+title
+**Kodo 2C Team 3: ClassDiagram_JDBC_consts**
++ public
+~# protect
+~- private
+end title
+' __static__
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+package src {
+  package src.application {
+    class Main
+  }
+  package src.gameprocess {
+  }
+  package src.jdbc {
+  }
+}
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+note left
+  --Folder Tree--
+  2C_team3
+  |_ src
+    |_ application
+      |_ application.css
+      |_ Battle.fxml
+      |_ Menu.fxml
+      |_ BattleController.java
+      |_ Main.java
+      |_ MenuController.java
+    |_ gameprocess
+      |_ BattleManager.java
+    |_ jdbc
+      |_ DBConnector.java
+      |_ DataAccessObject.java
+      |_ MenuDAO.java
+      |_ BattleDAO.java
+      |_ ShapnessSearchDAO.java
+      |_ PlayerStatusSearchDAO.java
+      |_ MonsterAttackStatusSearchDAO.java
+      |_ PlayerHpDAO.java
+      |_ MonsterMainHpDAO.java
+      |_ MonsterPartsHpDAO.java
+      |_ consts
+        |_ ColumnNames.java
+        |_ DenormalizedTablesNames.java
+        |_ NormalizedTablesNames.java
+      |_ sql
+        |_ hoge.sql
+        |_ fuga.sql
+  |_ bin/application
+    |_ ~*.class
+end note
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+package java.sql {
+}
+
+' package javafx {
+'   class Application
+'   Interface Initializable
+' }
+
+package src.jdbc {
+  package src.jdbc.consts {
+  }
+}
+
+src.jdbc --+ java.sql
+' src.application --+ javafx
+
+''''''''''''''''''''''''''''''''''''''''''''''''''
+
+' @note クラスの命名規則
+' @see  https://qiita.com/KeithYokoma/items/ee21fec6a3ebb5d1e9a8
+
+package src.application {
+}
+
+' 記事のクラス
+  ' class ApplicationController extends Initializable {
+  '   - dropDown: ChoiceBox<String>
+  '   - textBox: TextField
+  '   - button: Button
+
+  '   + initialize(location: URL
+  '   + onClick(event: ActionEvent): void
+  '   + getToolType(): ChoiceBox<String>
+  '   + setToolType(toolType: ChoiceBox<String>): void
+  '   + getInputFile(): TextField
+  '   + setInputFile(textBox: TextField): void
+  '   + getReference(): Button
+  '   + setReference(button: Button): void
+  ' }
+
+
+''''''''''''''''''''''''''''''''''''''''''''''''''
+
+package src.gameprocess {
+}
+
+''''''''''''''''''''''''''''''''''''''''''''''''''
+
+package src.jdbc {
+  package src.jdbc.consts {
+  enum ColumnNames {
+
+  ' /////////////////////////
+  ' // ユーザー選択
+  ' /////////////////////////
+  ' // ユーザー選択
+  USER_SELECTE_CODE
+  MONSTER_CODE
+  WEAPON_CODE
+  PLAYER_CODE
+
+  ' /////////////////////////
+  ' // プレイヤー関係
+  ' /////////////////////////
+  ' // プレイヤー
+  PLAYER_HITPOINT
+
+  ' /////////////////////////
+  ' // 武器
+  ' /////////////////////////
+  ' // 武器
+  WEAPON_NAME
+  WEAPON_ATTACK_VALUE
+  WEAPON_CRITIVAL_RATE
+  WEAPON_ELEMENT_VALUE
+  WEAPON_ELEMENT_CODE
+
+  ' // 武器切れ味 ※不可算名詞
+  WEAPONS_SHARPNESS_COLOR_CODE
+  WEAPONS_SHARPNESS_COLOR_GAGE_AMOUNT
+  WEAPONS_SHARPNESS_ATTACK_VALUE_RATE
+
+  ' // 武器切れ味色
+  WEAPONS_SHARPNESS_COLOR_NAME
+
+  ' // 武器属性
+  WEAPON_ELEMENT_NAME
+
+  ' /////////////////////////
+  ' // 防具関係
+  ' /////////////////////////
+  ' // 防具
+  ARMOR_NAME
+  ARMOR_DIFFENCE_VALUE
+  ARMOR_SKILL_CODE
+  ARMOR_RESISTANCE_CODE
+
+  ' // 防具属性耐性
+  ARMOR_FIRE_RESISTANCE
+  ARMOR_WATER_RESISTANCE
+  ARMOR_SUNDER_RESISTANCE
+  ARMOR_THUNDER_RESISTANCE
+  ARMOR_DRAGON_RESISTANCE
+
+  ' // 防具スキル
+  ARMOR_SKILL_NAME
+  ARMOR_SKILL_INCREASE_TARGET
+  ARMOR_SKILL_INCREASE_VALUE
+
+  ' /////////////////////////
+  ' // モンスター関係
+  ' /////////////////////////
+  ' // モンスター
+  MONSTER_NAME
+  MONSTER_MAIN_HITPOINT
+  MONSTER_FIRE_RESISTANCE
+  MONSTER_WATER_RESISTANCE
+  MONSTER_SUNDER_RESISTANCE
+  MONSTER_THUNDER_RESISTANCE
+  MONSTER_DRAGON_RESISTANCE
+
+  ' // モンスター部位
+  MONSTER_PART_CODE
+  MONSTER_PART_HITPOINT
+  MONSTER_PART_HARDNESS
+
+  ' // モンスター部位名
+  MONSTER_PART_NAME
+
+  ' // モンスター攻撃
+  MONSTER_ATTACK_CODE
+  MONSTER_ATTACK_NAME
+  MONSTER_ATTACK_VALUE
+  MONSTER_ATTACK_MISS_PROBABILITY
+
+  - ColumnNames()
+  + toLowerCase: String
+  }
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  
+
+enum NormalizedTablesNames {
+
+  ' // ユーザー選択
+  USERS_SELECTES
+
+  ' // プレイヤー関係
+  PLAYERS
+
+  ' // 武器関係
+  WEAPONS
+  WEAPONS_SHARPNESS
+  WEAPONS_SHARPNESS_COLORS
+  WEAPONS_ELEMENTS
+
+  ' // 防具関係
+  ARMORS
+  ARMORS_ELEMENTS_RESISTANCES
+  ARMORS_SKILLS
+
+  ' // モンスター関係
+  MONSTERS
+  MONSTERS_PARTS
+  MONSTERS_PARTS_NAMES
+  MONSTERS_ATTACKS
+
+  - NormalizedTablesNames()
+  + toLowerCase(): String
+  }
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  
+
+enum DenormalizedTablesNames {
+
+  ' // ユーザー選択関係
+  ' // なし
+
+  ' // プレイヤー関係
+  PLAYERS_HITPOINTS
+  PLAYERS_STATUSES_SEARCH
+  SHARPNESS_COLORS_SEARCH
+
+  ' // モンスター関係
+  MONSTERS_MAIN_HITPOINTS
+  MONSTERS_PARTS_HITPOINTS
+  MONSTERS_ATTACKS_STATUSES_SEARCH
+
+  - DenormalizedTablesNames()
+  + toLowerCase(): String
+}
+
+
+}
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+@enduml

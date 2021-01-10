@@ -30,6 +30,7 @@ end header
 title
 **Kodo 2C Team 3: ClassDiagram_GUI_and_GameProess**
 + public
+~# protected
 ~- private
 end title
 ' __static__
@@ -72,6 +73,10 @@ note left
       |_ PlayerHpDAO.java
       |_ MonsterMainHpDAO.java
       |_ MonsterPartsHpDAO.java
+      |_ consts
+        |_ ColumnNames.java
+        |_ DenormalizedTablesNames.java
+        |_ NormalizedTablesNames.java
       |_ sql
         |_ hoge.sql
         |_ fuga.sql
@@ -87,6 +92,11 @@ package java.sql {
 package javafx {
   class Application
   Interface Initializable
+}
+
+package src.jdbc {
+  package src.jdbc.consts {
+  }
 }
 
 src.jdbc --+ java.sql
