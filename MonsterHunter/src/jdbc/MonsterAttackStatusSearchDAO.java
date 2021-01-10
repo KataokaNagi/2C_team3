@@ -8,7 +8,6 @@
 * $Revision  1.4
 * @par       追加：createTableメソッドの完成
 * @par       変更予定：BattleDAOにgetMonsterCodeメソッドを実装
-* @see       https://www.kenschool.jp/blog/?p=1644
 */
 
 package jdbc;
@@ -23,6 +22,8 @@ public class MonsterAttackStatusSearchDAO extends BattleDAO {
 
   private final String FROM_TABLE_NAME = "monsters_attacks";
   private final String TABLE_NAME = "monster_attack_statuses_searches";
+
+  private final String MONSTER_CODE = "monster_code";
 
   private final String PRIMARY_KEY_COLUMN_NAME = "monster_attack_code";
   private final String MONSTER_ATTACK_NAME = "monster_attack_name";
@@ -49,12 +50,14 @@ public class MonsterAttackStatusSearchDAO extends BattleDAO {
     // SQLの作成
     tableRecordDetailSQL += "AS ";
     tableRecordDetailSQL += "SELECT ";
+    tableRecordDetailSQL += "ATTACKS." + PRIMARY_KEY_COLUMN_NAME + ", ";
     tableRecordDetailSQL += "ATTACKS." + MONSTER_ATTACK_NAME + ", ";
     tableRecordDetailSQL += "ATTACKS." + MONSTER_ATTACK_VAL + ", ";
     tableRecordDetailSQL += "ATTACKS." + MONSTER_ATTACK_MISS_PROB + " ";
     tableRecordDetailSQL += "FROM" + FROM_TABLE_NAME + " ATTACKS";
-    tableRecordDetailSQL += "WHERE " + PRIMARY_KEY_COLUMN_NAME;
-    tableRecordDetailSQL += " = " + super.getMonsterCode();
+    tableRecordDetailSQL += "WHERE";
+    tableRecordDetailSQL += "ATTACKS." + MONSTER_CODE;
+    tableRecordDetailSQL += " = ATTACKS." + super.getMonsterCode();
 
     // テーブルの作成
     super.createTable(TABLE_NAME, tableRecordDetailSQL, PRIMARY_KEY_COLUMN_NAME);

@@ -3,11 +3,11 @@
 * @brief     DAOの汎用部分を実装する抽象クラス
 * @note      高度情報演習2C 後半 木村教授担当分 Team3
 * @auther    AL18036 Kataoka Nagi
-* @date      2020-12-31 00:39:44
+* @date      2021-01-10 08:45:52
 * $Version   1.1
-* $Revision  1.2
+* $Revision  1.3
 * @par       リファクタリング：exeSQLメソッドを作成して分離するなど
-* @par       追加：createTableメソッドの完成
+* @par       追加：WHERE用のselectColumn()オーバーロードの追加
 * @par       メモ：SQL文の最後に;が必要である可能性がある
 * @see       https://www.kenschool.jp/blog/?p=1644
  */
@@ -111,6 +111,52 @@ abstract class DataAccessObject extends DBConnector {
     selectColumnSQL += "SELECT " + columnName;
     selectColumnSQL += " FROM " + tableName;
     selectColumnSQL += "ORDER BY " + primaryKeyColumnName;
+
+    try {
+      // DBの接続と実行
+      resultSet = this.exeSQL(connection, statement, selectColumnSQL);
+
+      // 検索結果をArrayListに格納
+      while (resultSet.next()) {
+        rtnColumnList.add(resultSet.getString("isbn"));
+      }
+
+      // 例外処理
+    } catch (SQLException e) {
+      System.err.println(e.getSQLState());
+
+      // 後処理
+    } finally {
+      this.closeDBResources(resultSet, statement, connection);
+    }
+
+    return rtnColumnList;
+  }
+
+  /**
+   * @fn selectColumn
+   * @note オーバーロード
+   * @brief カラム内のフィールドを全て返す
+   * @param[in] columnName: 検索したいカラムの名前
+   * @param[in] tableName: 検索したいカラムが存在するテーブルの名前
+   * @param[in] primaryKeyColumnName: 検索したいカラムの存在するテーブルの主キーの名前
+   * @return 指定されたカラムの全フィールドのオブジェクトリスト
+   */
+  protected ArrayList<String> selectColumn(String columnName, String tableName, String primaryKeyColumnName,
+      String whereSQL) {
+    Connection connection = null; // ! DBコネクション
+    Statement statement = null; // ! SQLステートメント
+    ResultSet resultSet = null; // ! SQLリザルトセット
+    ArrayList<String> rtnColumnList = new ArrayList<String>();
+    String selectColumnSQL = ""; // ! 実行SQL文
+
+    // SQL文の作成
+    // 主キーで整列することでSELECT文の順序を保証し、
+    // 武器名と武器スキルを同じインデックスで取得できるようにする
+    selectColumnSQL += "SELECT " + columnName;
+    selectColumnSQL += " FROM " + tableName;
+    selectColumnSQL += " " + whereSQL; // オーバーロードでここだけ異なる
+    selectColumnSQL += " ORDER BY " + primaryKeyColumnName;
 
     try {
       // DBの接続と実行
