@@ -2,8 +2,11 @@ package application;
 import java.util.ArrayList;
 import java.util.Random;
 
+import jdbc.MonsterAttackStatusSearchDAO;
+import jdbc.MonsterMainHpDAO;
 import jdbc.MonsterPartsHpDAO;
 import jdbc.PlayerHpDAO;
+import jdbc.PlayerStatusSearchDAO;
 
 public class BattleManager {
 	//*テーブルから取得
@@ -16,13 +19,23 @@ public class BattleManager {
 	Random rnd = new Random();
 
 	PlayerHpDAO playerHpDAO;
+	MonsterMainHpDAO monsterMainHpDAO;
+	MonsterPartsHpDAO monsterPartsDAO;
+	MonsterAttackStatusSearchDAO monsterAttackStatusSearchDAO;
+	PlayerStatusSearchDAO playerStatusSearchDAO;
 
-	public int PlayerAttack(int Parts_id) {
-		MonsterPartsHpDAO monsterPartsHpDAO;
-		int HP_monster = 0;//*
-		int hardness = 0;//*
-		int attack_player = 0;//*
-		int affinity = 0;//*
+	public int HP_player = playerHpDAO.selectFirstPlayerHp();
+
+
+	public int PlayerAttack(String targetPartsName) {
+		int targetPartsNum = PartsNumGet(targetPartsName);
+		ArrayList<Integer> List_Hp = monsterPartsDAO.selectAllMonsterPartsHp();
+		ArrayList<Integer> List_Hardness = monsterPartsDAO.selectAllMonsterPartsHardness();
+		int HP_monster_main = monsterMainHpDAO.selectFirstMonsterMainHp();
+		int HP_monster_parts = List_Hp.get(targetPartsNum);
+		int hardness = List_Hardness.get(targetPartsNum);
+		int attack_player = playerStatusSearchDAO.selectFirstWeaponAttackVal();
+		int affinity = (int)(playerStatusSearchDAO.selectFirstWeaponCriticalRate() * 100);
 		float affinityCorrection = 1;//会心補正
 		int sharpness = 0;//*
 		float sharpnessCorrection = 1;//切れ味補正
@@ -32,31 +45,39 @@ public class BattleManager {
 		}
 
 		float damage = attack_player *( (float)hardness /100) * affinityCorrection * sharpnessCorrection + ElementDamage_PlayerAttack();
-		HP_monster -= (int)damage;
+		HP_monster_main -= (int)damage;
+		monsterMainHpDAO.updateFirstMonsterMainHp(HP_monster_main);
+		HP_monster_parts -= (int)damage;
 		SharpnessDecrease(sharpness);
-		if (HP_monster <= 0) {
-			//シーン遷移(終了)
-			return -1;
+		if (HP_monster_main <= 0) {
+			return -1;//シーン遷移(終了)
 		}
 		else {
-			//HP_monsterを更新
+			monsterPartsDAO.updateMonsterPartsHp(HP_monster_parts, targetPartsName);
 			return (int)damage;
 		}
 	}
 
 	public int MonsterAttack() {
-		int HP_player = playerHpDAO.selectFirstPlayerHp();//*
+
+		ArrayList<Integer> List_attackPower = monsterAttackStatusSearchDAO.selectAllMonsterAttackVal();
+		ArrayList<Float> List_attackMiss = monsterAttackStatusSearchDAO.selectAllMonsterAttackMissProb();
+
+		int attackKind = rnd.nextInt(List_attackPower.size());
+		int attack_monster = List_attackPower.get(attackKind);
+		int attackMissPar = (int)(List_attackMiss.get(attackKind) * 100);
 		int deffence_player = 0;//*
 		int attackAction =  rnd.nextInt(10);//攻撃種類の決定
-		int attack_monster = 0;//*
 		int element = 0;//*
-
-		float damage = attack_monster *(80/(float)(80 + deffence_player)) * ElementCompatibilityCalculation_EnemyAttack(element);
+		float damage;
+		if (rnd.nextInt(100) < attackMissPar) {
+			return -2;//攻撃ミス時
+		}
+		damage = attack_monster *(80/(float)(80 + deffence_player)) * ElementCompatibilityCalculation_EnemyAttack(element);
 		HP_player -= (int)damage;
 		playerHpDAO.updateFirstPlayerHp(HP_player);
 		if (HP_player <= 0) {
-			//シーン遷移(終了)
-			return -1;
+			return -1;//シーン遷移(終了)
 		}
 		else {
 			return (int)damage;
@@ -88,4 +109,16 @@ public class BattleManager {
 		}
 		return sharpness;
 	}
+
+
+	int PartsNumGet(String serchName) {
+		ArrayList<String> partsName = monsterPartsDAO.selectAllMonsterPartsName();
+		for(int i = 0;i < partsName.size();++i) {
+			if (serchName.equals(partsName.get(i))) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
 }
