@@ -141,11 +141,11 @@ abstract class DataAccessObject<T extends Enum<T> & TableName> extends DBConnect
   /**
    * @fn selectColumn
    * @note オーバーロード
-   * @brief カラム内のフィールドを全て返す
+   * @brief "WHERE"で指定したカラム内のフィールドを全て返す
    * @param[in] columnName: 検索したいカラムの名前
    * @param[in] tableName: 検索したいカラムが存在するテーブルの名前
    * @param[in] primaryKeyColumnName: 検索したいカラムの存在するテーブルの主キーの名前
-   * @return 指定されたカラムの全フィールドのオブジェクトリスト
+   * @return "WHERE"で指定されたカラムの全フィールドのオブジェクトリスト
    */
   protected <T extends Enum<T> & TableName> ArrayList<String> selectColumn(ColumnName columnName, T tableName,
       ColumnName primaryKeyColumnName, String whereSQL) {

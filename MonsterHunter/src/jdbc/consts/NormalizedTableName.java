@@ -54,7 +54,7 @@ public enum NormalizedTableName implements TableName {
    */
   public String toLowerCase() {
     String rtnStr = this.name().toLowerCase();
-    System.out.println("return : " + rtnStr + DebugUtil.getProcessPositionStr());
+    // System.out.println("return : " + rtnStr + DebugUtil.getProcessPositionStr());
     return rtnStr;
   }
 }
