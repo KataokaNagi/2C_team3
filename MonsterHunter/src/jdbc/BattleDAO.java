@@ -14,6 +14,12 @@ package jdbc;
 
 import static jdbc.consts.NormalizedTableName.*;
 
+import java.util.ArrayList;
+
+import jdbc.utils.DebugUtil;
+
+import static jdbc.consts.ColumnName.*;
+
 abstract class BattleDAO extends DataAccessObject {
   private String weaponName;
   private String weaponCode;
@@ -35,24 +41,68 @@ abstract class BattleDAO extends DataAccessObject {
     this.setMonsterCode(this.selectMonsterCode(monsterName));
   }
 
-  // SELECT codes WHERE
+  //////////////////////////////////////////////////
+  // SELECT the code WHERE the name is correspond to
+  //////////////////////////////////////////////////
+
   private String selectWeaponCode(String weaponName) {
+    ArrayList<String> weaponCodeList;
     String whereSQL = "";
+
+    // Codeを指定するWHERE文の作成
     whereSQL += "WHERE ";
-    whereSQL += " ";
-    // return selectColumn(columnName, tableName, primaryKeyColumnName, whereSQL) ;
-    return null;
+    whereSQL += WEAPON_NAME.toLowerCase();
+    whereSQL += " = " + weaponName;
+
+    // 指定したCodeが1つだけ入っている（はずの）リストを取得
+    weaponCodeList = selectColumn(WEAPON_CODE, WEAPONS, WEAPON_CODE, whereSQL);
+
+    return this.getFirstElementSafely(weaponCodeList);
   }
 
   private String selectArmorCode(String armorName) {
-    return armorCode;
+    ArrayList<String> armorCodeList;
+    String whereSQL = "";
+
+    // Codeを指定するWHERE文の作成
+    whereSQL += "WHERE ";
+    whereSQL += ARMOR_NAME.toLowerCase();
+    whereSQL += " = " + armorName;
+
+    // 指定したCodeが1つだけ入っている（はずの）リストを取得
+    armorCodeList = selectColumn(ARMOR_CODE, ARMORS, ARMOR_CODE, whereSQL);
+
+    return this.getFirstElementSafely(armorCodeList);
   }
 
   private String selectMonsterCode(String monsterName) {
-    return monsterCode;
+    ArrayList<String> monsterCodeList;
+    String whereSQL = "";
+
+    // Codeを指定するWHERE文の作成
+    whereSQL += "WHERE ";
+    whereSQL += MONSTER_NAME.toLowerCase();
+    whereSQL += " = " + monsterName;
+
+    // 指定したCodeが1つだけ入っている（はずの）リストを取得
+    monsterCodeList = selectColumn(MONSTER_CODE, MONSTERS, MONSTER_CODE, whereSQL);
+
+    return this.getFirstElementSafely(monsterCodeList);
   }
 
+  private String getFirstElementSafely(ArrayList<String> list) {
+    if (!list.isEmpty() || list.size() != 0) {
+      return list.get(0);
+    } else {
+      System.err.println("Error: null refelence" + DebugUtil.getProcessPositionStr());
+      return "error";
+    }
+  }
+
+  //////////////////////////////////////////////////
   // Setter
+  //////////////////////////////////////////////////
+
   private void setWeaponName(String weaponName) {
     this.weaponName = weaponName;
   }
@@ -77,7 +127,10 @@ abstract class BattleDAO extends DataAccessObject {
     this.monsterCode = monsterCode;
   }
 
+  //////////////////////////////////////////////////
   // Getter
+  //////////////////////////////////////////////////
+
   public String getWeaponName() {
     return this.weaponName;
   }

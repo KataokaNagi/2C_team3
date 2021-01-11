@@ -182,6 +182,7 @@ package src.jdbc {
   - selectWeaponCode(weaponName: String): String
   - selectArmorCode(armorName: String): String
   - selectMonsterCode(monsterName: String): String
+  - getFirstElementSafely(list: ArrayList<String>): String
   - setWeaponName(weaponName: String): void
   - setWeaponCode(weaponCode: String): void
   - setArmorName(armorName: String): void

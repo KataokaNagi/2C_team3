@@ -18,6 +18,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import jdbc.consts.*;
+import jdbc.utils.DebugUtil;
 
 /**
  * @class DataAccessObject
@@ -237,20 +238,19 @@ abstract class DataAccessObject<T extends Enum<T> & TableName> extends DBConnect
    */
   protected String selectFirstField(ColumnName columnName, DenormalizedTableName tableName,
       ColumnName primaryKeyColumnName) {
-    String primaryKey = "0"; // ! @attention primaryKeyが数字で張られているときにしか通用しない
-    return selectField(columnName, tableName, primaryKeyColumnName, primaryKey);
+    // // selectFieldを実装するならこちらを採用
+    // String primaryKey = "1"; // ! @attention primaryKeyが数字で張られているときにしか通用しない
+    // return selectField(columnName, tableName, primaryKeyColumnName, primaryKey);
 
-    // // 1番目のレコードの取り出し方がわからなかったのでコラムを全て取得
-    // // 本来なら激重コードになるので控えるべき
-    // ArrayList<String> fieldsList = selectColumn(columnName, tableName,
-    // primaryKeyColumnName);
-    // if (!fieldsList.isEmpty() || fieldsList.size() != 0) {
-    // return fieldsList.get(0);
-    // } else {
-    // System.err.println("Error: null refelence @ selectFirstField() in
-    // DataAccessObject.java");
-    // return "error";
-    // }
+    // 1番目のレコードの取り出し方がわからなかったのでコラムを全て取得
+    // 本来なら激重コードになるので控えるべき
+    ArrayList<String> fieldsList = selectColumn(columnName, tableName, primaryKeyColumnName);
+    if (!fieldsList.isEmpty() || fieldsList.size() != 0) {
+      return fieldsList.get(0);
+    } else {
+      System.err.println("Error: null refelence" + DebugUtil.getProcessPositionStr());
+      return "error";
+    }
   }
 
   /**
