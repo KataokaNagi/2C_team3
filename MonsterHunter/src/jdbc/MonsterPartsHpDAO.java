@@ -3,10 +3,10 @@
 * @brief     「モンスター部位体力」テーブルのDAO
 * @note      高度情報演習2C 後半 木村教授担当分 Team3
 * @auther    AL18036 Kataoka Nagi
-* @date      2020-12-30 19:31:59
+* @date      2021-01-11 12:05:48
 * $Version   1.1
-* $Revision  1.3
-* @par       リファクタリング：テーブル名とPK名をメンバ変数へ
+* $Revision  1.4
+* @par       追加：codeのselectメソッド
 * @see       https://www.kenschool.jp/blog/?p=1644
 */
 
@@ -60,6 +60,15 @@ public class MonsterPartsHpDAO extends BattleDAO {
   //////////////////////////////////////////////////
   // SELECT SELECT ALL
   //////////////////////////////////////////////////
+
+  /**
+   * @fn selectAllMonsterPartsCode
+   * @brief 「モンスター部位体力」テーブルの、モンスター部位コードカラムの全てのフィールドを返す
+   * @return 全モンスター部位コードのリスト
+   */
+  public ArrayList<String> selectAllMonsterPartsCode() {
+    return super.selectColumn(MONSTER_PART_CODE, MONSTERS_PARTS_HITPOINTS, MONSTER_CODE);
+  }
 
   /**
    * @fn selectAllMonsterPartsName

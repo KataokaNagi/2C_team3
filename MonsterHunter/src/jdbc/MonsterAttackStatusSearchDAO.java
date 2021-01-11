@@ -3,10 +3,10 @@
 * @brief     「モンスター攻撃ステータス検索」テーブルのDAO
 * @note      高度情報演習2C 後半 木村教授担当分 Team3
 * @auther    AL18036 Kataoka Nagi
-* @date      2020-12-31 02:28:02
+* @date      2021-01-11 12:06:05
 * $Version   1.0
-* $Revision  1.4
-* @par       追加：createTableメソッドの完成
+* $Revision  1.5
+* @par       追加：codeのselectメソッド
 * @par       変更予定：BattleDAOにgetMonsterCodeメソッドを実装
 */
 
@@ -80,6 +80,15 @@ public class MonsterAttackStatusSearchDAO extends BattleDAO {
   //////////////////////////////////////////////////
   // 以降、全て selectAll
   //////////////////////////////////////////////////
+
+  /**
+   * @fn selectAllMonsterAttackCode
+   * @brief 「モンスター攻撃ステータス検索」テーブルの、モンスター攻撃コードカラムの全てのフィールドを返す
+   * @return モンスター攻撃コードのリスト
+   */
+  public ArrayList<String> selectAllMonsterAttackCode() {
+    return super.selectColumn(MONSTER_ATTACK_CODE, MONSTERS_ATTACKS_STATUSES_SEARCH, MONSTER_ATTACK_CODE);
+  }
 
   /**
    * @fn selectAllMonsterAttackName

@@ -3,10 +3,10 @@
 * @brief     「プレイヤーステータス検索」テーブルのDAO
 * @note      高度情報演習2C 後半 木村教授担当分 Team3
 * @auther    AL18036 Kataoka Nagi
-* @date      2020-12-30 19:31:42
+* @date      2021-01-11 12:06:55
 * $Version   1.0
-* $Revision  1.3
-* @par       リファクタリング：テーブル名とPK名をメンバ変数へ
+* $Revision  1.4
+* @par       追加：codeのselectメソッド
 * @see       https://www.kenschool.jp/blog/?p=1644
 */
 
@@ -59,6 +59,15 @@ public class PlayerStatusSearchDAO extends BattleDAO {
   //////////////////////////////////////////////////
   // 以降、全て selectFirst
   //////////////////////////////////////////////////
+
+  /**
+   * @fn selectFirstPlayerCode
+   * @brief 「プレイヤーステータス検索」テーブルの、プレイヤーコードカラムの最初のフィールドを返す
+   * @return プレイヤーコード
+   */
+  public String selectFirstPlayerCode() {
+    return super.selectFirstField(PLAYER_CODE, PLAYERS_STATUSES_SEARCH, WEAPON_SHARPNESS_COLOR_CODE);
+  }
 
   /**
    * @fn selectFirstWeaponCode
