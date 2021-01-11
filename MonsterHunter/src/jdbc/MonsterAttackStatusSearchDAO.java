@@ -14,21 +14,19 @@ package jdbc;
 
 import java.util.ArrayList;
 
+import jdbc.consts.DenormalizedTableName;
+import jdbc.consts.IdxName;
+
+import static jdbc.consts.ColumnName.*;
+import static jdbc.consts.NormalizedTableName.*;
+import static jdbc.consts.DenormalizedTableName.*;
+import static jdbc.consts.IdxName.*;
+
 /**
  * @class MonsterAttackStatusSearchDAO
  * @brief 「モンスター攻撃ステータス検索」テーブルのDAO
  */
 public class MonsterAttackStatusSearchDAO extends BattleDAO {
-
-  private final String FROM_TABLE_NAME = "monsters_attacks";
-  private final String TABLE_NAME = "monster_attack_statuses_searches";
-
-  private final String MONSTER_CODE = "monster_code";
-
-  private final String PRIMARY_KEY_COLUMN_NAME = "monster_attack_code";
-  private final String MONSTER_ATTACK_NAME = "monster_attack_name";
-  private final String MONSTER_ATTACK_VAL = "monster_attack_value";
-  private final String MONSTER_ATTACK_MISS_PROB = "monster_attack_miss_probability";
 
   /**
    * @fn MonsterAttackStatusSearchDAO
@@ -50,17 +48,17 @@ public class MonsterAttackStatusSearchDAO extends BattleDAO {
     // SQLの作成
     tableRecordDetailSQL += "AS ";
     tableRecordDetailSQL += "SELECT ";
-    tableRecordDetailSQL += "ATTACKS." + PRIMARY_KEY_COLUMN_NAME + ", ";
-    tableRecordDetailSQL += "ATTACKS." + MONSTER_ATTACK_NAME + ", ";
-    tableRecordDetailSQL += "ATTACKS." + MONSTER_ATTACK_VAL + ", ";
-    tableRecordDetailSQL += "ATTACKS." + MONSTER_ATTACK_MISS_PROB + " ";
-    tableRecordDetailSQL += "FROM" + FROM_TABLE_NAME + " ATTACKS";
+    tableRecordDetailSQL += "ATTACKS." + MONSTER_ATTACK_CODE.toLowerCase() + ", ";
+    tableRecordDetailSQL += "ATTACKS." + MONSTER_ATTACK_NAME.toLowerCase() + ", ";
+    tableRecordDetailSQL += "ATTACKS." + MONSTER_ATTACK_VALUE.toLowerCase() + ", ";
+    tableRecordDetailSQL += "ATTACKS." + MONSTER_ATTACK_MISS_PROBABILITY.toLowerCase() + " ";
+    tableRecordDetailSQL += "FROM" + MONSTERS_ATTACKS.toLowerCase() + " ATTACKS";
     tableRecordDetailSQL += "WHERE";
-    tableRecordDetailSQL += "ATTACKS." + MONSTER_CODE;
+    tableRecordDetailSQL += "ATTACKS." + MONSTER_CODE.toLowerCase();
     tableRecordDetailSQL += " = ATTACKS." + super.getMonsterCode();
 
     // テーブルの作成
-    super.createTable(TABLE_NAME, tableRecordDetailSQL, PRIMARY_KEY_COLUMN_NAME);
+    super.createTable(MONSTERS_ATTACKS_STATUSES_SEARCH, tableRecordDetailSQL, MONSTER_ATTACK_CODE);
   }
 
   /**
@@ -76,9 +74,7 @@ public class MonsterAttackStatusSearchDAO extends BattleDAO {
    * @brief テーブルのインデックスを張る
    */
   private void createMonsterAttackStatusSearchIdx() {
-    String idxName = "idx_" + TABLE_NAME;
-    String idxColumnName = PRIMARY_KEY_COLUMN_NAME;
-    super.createIdx(idxName, TABLE_NAME, idxColumnName);
+    super.createIdx(TODO, MONSTERS_ATTACKS_STATUSES_SEARCH, MONSTER_ATTACK_CODE);
   }
 
   //////////////////////////////////////////////////
@@ -91,8 +87,7 @@ public class MonsterAttackStatusSearchDAO extends BattleDAO {
    * @return モンスター攻撃名のリスト
    */
   public ArrayList<String> selectAllMonsterAttackName() {
-    String columnName = MONSTER_ATTACK_NAME;
-    return super.selectColumn(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME);
+    return super.selectColumn(MONSTER_ATTACK_NAME, MONSTERS_ATTACKS_STATUSES_SEARCH, MONSTER_ATTACK_CODE);
   }
 
   /**
@@ -101,8 +96,8 @@ public class MonsterAttackStatusSearchDAO extends BattleDAO {
    * @return モンスター攻撃力のリスト
    */
   public ArrayList<Integer> selectAllMonsterAttackVal() {
-    String columnName = MONSTER_ATTACK_VAL;
-    return super.toIntegerList(super.selectColumn(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
+    return super.toIntegerList(
+        super.selectColumn(MONSTER_ATTACK_VALUE, MONSTERS_ATTACKS_STATUSES_SEARCH, MONSTER_ATTACK_CODE));
   }
 
   /**
@@ -111,7 +106,7 @@ public class MonsterAttackStatusSearchDAO extends BattleDAO {
    * @return モンスター攻撃ミス確率のリスト
    */
   public ArrayList<Float> selectAllMonsterAttackMissProb() {
-    String columnName = MONSTER_ATTACK_MISS_PROB;
-    return super.toFloatList(super.selectColumn(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
+    return super.toFloatList(
+        super.selectColumn(MONSTER_ATTACK_MISS_PROBABILITY, MONSTERS_ATTACKS_STATUSES_SEARCH, MONSTER_ATTACK_CODE));
   }
 }

@@ -25,6 +25,7 @@ public enum ColumnName implements Consts {
   USER_SELECTE_CODE, // ユーザー選択コード
   MONSTER_CODE, // モンスターコード
   WEAPON_CODE, // 武器コード
+  ARMOR_CODE, // 防具コード
   PLAYER_CODE, // プレイヤーコード
 
   /////////////////////////
@@ -44,12 +45,12 @@ public enum ColumnName implements Consts {
   WEAPON_ELEMENT_CODE, // 武器属性コード
 
   // 武器切れ味 ※不可算名詞
-  WEAPONS_SHARPNESS_COLOR_CODE, // 切れ味色コード
-  WEAPONS_SHARPNESS_COLOR_GAGE_AMOUNT, // 切れ味色ゲージ量
-  WEAPONS_SHARPNESS_ATTACK_VALUE_RATE, // 切れ味攻撃力倍率
+  WEAPON_SHARPNESS_COLOR_CODE, // 切れ味色コード
+  WEAPON_SHARPNESS_COLOR_GAGE_AMOUNT, // 切れ味色ゲージ量
+  WEAPON_SHARPNESS_ATTACK_VALUE_RATE, // 切れ味攻撃力倍率
 
   // 武器切れ味色
-  WEAPONS_SHARPNESS_COLOR_NAME, // 切れ味色名
+  WEAPON_SHARPNESS_COLOR_NAME, // 切れ味色名
 
   // 武器属性
   WEAPON_ELEMENT_NAME, // 武器属性名
@@ -61,13 +62,13 @@ public enum ColumnName implements Consts {
   ARMOR_NAME, // 防具名
   ARMOR_DIFFENCE_VALUE, // 防具防御力
   ARMOR_SKILL_CODE, // 防具スキルコード
-  ARMOR_RESISTANCE_CODE, // 防具耐性コード
+  ARMOR_ELEMENT_RESISTANCE_CODE, // 防具耐性コード
 
   // 防具属性耐性
   ARMOR_FIRE_RESISTANCE, // 防具火耐性
   ARMOR_WATER_RESISTANCE, // 防具水耐性
-  ARMOR_SUNDER_RESISTANCE, // 防具雷耐性
-  ARMOR_THUNDER_RESISTANCE, // 防具氷耐性
+  ARMOR_ICE_RESISTANCE, // 防具氷耐性
+  ARMOR_THUNDER_RESISTANCE, // 防具雷耐性
   ARMOR_DRAGON_RESISTANCE, // 防具龍耐性
 
   // 防具スキル
@@ -83,8 +84,8 @@ public enum ColumnName implements Consts {
   MONSTER_MAIN_HITPOINT, // モンスター体力
   MONSTER_FIRE_RESISTANCE, // モンスター火耐性
   MONSTER_WATER_RESISTANCE, // モンスター水耐性
-  MONSTER_SUNDER_RESISTANCE, // モンスター雷耐性
-  MONSTER_THUNDER_RESISTANCE, // モンスター氷耐性
+  MONSTER_ICE_RESISTANCE, // モンスター氷耐性
+  MONSTER_THUNDER_RESISTANCE, // モンスター雷耐性
   MONSTER_DRAGON_RESISTANCE, // モンスター龍耐性
 
   // モンスター部位

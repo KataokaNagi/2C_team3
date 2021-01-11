@@ -12,14 +12,15 @@
 
 package jdbc;
 
+import static jdbc.consts.ColumnName.*;
+import static jdbc.consts.DenormalizedTableName.*;
+import static jdbc.consts.IdxName.*;
+
 /**
  * @class MonsterMainHpDAO
  * @brief 「モンスター総合体力」テーブルのDAO
  */
 public class MonsterMainHpDAO extends BattleDAO {
-
-  private final String TABLE_NAME = "monster_main_hitpoints";
-  private final String PRIMARY_KEY_COLUMN_NAME = "monster_code";
 
   /**
    * @fn MonsterMainHpDAO
@@ -52,9 +53,7 @@ public class MonsterMainHpDAO extends BattleDAO {
    * @brief テーブルのインデックスを張る
    */
   private void createMonsterMainHpIdx() {
-    String idxName = "idx_" + TABLE_NAME;
-    String idxColumnName = PRIMARY_KEY_COLUMN_NAME;
-    super.createIdx(idxName, TABLE_NAME, idxColumnName);
+    super.createIdx(TODO, MONSTERS_MAIN_HITPOINTS, MONSTER_CODE);
   }
 
   /**
@@ -63,8 +62,7 @@ public class MonsterMainHpDAO extends BattleDAO {
    * @return モンスター体力の先頭のフィールド
    */
   public int selectFirstMonsterMainHp() {
-    String columnName = "monster_main_hitpoint";
-    return Integer.parseInt(super.selectFirstField(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
+    return Integer.parseInt(super.selectFirstField(MONSTER_MAIN_HITPOINT, MONSTERS_MAIN_HITPOINTS, MONSTER_CODE));
   }
 
   /**
@@ -72,7 +70,7 @@ public class MonsterMainHpDAO extends BattleDAO {
    * @brief 「モンスター総合体力」テーブルの、モンスター体力カラムの先頭のフィールドを更新
    */
   public void updateFirstMonsterMainHp(int monsterMainHp) {
-    String columnName = "monster_main_hitpoint";
-    super.updateFirstField(Integer.toString(monsterMainHp), columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME);
+    super.updateFirstField(Integer.toString(monsterMainHp), MONSTER_MAIN_HITPOINT, MONSTERS_MAIN_HITPOINTS,
+        MONSTER_CODE);
   }
 }

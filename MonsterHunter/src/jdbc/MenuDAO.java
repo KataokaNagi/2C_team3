@@ -16,6 +16,8 @@
 package jdbc;
 
 import java.util.ArrayList;
+import static jdbc.consts.ColumnName.*;
+import static jdbc.consts.NormalizedTableName.*;
 
 /**
  * @class MenuDAO
@@ -39,10 +41,7 @@ public class MenuDAO extends DataAccessObject {
    * @return 全武器名のリスト
    */
   public ArrayList<String> selectAllWeaponName() {
-    String columnName = "weapon_name";
-    String tableName = "weapons";
-    String primaryKeyColumnName = "weapon_id";
-    return super.selectColumn(columnName, tableName, primaryKeyColumnName);
+    return super.selectColumn(WEAPON_NAME, WEAPONS, WEAPON_CODE);
   }
 
   /**
@@ -51,10 +50,7 @@ public class MenuDAO extends DataAccessObject {
    * @return 全防具名のリスト
    */
   public ArrayList<String> selectAllArmorName() {
-    String columnName = "armor_name";
-    String tableName = "armors";
-    String primaryKeyColumnName = "armor_id";
-    return super.selectColumn(columnName, tableName, primaryKeyColumnName);
+    return super.selectColumn(ARMOR_NAME, ARMORS, ARMOR_CODE);
   }
 
   /**
@@ -63,10 +59,7 @@ public class MenuDAO extends DataAccessObject {
    * @return 全モンスター名のリスト
    */
   public ArrayList<String> selectAllMonsterName() {
-    String columnName = "monster_name";
-    String tableName = "monsters";
-    String primaryKeyColumnName = "monster_id";
-    return super.selectColumn(columnName, tableName, primaryKeyColumnName);
+    return super.selectColumn(MONSTER_NAME, MONSTERS, MONSTER_CODE);
   }
 
   /**
@@ -75,10 +68,7 @@ public class MenuDAO extends DataAccessObject {
    * @return 全武器攻撃力のリスト
    */
   public ArrayList<Integer> selectAllWeaponAttackVal() {
-    String columnName = "weapon_attack_value";
-    String tableName = "weapons";
-    String primaryKeyColumnName = "weapon_id";
-    return super.toIntegerList(super.selectColumn(columnName, tableName, primaryKeyColumnName));
+    return super.toIntegerList(super.selectColumn(WEAPON_ATTACK_VALUE, WEAPONS, WEAPON_CODE));
   }
 
   /**
@@ -87,9 +77,6 @@ public class MenuDAO extends DataAccessObject {
    * @return 全防具防御力のリスト
    */
   public ArrayList<Integer> selectAllArmorDiffenceVal() {
-    String columnName = "armor_diffence_value";
-    String tableName = "armors";
-    String primaryKeyColumnName = "armor_id";
-    return super.toIntegerList(super.selectColumn(columnName, tableName, primaryKeyColumnName));
+    return super.toIntegerList(super.selectColumn(ARMOR_DIFFENCE_VALUE, ARMORS, ARMOR_CODE));
   }
 }

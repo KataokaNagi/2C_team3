@@ -13,10 +13,9 @@
 
 package jdbc;
 
+import static jdbc.consts.NormalizedTableName.*;
+
 abstract class BattleDAO extends DataAccessObject {
-  private final String WEAPON_TABLE_NAME = "weapons";
-  private final String ARMOR_TABLE_NAME = "armors";
-  private final String MONSTER_TABLE_NAME = "monsters";
   private String weaponName;
   private String weaponCode;
   private String armorName;

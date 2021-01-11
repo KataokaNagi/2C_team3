@@ -12,14 +12,15 @@
 
 package jdbc;
 
+import static jdbc.consts.ColumnName.*;
+import static jdbc.consts.DenormalizedTableName.*;
+import static jdbc.consts.IdxName.*;
+
 /**
  * @class PlayerHpDAO
  * @brief 「プレイヤー体力」テーブルのDAO
  */
 public class PlayerHpDAO extends BattleDAO {
-
-  private final String TABLE_NAME = "players_hitpoints";
-  private final String PRIMARY_KEY_COLUMN_NAME = "player_code";
 
   /**
    * @fn PlayerHpDAO
@@ -52,9 +53,7 @@ public class PlayerHpDAO extends BattleDAO {
    * @brief テーブルのインデックスを張る
    */
   private void createPlayerHpIdx() {
-    String idxName = "idx_" + TABLE_NAME;
-    String idxColumnName = PRIMARY_KEY_COLUMN_NAME;
-    super.createIdx(idxName, TABLE_NAME, idxColumnName);
+    super.createIdx(TODO, PLAYERS_HITPOINTS, PLAYER_CODE);
   }
 
   /**
@@ -63,8 +62,7 @@ public class PlayerHpDAO extends BattleDAO {
    * @return プレイヤー体力の先頭のフィールド
    */
   public int selectFirstPlayerHp() {
-    String columnName = "player_hitpoint";
-    return Integer.parseInt(super.selectFirstField(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
+    return Integer.parseInt(super.selectFirstField(PLAYER_HITPOINT, PLAYERS_HITPOINTS, PLAYER_CODE));
   }
 
   /**
@@ -72,7 +70,6 @@ public class PlayerHpDAO extends BattleDAO {
    * @brief 「プレイヤー体力」テーブルの、プレイヤー体力カラムの先頭のフィールドを更新
    */
   public void updateFirstPlayerHp(int playerHp) {
-    String columnName = "player_hitpoint";
-    super.updateFirstField(Integer.toString(playerHp), columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME);
+    super.updateFirstField(Integer.toString(playerHp), PLAYER_HITPOINT, PLAYERS_HITPOINTS, PLAYER_CODE);
   }
 }

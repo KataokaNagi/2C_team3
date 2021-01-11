@@ -23,7 +23,7 @@ import jdbc.consts.*;
  * @class DataAccessObject
  * @brief DAOの汎用部分を実装する抽象クラス
  */
-abstract class DataAccessObject<T extends TableName> extends DBConnector {
+abstract class DataAccessObject<T extends Enum<T> & TableName> extends DBConnector {
 
   /**
    * @fn createTable
@@ -101,7 +101,7 @@ abstract class DataAccessObject<T extends TableName> extends DBConnector {
    * @param[in] primaryKeyColumnName: 検索したいカラムの存在するテーブルの主キーの名前
    * @return 指定されたカラムの全フィールドのオブジェクトリスト
    */
-  protected <T extends TableName> ArrayList<String> selectColumn(ColumnName columnName, T tableName,
+  protected <T extends Enum<T> & TableName> ArrayList<String> selectColumn(ColumnName columnName, T tableName,
       ColumnName primaryKeyColumnName) {
     Connection connection = null; // ! DBコネクション
     Statement statement = null; // ! SQLステートメント
@@ -146,7 +146,7 @@ abstract class DataAccessObject<T extends TableName> extends DBConnector {
    * @param[in] primaryKeyColumnName: 検索したいカラムの存在するテーブルの主キーの名前
    * @return 指定されたカラムの全フィールドのオブジェクトリスト
    */
-  protected <T extends TableName> ArrayList<String> selectColumn(ColumnName columnName, T tableName,
+  protected <T extends Enum<T> & TableName> ArrayList<String> selectColumn(ColumnName columnName, T tableName,
       ColumnName primaryKeyColumnName, String whereSQL) {
     Connection connection = null; // ! DBコネクション
     Statement statement = null; // ! SQLステートメント

@@ -14,14 +14,17 @@ package jdbc;
 
 import java.util.ArrayList;
 
+import jdbc.consts.ColumnName;
+
+import static jdbc.consts.ColumnName.*;
+import static jdbc.consts.DenormalizedTableName.*;
+import static jdbc.consts.IdxName.*;
+
 /**
  * @class SharpnessSearchDAO
  * @brief 「切れ味色ごと検索」テーブルのDAO
  */
 public class SharpnessSearchDAO extends BattleDAO {
-
-  private final String TABLE_NAME = "sharpness_searches";
-  private final String PRIMARY_KEY_COLUMN_NAME = "sharpness_color_code";
 
   /**
    * @fn SharpnessSearchDAO
@@ -54,9 +57,7 @@ public class SharpnessSearchDAO extends BattleDAO {
    * @brief テーブルのインデックスを張る
    */
   private void createSharpnessSearchIdx() {
-    String idxName = "idx_" + TABLE_NAME;
-    String idxColumnName = PRIMARY_KEY_COLUMN_NAME;
-    super.createIdx(idxName, TABLE_NAME, idxColumnName);
+    super.createIdx(TODO, SHARPNESS_COLORS_SEARCH, WEAPON_SHARPNESS_COLOR_CODE);
   }
 
   //////////////////////////////////////////////////
@@ -69,8 +70,7 @@ public class SharpnessSearchDAO extends BattleDAO {
    * @return 全切れ味色名のリスト
    */
   public ArrayList<String> selectAllSharpnessColorName() {
-    String columnName = "sharpness_color_name";
-    return super.selectColumn(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME);
+    return super.selectColumn(WEAPON_SHARPNESS_COLOR_NAME, SHARPNESS_COLORS_SEARCH, WEAPON_SHARPNESS_COLOR_CODE);
   }
 
   /**
@@ -79,8 +79,8 @@ public class SharpnessSearchDAO extends BattleDAO {
    * @return 全切れ味ゲージ量名のリスト
    */
   public ArrayList<Integer> selectAllSharpnessGaugeAmount() {
-    String columnName = "sharpness_gauge_amount";
-    return super.toIntegerList(super.selectColumn(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
+    return super.toIntegerList(
+        super.selectColumn(WEAPON_SHARPNESS_COLOR_GAGE_AMOUNT, SHARPNESS_COLORS_SEARCH, WEAPON_SHARPNESS_COLOR_CODE));
   }
 
   /**
@@ -89,7 +89,7 @@ public class SharpnessSearchDAO extends BattleDAO {
    * @return 全切れ味攻撃力倍率のリスト
    */
   public ArrayList<Float> selectAllSharpnessIncreasingAttackValueRate() {
-    String columnName = "sharpness_increasing_attack_value_rate";
-    return super.toFloatList(super.selectColumn(columnName, TABLE_NAME, PRIMARY_KEY_COLUMN_NAME));
+    return super.toFloatList(
+        super.selectColumn(WEAPON_SHARPNESS_ATTACK_VALUE_RATE, SHARPNESS_COLORS_SEARCH, WEAPON_SHARPNESS_COLOR_CODE));
   }
 }

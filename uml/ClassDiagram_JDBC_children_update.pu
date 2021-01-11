@@ -147,8 +147,8 @@ package src.jdbc {
   }
 
   class PlayerHpDAO extends BattleDAO {
-    - TABLE_NAME: final String
-    - PRIMARY_KEY_COLUMN_NAME: final String
+    ' - TABLE_NAME: final String
+    ' - PRIMARY_KEY_COLUMN_NAME: final String
 
     + PlayerHpDAO(weaponName: String, armorName: String, monsterName: String) {
     - createPlayerHpTable(): void
@@ -159,8 +159,8 @@ package src.jdbc {
   }
 
   class MonsterMainHpDAO extends BattleDAO {
-    - TABLE_NAME: final String
-    - PRIMARY_KEY_COLUMN_NAME: final String
+    ' - TABLE_NAME: final String
+    ' - PRIMARY_KEY_COLUMN_NAME: final String
 
     + MonsterMainHpDAO(weaponName: String, armorName: String, monsterName: String) {
     - createMonsterMainHpTable(): void
@@ -171,8 +171,8 @@ package src.jdbc {
   }
 
   class MonsterPartsHpDAO extends BattleDAO {
-    - TABLE_NAME: final String
-    - PRIMARY_KEY_COLUMN_NAME: final String
+    ' - TABLE_NAME: final String
+    ' - PRIMARY_KEY_COLUMN_NAME: final String
 
     + MonsterPartsHpDAO(weaponName: String, armorName: String, monsterName: String)
     - createMonsterPartsHpTable() : void

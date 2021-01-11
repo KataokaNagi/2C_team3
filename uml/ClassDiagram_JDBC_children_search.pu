@@ -146,8 +146,8 @@ package src.jdbc {
   }
 
   class SharpnessSearchDAO extends BattleDAO {
-    - TABLE_NAME: final String
-    - PRIMARY_KEY_COLUMN_NAME: final String
+    ' - TABLE_NAME: final String
+    ' - PRIMARY_KEY_COLUMN_NAME: final String
 
     + SharpnessSearchDAO(weaponName: String, armorName: String, monsterName: String)
     - createSharpnessSearchTable(): void
@@ -159,8 +159,8 @@ package src.jdbc {
   }
 
   class PlayerStatusSearchDAO extends BattleDAO {
-    - TABLE_NAME: final String
-    - PRIMARY_KEY_COLUMN_NAME: final String
+    ' - TABLE_NAME: final String
+    ' - PRIMARY_KEY_COLUMN_NAME: final String
 
     + PlayerStatusSearchDAO(weaponName: String, armorName: String, monsterName: String)
     - createPlayerStatusSearchTable(): void
@@ -189,12 +189,12 @@ package src.jdbc {
   }
 
   class MonsterAttackStatusSearchDAO extends BattleDAO {
-    - FROM_TABLE_NAME: final String
-    - TABLE_NAME: final String
-    - PRIMARY_KEY_COLUMN_NAME: final String
-    - MONSTER_ATTACK_NAME: final String
-    - MONSTER_ATTACK_VAL: final String
-    - MONSTER_ATTACK_MISS_PROB: final String
+    ' - FROM_TABLE_NAME: final String
+    ' - TABLE_NAME: final String
+    ' - PRIMARY_KEY_COLUMN_NAME: final String
+    ' - MONSTER_ATTACK_NAME: final String
+    ' - MONSTER_ATTACK_VAL: final String
+    ' - MONSTER_ATTACK_MISS_PROB: final String
 
     + MonsterAttackStatusSearchDAO(weaponName: String, armorName: String, monsterName: String)
     - MonsterAttackStatusSearchTable(): void
