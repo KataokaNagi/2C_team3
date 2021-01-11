@@ -31,7 +31,8 @@ abstract class DataAccessObject extends DBConnector {
    * @brief SQL文でよく使うカラムを非正規化する汎用メソッド
    * @param[in] tableName 作成するテーブル名
    */
-  protected void createTable(DenormalizedTableName tableName, String tableRecordDetailSQL, ColumnName primaryKeyColumnName) {
+  protected void createTable(DenormalizedTableName tableName, String tableRecordDetailSQL,
+      ColumnName primaryKeyColumnName) {
 
     Connection connection = null; // ! DBコネクション
     Statement statement = null; // ! SQLステートメント
@@ -89,7 +90,7 @@ abstract class DataAccessObject extends DBConnector {
    * @param[in] columnName インデックスを張るコラム名
    * @brief テーブルのインデックスを張る
    */
-  protected void createIdx(String idxName, DenormalizedTableName tableName, String columnName) {
+  protected void createIdx(String idxName, DenormalizedTableName tableName, ColumnName columnName) {
     // TODO
   }
 
@@ -101,7 +102,7 @@ abstract class DataAccessObject extends DBConnector {
    * @param[in] primaryKeyColumnName: 検索したいカラムの存在するテーブルの主キーの名前
    * @return 指定されたカラムの全フィールドのオブジェクトリスト
    */
-  protected ArrayList<String> selectColumn(String columnName, String tableName, String primaryKeyColumnName) {
+  protected ArrayList<String> selectColumn(ColumnName columnName, String tableName, ColumnName primaryKeyColumnName) {
     Connection connection = null; // ! DBコネクション
     Statement statement = null; // ! SQLステートメント
     ResultSet resultSet = null; // ! SQLリザルトセット
@@ -145,7 +146,7 @@ abstract class DataAccessObject extends DBConnector {
    * @param[in] primaryKeyColumnName: 検索したいカラムの存在するテーブルの主キーの名前
    * @return 指定されたカラムの全フィールドのオブジェクトリスト
    */
-  protected ArrayList<String> selectColumn(String columnName, String tableName, String primaryKeyColumnName,
+  protected ArrayList<String> selectColumn(ColumnName columnName, String tableName, ColumnName primaryKeyColumnName,
       String whereSQL) {
     Connection connection = null; // ! DBコネクション
     Statement statement = null; // ! SQLステートメント
@@ -219,7 +220,8 @@ abstract class DataAccessObject extends DBConnector {
    * @param[in] primaryKey: 検索したいフィールドに対応する主キー
    * @return String: 主キーで指定したフィールド
    */
-  protected String selectField(String columnName, String tableName, String primaryKeyColumnName, String primaryKey) {
+  protected String selectField(ColumnName columnName, String tableName, ColumnName primaryKeyColumnName,
+      String primaryKey) {
     // TODO
     return "tmp";
   }
@@ -233,7 +235,7 @@ abstract class DataAccessObject extends DBConnector {
    * @param[in] primaryKey: 検索したいフィールドに対応する主キー
    * @return String: 主キーで指定したフィールド
    */
-  protected String selectFirstField(String columnName, String tableName, String primaryKeyColumnName) {
+  protected String selectFirstField(ColumnName columnName, String tableName, ColumnName primaryKeyColumnName) {
     String primaryKey = "0"; // ! @attention primaryKeyが数字で張られているときにしか通用しない
     return selectField(columnName, tableName, primaryKeyColumnName, primaryKey);
 
@@ -259,7 +261,7 @@ abstract class DataAccessObject extends DBConnector {
    * @param[in] primaryKeyColumnName: 更新したいフィールドが存在するテーブルの主キーの名前
    * @param[in] primaryKey: 更新したいフィールドに対応する主キー
    */
-  protected void updateField(String field, String columnName, String tableName, String primaryKeyColumnName,
+  protected void updateField(String field, ColumnName columnName, String tableName, ColumnName primaryKeyColumnName,
       String primaryKey) {
     // TODO
   }
@@ -273,7 +275,8 @@ abstract class DataAccessObject extends DBConnector {
    * @param[in] primaryKeyColumnName: 更新したいフィールドが存在するテーブルの主キーの名前
    * @param[in] primaryKey: 更新したいフィールドに対応する主キー
    */
-  protected void updateFirstField(String field, String columnName, String tableName, String primaryKeyColumnName) {
+  protected void updateFirstField(String field, ColumnName columnName, String tableName,
+      ColumnName primaryKeyColumnName) {
     String primaryKey = "0"; // ! @attention primaryKeyが数字で張られているときにしか通用しない
     updateField(field, columnName, tableName, primaryKeyColumnName, primaryKey);
   }

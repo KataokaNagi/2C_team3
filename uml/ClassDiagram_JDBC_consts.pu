@@ -136,148 +136,169 @@ package src.gameprocess {
 
 package src.jdbc {
   package src.jdbc.consts {
-  enum ColumnName {
 
-  ' /////////////////////////
-  ' // ユーザー選択
-  ' /////////////////////////
-  ' // ユーザー選択
-  USER_SELECTE_CODE
-  MONSTER_CODE
-  WEAPON_CODE
-  PLAYER_CODE
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  
 
-  ' /////////////////////////
-  ' // プレイヤー関係
-  ' /////////////////////////
-  ' // プレイヤー
-  PLAYER_HITPOINT
-
-  ' /////////////////////////
-  ' // 武器
-  ' /////////////////////////
-  ' // 武器
-  WEAPON_NAME
-  WEAPON_ATTACK_VALUE
-  WEAPON_CRITIVAL_RATE
-  WEAPON_ELEMENT_VALUE
-  WEAPON_ELEMENT_CODE
-
-  ' // 武器切れ味 ※不可算名詞
-  WEAPONS_SHARPNESS_COLOR_CODE
-  WEAPONS_SHARPNESS_COLOR_GAGE_AMOUNT
-  WEAPONS_SHARPNESS_ATTACK_VALUE_RATE
-
-  ' // 武器切れ味色
-  WEAPONS_SHARPNESS_COLOR_NAME
-
-  ' // 武器属性
-  WEAPON_ELEMENT_NAME
-
-  ' /////////////////////////
-  ' // 防具関係
-  ' /////////////////////////
-  ' // 防具
-  ARMOR_NAME
-  ARMOR_DIFFENCE_VALUE
-  ARMOR_SKILL_CODE
-  ARMOR_RESISTANCE_CODE
-
-  ' // 防具属性耐性
-  ARMOR_FIRE_RESISTANCE
-  ARMOR_WATER_RESISTANCE
-  ARMOR_SUNDER_RESISTANCE
-  ARMOR_THUNDER_RESISTANCE
-  ARMOR_DRAGON_RESISTANCE
-
-  ' // 防具スキル
-  ARMOR_SKILL_NAME
-  ARMOR_SKILL_INCREASE_TARGET
-  ARMOR_SKILL_INCREASE_VALUE
-
-  ' /////////////////////////
-  ' // モンスター関係
-  ' /////////////////////////
-  ' // モンスター
-  MONSTER_NAME
-  MONSTER_MAIN_HITPOINT
-  MONSTER_FIRE_RESISTANCE
-  MONSTER_WATER_RESISTANCE
-  MONSTER_SUNDER_RESISTANCE
-  MONSTER_THUNDER_RESISTANCE
-  MONSTER_DRAGON_RESISTANCE
-
-  ' // モンスター部位
-  MONSTER_PART_CODE
-  MONSTER_PART_HITPOINT
-  MONSTER_PART_HARDNESS
-
-  ' // モンスター部位名
-  MONSTER_PART_NAME
-
-  ' // モンスター攻撃
-  MONSTER_ATTACK_CODE
-  MONSTER_ATTACK_NAME
-  MONSTER_ATTACK_VALUE
-  MONSTER_ATTACK_MISS_PROBABILITY
-
-  - ColumnName()
-  + toLowerCase: String
+  interface Consts {
+    + toLowerCase(): String
   }
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  
 
-enum NormalizedTableName {
-
-  ' // ユーザー選択
-  USERS_SELECTES
-
-  ' // プレイヤー関係
-  PLAYERS
-
-  ' // 武器関係
-  WEAPONS
-  WEAPONS_SHARPNESS
-  WEAPONS_SHARPNESS_COLORS
-  WEAPONS_ELEMENTS
-
-  ' // 防具関係
-  ARMORS
-  ARMORS_ELEMENTS_RESISTANCES
-  ARMORS_SKILLS
-
-  ' // モンスター関係
-  MONSTERS
-  MONSTERS_PARTS
-  MONSTERS_PARTS_NAMES
-  MONSTERS_ATTACKS
-
-  - NormalizedTableName()
-  + toLowerCase(): String
+  interface TableName extends Consts {
   }
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  
 
-enum DenormalizedTableName {
+  enum IdxName implements Consts {
+    TODO
 
-  ' // ユーザー選択関係
-  ' // なし
+    - IdxName()
+    + toLowerCase(): String
+  }
 
-  ' // プレイヤー関係
-  PLAYERS_HITPOINTS
-  PLAYERS_STATUSES_SEARCH
-  SHARPNESS_COLORS_SEARCH
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  
 
-  ' // モンスター関係
-  MONSTERS_MAIN_HITPOINTS
-  MONSTERS_PARTS_HITPOINTS
-  MONSTERS_ATTACKS_STATUSES_SEARCH
+    enum ColumnName implements Consts {
 
-  - DenormalizedTableName()
-  + toLowerCase(): String
-}
+    ' /////////////////////////
+    ' // ユーザー選択
+    ' /////////////////////////
+    ' // ユーザー選択
+    USER_SELECTE_CODE
+    MONSTER_CODE
+    WEAPON_CODE
+    PLAYER_CODE
 
+    ' /////////////////////////
+    ' // プレイヤー関係
+    ' /////////////////////////
+    ' // プレイヤー
+    PLAYER_HITPOINT
 
+    ' /////////////////////////
+    ' // 武器
+    ' /////////////////////////
+    ' // 武器
+    WEAPON_NAME
+    WEAPON_ATTACK_VALUE
+    WEAPON_CRITIVAL_RATE
+    WEAPON_ELEMENT_VALUE
+    WEAPON_ELEMENT_CODE
+
+    ' // 武器切れ味 ※不可算名詞
+    WEAPONS_SHARPNESS_COLOR_CODE
+    WEAPONS_SHARPNESS_COLOR_GAGE_AMOUNT
+    WEAPONS_SHARPNESS_ATTACK_VALUE_RATE
+
+    ' // 武器切れ味色
+    WEAPONS_SHARPNESS_COLOR_NAME
+
+    ' // 武器属性
+    WEAPON_ELEMENT_NAME
+
+    ' /////////////////////////
+    ' // 防具関係
+    ' /////////////////////////
+    ' // 防具
+    ARMOR_NAME
+    ARMOR_DIFFENCE_VALUE
+    ARMOR_SKILL_CODE
+    ARMOR_RESISTANCE_CODE
+
+    ' // 防具属性耐性
+    ARMOR_FIRE_RESISTANCE
+    ARMOR_WATER_RESISTANCE
+    ARMOR_SUNDER_RESISTANCE
+    ARMOR_THUNDER_RESISTANCE
+    ARMOR_DRAGON_RESISTANCE
+
+    ' // 防具スキル
+    ARMOR_SKILL_NAME
+    ARMOR_SKILL_INCREASE_TARGET
+    ARMOR_SKILL_INCREASE_VALUE
+
+    ' /////////////////////////
+    ' // モンスター関係
+    ' /////////////////////////
+    ' // モンスター
+    MONSTER_NAME
+    MONSTER_MAIN_HITPOINT
+    MONSTER_FIRE_RESISTANCE
+    MONSTER_WATER_RESISTANCE
+    MONSTER_SUNDER_RESISTANCE
+    MONSTER_THUNDER_RESISTANCE
+    MONSTER_DRAGON_RESISTANCE
+
+    ' // モンスター部位
+    MONSTER_PART_CODE
+    MONSTER_PART_HITPOINT
+    MONSTER_PART_HARDNESS
+
+    ' // モンスター部位名
+    MONSTER_PART_NAME
+
+    ' // モンスター攻撃
+    MONSTER_ATTACK_CODE
+    MONSTER_ATTACK_NAME
+    MONSTER_ATTACK_VALUE
+    MONSTER_ATTACK_MISS_PROBABILITY
+
+    - ColumnName()
+    + toLowerCase: String
+    }
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  
+
+  enum NormalizedTableName implements TableName {
+
+    ' // ユーザー選択
+    USERS_SELECTES
+
+    ' // プレイヤー関係
+    PLAYERS
+
+    ' // 武器関係
+    WEAPONS
+    WEAPONS_SHARPNESS
+    WEAPONS_SHARPNESS_COLORS
+    WEAPONS_ELEMENTS
+
+    ' // 防具関係
+    ARMORS
+    ARMORS_ELEMENTS_RESISTANCES
+    ARMORS_SKILLS
+
+    ' // モンスター関係
+    MONSTERS
+    MONSTERS_PARTS
+    MONSTERS_PARTS_NAMES
+    MONSTERS_ATTACKS
+
+    - NormalizedTableName()
+    + toLowerCase(): String
+    }
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  
+
+  enum DenormalizedTableName implements TableName {
+
+    ' // ユーザー選択関係
+    ' // なし
+
+    ' // プレイヤー関係
+    PLAYERS_HITPOINTS
+    PLAYERS_STATUSES_SEARCH
+    SHARPNESS_COLORS_SEARCH
+
+    ' // モンスター関係
+    MONSTERS_MAIN_HITPOINTS
+    MONSTERS_PARTS_HITPOINTS
+    MONSTERS_ATTACKS_STATUSES_SEARCH
+
+    - DenormalizedTableName()
+    + toLowerCase(): String
+  }
 }
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''

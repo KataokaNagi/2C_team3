@@ -14,7 +14,7 @@
 
 package jdbc.consts;
 
-public enum ColumnName {
+public enum ColumnName implements Consts {
 
   /////////////////////////
   // ユーザー選択
@@ -112,7 +112,7 @@ public enum ColumnName {
    */
   public String toLowerCase() {
     String rtnStr = this.name().toLowerCase();
-    System.out.println("TableName.toLowerCase() being used (return : " + rtnStr + ")");
+    System.out.println("ColumnName.toLowerCase() being used (return : " + rtnStr + ")");
     return rtnStr;
   }
 }

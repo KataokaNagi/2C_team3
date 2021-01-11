@@ -14,7 +14,7 @@
 
 package jdbc.consts;
 
-public enum NormalizedTableName {
+public enum NormalizedTableName implements TableName {
 
   // ユーザー選択
   USERS_SELECTES, // ユーザー選択

@@ -14,7 +14,7 @@
 
 package jdbc.consts;
 
-public enum DenormalizedTableName {
+public enum DenormalizedTableName implements TableName {
 
   // ユーザー選択関係
   // なし
