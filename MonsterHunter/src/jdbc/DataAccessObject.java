@@ -17,14 +17,13 @@ package jdbc;
 import java.sql.*;
 import java.util.ArrayList;
 
-import jdbc.consts.ColumnName;
-import jdbc.consts.DenormalizedTableName;
+import jdbc.consts.*;
 
 /**
  * @class DataAccessObject
  * @brief DAOの汎用部分を実装する抽象クラス
  */
-abstract class DataAccessObject extends DBConnector {
+abstract class DataAccessObject<T extends TableName> extends DBConnector {
 
   /**
    * @fn createTable
@@ -90,7 +89,7 @@ abstract class DataAccessObject extends DBConnector {
    * @param[in] columnName インデックスを張るコラム名
    * @brief テーブルのインデックスを張る
    */
-  protected void createIdx(String idxName, DenormalizedTableName tableName, ColumnName columnName) {
+  protected void createIdx(IdxName idxName, DenormalizedTableName tableName, ColumnName columnName) {
     // TODO
   }
 
@@ -102,7 +101,8 @@ abstract class DataAccessObject extends DBConnector {
    * @param[in] primaryKeyColumnName: 検索したいカラムの存在するテーブルの主キーの名前
    * @return 指定されたカラムの全フィールドのオブジェクトリスト
    */
-  protected ArrayList<String> selectColumn(ColumnName columnName, String tableName, ColumnName primaryKeyColumnName) {
+  protected <T extends TableName> ArrayList<String> selectColumn(ColumnName columnName, T tableName,
+      ColumnName primaryKeyColumnName) {
     Connection connection = null; // ! DBコネクション
     Statement statement = null; // ! SQLステートメント
     ResultSet resultSet = null; // ! SQLリザルトセット
@@ -112,9 +112,9 @@ abstract class DataAccessObject extends DBConnector {
     // SQL文の作成
     // 主キーで整列することでSELECT文の順序を保証し、
     // 武器名と武器スキルを同じインデックスで取得できるようにする
-    selectColumnSQL += "SELECT " + columnName;
-    selectColumnSQL += " FROM " + tableName;
-    selectColumnSQL += "ORDER BY " + primaryKeyColumnName;
+    selectColumnSQL += "SELECT " + columnName.toLowerCase();
+    selectColumnSQL += " FROM " + tableName.toLowerCase();
+    selectColumnSQL += "ORDER BY " + primaryKeyColumnName.toLowerCase();
 
     try {
       // DBの接続と実行
@@ -146,8 +146,8 @@ abstract class DataAccessObject extends DBConnector {
    * @param[in] primaryKeyColumnName: 検索したいカラムの存在するテーブルの主キーの名前
    * @return 指定されたカラムの全フィールドのオブジェクトリスト
    */
-  protected ArrayList<String> selectColumn(ColumnName columnName, String tableName, ColumnName primaryKeyColumnName,
-      String whereSQL) {
+  protected <T extends TableName> ArrayList<String> selectColumn(ColumnName columnName, T tableName,
+      ColumnName primaryKeyColumnName, String whereSQL) {
     Connection connection = null; // ! DBコネクション
     Statement statement = null; // ! SQLステートメント
     ResultSet resultSet = null; // ! SQLリザルトセット
@@ -157,10 +157,10 @@ abstract class DataAccessObject extends DBConnector {
     // SQL文の作成
     // 主キーで整列することでSELECT文の順序を保証し、
     // 武器名と武器スキルを同じインデックスで取得できるようにする
-    selectColumnSQL += "SELECT " + columnName;
-    selectColumnSQL += " FROM " + tableName;
+    selectColumnSQL += "SELECT " + columnName.toLowerCase();
+    selectColumnSQL += " FROM " + tableName.toLowerCase();
     selectColumnSQL += " " + whereSQL; // オーバーロードでここだけ異なる
-    selectColumnSQL += " ORDER BY " + primaryKeyColumnName;
+    selectColumnSQL += " ORDER BY " + primaryKeyColumnName.toLowerCase();
 
     try {
       // DBの接続と実行
@@ -220,7 +220,7 @@ abstract class DataAccessObject extends DBConnector {
    * @param[in] primaryKey: 検索したいフィールドに対応する主キー
    * @return String: 主キーで指定したフィールド
    */
-  protected String selectField(ColumnName columnName, String tableName, ColumnName primaryKeyColumnName,
+  protected String selectField(ColumnName columnName, DenormalizedTableName tableName, ColumnName primaryKeyColumnName,
       String primaryKey) {
     // TODO
     return "tmp";
@@ -235,7 +235,8 @@ abstract class DataAccessObject extends DBConnector {
    * @param[in] primaryKey: 検索したいフィールドに対応する主キー
    * @return String: 主キーで指定したフィールド
    */
-  protected String selectFirstField(ColumnName columnName, String tableName, ColumnName primaryKeyColumnName) {
+  protected String selectFirstField(ColumnName columnName, DenormalizedTableName tableName,
+      ColumnName primaryKeyColumnName) {
     String primaryKey = "0"; // ! @attention primaryKeyが数字で張られているときにしか通用しない
     return selectField(columnName, tableName, primaryKeyColumnName, primaryKey);
 
@@ -261,8 +262,8 @@ abstract class DataAccessObject extends DBConnector {
    * @param[in] primaryKeyColumnName: 更新したいフィールドが存在するテーブルの主キーの名前
    * @param[in] primaryKey: 更新したいフィールドに対応する主キー
    */
-  protected void updateField(String field, ColumnName columnName, String tableName, ColumnName primaryKeyColumnName,
-      String primaryKey) {
+  protected void updateField(String field, ColumnName columnName, DenormalizedTableName tableName,
+      ColumnName primaryKeyColumnName, String primaryKey) {
     // TODO
   }
 
@@ -275,7 +276,7 @@ abstract class DataAccessObject extends DBConnector {
    * @param[in] primaryKeyColumnName: 更新したいフィールドが存在するテーブルの主キーの名前
    * @param[in] primaryKey: 更新したいフィールドに対応する主キー
    */
-  protected void updateFirstField(String field, ColumnName columnName, String tableName,
+  protected void updateFirstField(String field, ColumnName columnName, DenormalizedTableName tableName,
       ColumnName primaryKeyColumnName) {
     String primaryKey = "0"; // ! @attention primaryKeyが数字で張られているときにしか通用しない
     updateField(field, columnName, tableName, primaryKeyColumnName, primaryKey);

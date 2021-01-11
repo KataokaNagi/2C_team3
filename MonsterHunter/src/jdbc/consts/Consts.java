@@ -13,7 +13,7 @@
 
 package jdbc.consts;
 
-interface Consts {
+public interface Consts {
 
   /**
    * @fn toLowerCase

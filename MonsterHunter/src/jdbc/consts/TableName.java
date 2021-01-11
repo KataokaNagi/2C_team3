@@ -13,6 +13,5 @@
 
 package jdbc.consts;
 
-interface TableName extends Consts {
-
+public interface TableName extends Consts {
 }
