@@ -3,11 +3,10 @@
 * @brief     バトル画面で用いるデータアクセスオブジェクト
 * @note      高度情報演習2C 後半 木村教授担当分 Team3
 * @auther    AL18036 Kataoka Nagi
-* @date      2021-01-10 08:49:51
+* @date      2021-01-11 11:27:42
 * $Version   1.2
-* $Revision  1.0
-* @par       追加：get*Code(), set*Code()
-* @par       追加：select*Code()
+* $Revision  1.1
+* @par       修正：アクセス修飾子を変更（getter以外はprivateに）
 * @see       https://www.kenschool.jp/blog/?p=1644
 */
 
@@ -37,7 +36,7 @@ abstract class BattleDAO extends DataAccessObject {
   }
 
   // SELECT codes WHERE
-  public String selectWeaponCode(String weaponName) {
+  private String selectWeaponCode(String weaponName) {
     String whereSQL = "";
     whereSQL += "WHERE ";
     whereSQL += " ";
@@ -45,36 +44,36 @@ abstract class BattleDAO extends DataAccessObject {
     return null;
   }
 
-  public String selectArmorCode(String armorName) {
+  private String selectArmorCode(String armorName) {
     return armorCode;
   }
 
-  public String selectMonsterCode(String monsterName) {
+  private String selectMonsterCode(String monsterName) {
     return monsterCode;
   }
 
   // Setter
-  public void setWeaponName(String weaponName) {
+  private void setWeaponName(String weaponName) {
     this.weaponName = weaponName;
   }
 
-  public void setWeaponCode(String weaponCode) {
+  private void setWeaponCode(String weaponCode) {
     this.weaponCode = weaponCode;
   }
 
-  public void setArmorName(String armorName) {
+  private void setArmorName(String armorName) {
     this.armorName = armorName;
   }
 
-  public void setArmorCode(String armorCode) {
+  private void setArmorCode(String armorCode) {
     this.armorCode = armorCode;
   }
 
-  public void setMonsterName(String monsterName) {
+  private void setMonsterName(String monsterName) {
     this.monsterName = monsterName;
   }
 
-  public void setMonsterCode(String monsterCode) {
+  private void setMonsterCode(String monsterCode) {
     this.monsterCode = monsterCode;
   }
 
