@@ -24,7 +24,16 @@ public class BattleManager {
 	MonsterAttackStatusSearchDAO monsterAttackStatusSearchDAO;
 	PlayerStatusSearchDAO playerStatusSearchDAO;
 
-	public int HP_player = playerHpDAO.selectFirstPlayerHp();
+	public int HP_player;
+
+	public BattleManager(String weaponName, String armorName, String monsterName) {
+	    this.playerHpDAO = new PlayerHpDAO(weaponName, armorName, monsterName);
+	    this.monsterMainHpDAO = new MonsterMainHpDAO(weaponName, armorName, monsterName);
+	    this.monsterPartsDAO = new MonsterPartsHpDAO(weaponName, armorName, monsterName);
+	    this.monsterAttackStatusSearchDAO = new MonsterAttackStatusSearchDAO(weaponName, armorName, monsterName);
+	    this.playerStatusSearchDAO = new PlayerStatusSearchDAO(weaponName, armorName, monsterName);
+	    HP_player = playerHpDAO.selectFirstPlayerHp();
+	  }
 
 
 	public int PlayerAttack(String targetPartsName) {
@@ -48,12 +57,12 @@ public class BattleManager {
 		HP_monster_main -= (int)damage;
 		monsterMainHpDAO.updateFirstMonsterMainHp(HP_monster_main);
 		HP_monster_parts -= (int)damage;
+		monsterPartsDAO.updateMonsterPartsHp(HP_monster_parts, monsterPartsDAO.selectAllMonsterPartsCode().get(targetPartsNum));
 		SharpnessDecrease(sharpness);
 		if (HP_monster_main <= 0) {
 			return -1;//シーン遷移(終了)
 		}
 		else {
-			monsterPartsDAO.updateMonsterPartsHp(HP_monster_parts, targetPartsName);
 			return (int)damage;
 		}
 	}
@@ -120,5 +129,9 @@ public class BattleManager {
 		}
 		return -1;
 	}
+
+	public ArrayList<String> getPartsName(){
+		return monsterPartsDAO.selectAllMonsterPartsName();
+		}
 
 }
