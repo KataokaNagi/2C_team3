@@ -14,6 +14,8 @@
 
 package jdbc.consts;
 
+import jdbc.utils.DebugUtil;
+
 public enum DenormalizedTableName implements TableName {
 
   // ユーザー選択関係
@@ -42,7 +44,7 @@ public enum DenormalizedTableName implements TableName {
    */
   public String toLowerCase() {
     String rtnStr = this.name().toLowerCase();
-    System.out.println("TableName.toLowerCase() being used (return : " + rtnStr + ")");
+    System.out.println("return : " + rtnStr + DebugUtil.getProcessPositionStr());
     return rtnStr;
   }
 }

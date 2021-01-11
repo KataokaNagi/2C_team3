@@ -14,6 +14,8 @@
 
 package jdbc.consts;
 
+import jdbc.utils.DebugUtil;
+
 public enum ColumnName implements Consts {
 
   /////////////////////////
@@ -112,7 +114,7 @@ public enum ColumnName implements Consts {
    */
   public String toLowerCase() {
     String rtnStr = this.name().toLowerCase();
-    System.out.println("ColumnName.toLowerCase() being used (return : " + rtnStr + ")");
+    System.out.println("return : " + rtnStr + DebugUtil.getProcessPositionStr());
     return rtnStr;
   }
 }

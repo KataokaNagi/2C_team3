@@ -75,8 +75,13 @@ note left
       |_ MonsterPartsHpDAO.java
       |_ consts
         |_ ColumnName.java
+        |_ Consts.java
         |_ DenormalizedTableName.java
+        |_ IdxName.java
         |_ NormalizedTableName.java
+        |_ TableName.java
+      |_ utils
+        |_ DebugUtil.java
       |_ sql
         |_ hoge.sql
         |_ fuga.sql
