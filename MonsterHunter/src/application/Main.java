@@ -13,6 +13,8 @@ public class Main extends Application {
 
 	private static Stage stage;
 
+	public static String selectWeapon, selectArmor, selectMonster;
+
 	@Override
 	public void start(Stage stage) {
 		try {

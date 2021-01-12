@@ -13,19 +13,20 @@ import jdbc.MenuDAO;
 public class MenuController {
 
 	//MenuDAOからArrayListを取得
-//	MenuDAO MenuDao = new MenuDAO();
-//	ArrayList<String> weaponArry = MenuDao.selectAllWeaponName();
-//	ArrayList<String> armorArry = MenuDao.selectAllArmorName();
-//	ArrayList<String> monsterArry = MenuDao.selectAllMonsterName();
-//	ArrayList<Integer> AttackArry = MenuDao.selectAllWeaponAttackVal();
-//	ArrayList<Integer> DeffenseArry = MenuDao.selectAllArmorDiffenceVal();
+	MenuDAO menuDao;
+	ArrayList<String> weaponArry = menuDao.selectAllWeaponName();
+	ArrayList<String> armorArry = menuDao.selectAllArmorName();
+	ArrayList<String> monsterArry = menuDao.selectAllMonsterName();
+	ArrayList<Integer> AttackArry = menuDao.selectAllWeaponAttackVal();
+	ArrayList<Integer> DeffenseArry = menuDao.selectAllArmorDiffenceVal();
 
 	//テスト用
-	ArrayList<String> weaponArry = new ArrayList<String>(Arrays.asList("あ","い","う","え","お"));
-	ArrayList<String> armorArry = new ArrayList<String>(Arrays.asList("か","き","く","け","こ"));
-	ArrayList<String> monsterArry = new ArrayList<String>(Arrays.asList("さ","し","す","せ","そ"));
-	ArrayList<Integer> AttackArry = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5));
-	ArrayList<Integer> DeffenseArry = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5));
+//	ArrayList<String> weaponArry = new ArrayList<String>(Arrays.asList("あ","い","う","え","お"));
+//	ArrayList<String> armorArry = new ArrayList<String>(Arrays.asList("か","き","く","け","こ"));
+//	ArrayList<String> monsterArry = new ArrayList<String>(Arrays.asList("さ","し","す","せ","そ"));
+//	ArrayList<Integer> AttackArry = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5));
+//	ArrayList<Integer> DeffenseArry = new ArrayList<Integer>(Arrays.asList(1,2,3,4,5));
+
 
 
 	@FXML
@@ -63,6 +64,10 @@ public class MenuController {
 			Error.setVisible(true);
 			return;
 		}
+		Main.selectWeapon = weapon_field.getValue();
+		Main.selectArmor = armor_field.getValue();
+		Main.selectMonster = monster_field.getValue();
+
 		new Main().changeView("Battle.fxml");// バトル画面へ遷移
 	}
 
