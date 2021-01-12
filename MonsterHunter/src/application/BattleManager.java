@@ -7,12 +7,11 @@ import jdbc.MonsterMainHpDAO;
 import jdbc.MonsterPartsHpDAO;
 import jdbc.PlayerHpDAO;
 import jdbc.PlayerStatusSearchDAO;
+import jdbc.SharpnessSearchDAO;
 
 public class BattleManager {
-	//*テーブルから取得
-	int monster_id = 0;//*
-	int element_player = 0;//*
-	int elementValue_player = 0;//*
+	int element_player;//*
+	int elementValue_player;//*
 
 	ArrayList<String> log = new ArrayList<String>();
 
@@ -23,8 +22,11 @@ public class BattleManager {
 	MonsterPartsHpDAO monsterPartsDAO;
 	MonsterAttackStatusSearchDAO monsterAttackStatusSearchDAO;
 	PlayerStatusSearchDAO playerStatusSearchDAO;
+	SharpnessSearchDAO sharpnessSearchDAO;
 
 	public int HP_player;
+	public int sharpnessColor;
+	public int sharpnessNum;
 
 	public BattleManager(String weaponName, String armorName, String monsterName) {
 	    this.playerHpDAO = new PlayerHpDAO(weaponName, armorName, monsterName);
@@ -32,7 +34,18 @@ public class BattleManager {
 	    this.monsterPartsDAO = new MonsterPartsHpDAO(weaponName, armorName, monsterName);
 	    this.monsterAttackStatusSearchDAO = new MonsterAttackStatusSearchDAO(weaponName, armorName, monsterName);
 	    this.playerStatusSearchDAO = new PlayerStatusSearchDAO(weaponName, armorName, monsterName);
+	    this.sharpnessSearchDAO = new SharpnessSearchDAO(weaponName, armorName, monsterName);
 	    HP_player = playerHpDAO.selectFirstPlayerHp();
+	    ArrayList<Integer> List_sharpness = sharpnessSearchDAO.selectAllSharpnessGaugeAmount();
+	    for(int i = List_sharpness.size()-1;i >= 0;--i) {
+	    	if (List_sharpness.get(i) != 0) {
+	    		sharpnessColor = i;
+	    		break;
+	    	}
+	    }
+	    sharpnessNum = sharpnessSearchDAO.selectAllSharpnessGaugeAmount().get(sharpnessColor);
+	    //element_player = playerStatusSearchDAO.select
+	    elementValue_player = playerStatusSearchDAO.selectFirstWeaponElementVal();
 	  }
 
 
@@ -46,8 +59,7 @@ public class BattleManager {
 		int attack_player = playerStatusSearchDAO.selectFirstWeaponAttackVal();
 		int affinity = (int)(playerStatusSearchDAO.selectFirstWeaponCriticalRate() * 100);
 		float affinityCorrection = 1;//会心補正
-		int sharpness = 0;//*
-		float sharpnessCorrection = 1;//切れ味補正
+		float sharpnessCorrection = sharpnessSearchDAO.selectAllSharpnessIncreasingAttackValueRate().get(sharpnessColor);//切れ味補正
 
 		if (rnd.nextInt(100) <= affinity) {
 			affinityCorrection = 1.25f;
@@ -58,7 +70,7 @@ public class BattleManager {
 		monsterMainHpDAO.updateFirstMonsterMainHp(HP_monster_main);
 		HP_monster_parts -= (int)damage;
 		monsterPartsDAO.updateMonsterPartsHp(HP_monster_parts, monsterPartsDAO.selectAllMonsterPartsCode().get(targetPartsNum));
-		SharpnessDecrease(sharpness);
+		SharpnessDecrease();
 		if (HP_monster_main <= 0) {
 			return -1;//シーン遷移(終了)
 		}
@@ -75,7 +87,7 @@ public class BattleManager {
 		int attackKind = rnd.nextInt(List_attackPower.size());
 		int attack_monster = List_attackPower.get(attackKind);
 		int attackMissPar = (int)(List_attackMiss.get(attackKind) * 100);
-		int deffence_player = 0;//*
+		int deffence_player = playerStatusSearchDAO.selectFirstArmorDiffenceVal();//*
 		int attackAction =  rnd.nextInt(10);//攻撃種類の決定
 		int element = 0;//*
 		float damage;
@@ -94,7 +106,7 @@ public class BattleManager {
 	}
 
 	float ElementDamage_PlayerAttack() {
-		float result = 0;
+		float result = 1;
 		int elementResistance = 0;//*
 		result = ((float)elementValue_player/10) * ((float)elementResistance/100);
 		return result;
@@ -102,7 +114,7 @@ public class BattleManager {
 
 
 	float ElementCompatibilityCalculation_EnemyAttack(int attackElement) {
-		float result = 0;
+		float result = 1;
 		int elementResistance = 0;//*
 
 		result = (100 - elementResistance)/100;
@@ -111,12 +123,12 @@ public class BattleManager {
 
 
 
-	int SharpnessDecrease(int sharpness) {
-		sharpness -= 1;
-		if (sharpness < 0) {
-			//次の色に変更
+	void SharpnessDecrease() {
+		--sharpnessNum;
+		if (sharpnessNum < 0 && sharpnessColor > 0) {
+			--sharpnessColor;
+			sharpnessNum = sharpnessSearchDAO.selectAllSharpnessGaugeAmount().get(sharpnessColor);
 		}
-		return sharpness;
 	}
 
 
