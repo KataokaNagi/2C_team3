@@ -3,10 +3,10 @@
 * @brief     DAOの汎用部分を実装する抽象クラス
 * @note      高度情報演習2C 後半 木村教授担当分 Team3
 * @auther    AL18036 Kataoka Nagi
-* @date      2021-01-13 02:41:09
-* $Version   1.1
-* $Revision  1.4
-* @par       変更点：IdxName
+* @date      2021-01-13 03:09:13
+* $Version   1.2
+* $Revision  1.0
+* @par       変更点：update関係の完成
 * @par       メモ：SQL文の最後に;が必要である可能性がある
 * @see       https://www.kenschool.jp/blog/?p=1644
  */
@@ -312,9 +312,45 @@ abstract class DataAccessObject<T extends Enum<T> & TableName> extends DBConnect
    * @param[in] primaryKeyColumnName: 更新したいフィールドが存在するテーブルの主キーの名前
    * @param[in] primaryKey: 更新したいフィールドに対応する主キー
    */
-  protected void updateField(String field, ColumnName columnName, DenormalizedTableName tableName,
+  protected void updateField(String field, ColumnName beingUpdatedColumnName, DenormalizedTableName tableName,
       ColumnName primaryKeyColumnName, String primaryKey) {
-    // TODO
+    Connection connection = null; // ! DBコネクション
+    Statement statement = null; // ! SQLステートメント
+    ResultSet resultSet = null; // ! SQLリザルトセット
+    ArrayList<String> rtnColumnList = new ArrayList<String>();
+    String updateFirstFieldSQL = ""; // ! 実行SQL文
+
+    // SQL文の作成
+    // 主キーで整列することでSELECT文の順序を保証し、
+    // 武器名と武器スキルを同じインデックスで取得できるようにする
+    updateFirstFieldSQL += "UPDATE ";
+    updateFirstFieldSQL += tableName.toLowerCase();
+    updateFirstFieldSQL += " SET ";
+    updateFirstFieldSQL += beingUpdatedColumnName.toLowerCase();
+    updateFirstFieldSQL += " = ";
+    updateFirstFieldSQL += field;
+    updateFirstFieldSQL += " WHERE ";
+    updateFirstFieldSQL += primaryKeyColumnName.toLowerCase();
+    updateFirstFieldSQL += " = ";
+    updateFirstFieldSQL += primaryKey;
+
+    try {
+      // DBの接続と実行
+      resultSet = this.exeSQL(connection, statement, updateFirstFieldSQL);
+
+      // 検索結果をArrayListに格納
+      while (resultSet.next()) {
+        rtnColumnList.add(resultSet.getString("isbn"));
+      }
+
+      // 例外処理
+    } catch (SQLException e) {
+      System.err.println(e.getSQLState());
+
+      // 後処理
+    } finally {
+      this.closeDBResources(resultSet, statement, connection);
+    }
   }
 
   /**
@@ -326,10 +362,17 @@ abstract class DataAccessObject<T extends Enum<T> & TableName> extends DBConnect
    * @param[in] primaryKeyColumnName: 更新したいフィールドが存在するテーブルの主キーの名前
    * @param[in] primaryKey: 更新したいフィールドに対応する主キー
    */
-  protected void updateFirstField(String field, ColumnName columnName, DenormalizedTableName tableName,
+  protected void updateFirstField(String field, ColumnName beingUpdatedColumnName, DenormalizedTableName tableName,
       ColumnName primaryKeyColumnName) {
-    String primaryKey = "0"; // ! @attention primaryKeyが数字で張られているときにしか通用しない
-    updateField(field, columnName, tableName, primaryKeyColumnName, primaryKey);
+    // 間に合わせコード1
+    // 主キーが0である保証がないので保留
+    // String primaryKey = "0"; // ! @attention primaryKeyが数字で張られているときにしか通用しない
+    // updateField(field, columnName, tableName, primaryKeyColumnName, primaryKey);
+
+    // 間に合わせコード2
+    // 激重コードだが、レコード数が1つしかないので、実際そんなに重くない
+    String firstPrimaryKeyField = this.selectFirstField(primaryKeyColumnName, tableName, primaryKeyColumnName);
+    updateField(field, beingUpdatedColumnName, tableName, primaryKeyColumnName, firstPrimaryKeyField);
   }
 
   /**
