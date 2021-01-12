@@ -72,7 +72,7 @@ public class PlayerHpDAO extends BattleDAO {
    * @brief 「プレイヤー体力」テーブルの削除
    */
   public void dropPlayerHpTable() {
-    // TODO
+    super.dropTable(PLAYERS_HITPOINTS);
   }
 
   /**

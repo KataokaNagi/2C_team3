@@ -86,7 +86,7 @@ public class MonsterPartsHpDAO extends BattleDAO {
    * @brief 「モンスター部位体力」テーブルの削除
    */
   public void dropMonsterPartsHpTable() {
-    // TODO
+    super.dropTable(MONSTERS_PARTS_HITPOINTS);
   }
 
   /**

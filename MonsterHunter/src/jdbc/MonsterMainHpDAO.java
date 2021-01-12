@@ -73,7 +73,7 @@ public class MonsterMainHpDAO extends BattleDAO {
    * @brief 「モンスター総合体力」テーブルの削除
    */
   public void dropMonsterMainHpTable() {
-    // TODO
+    super.dropTable(MONSTERS_MAIN_HITPOINTS);
   }
 
   /**

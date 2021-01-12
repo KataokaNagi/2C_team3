@@ -95,7 +95,7 @@ public class SharpnessSearchDAO extends BattleDAO {
    * @brief 切れ味色ごと検索テーブルの削除
    */
   public void dropSharpnessSearchTable() {
-    // TODO
+    super.dropTable(SHARPNESS_COLORS_SEARCH);
   }
 
   /**

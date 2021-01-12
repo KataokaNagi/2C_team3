@@ -83,7 +83,7 @@ public class MonsterAttackStatusSearchDAO extends BattleDAO {
    * @brief 「モンスター攻撃ステータス検索」テーブルの削除
    */
   public void dropMonsterAttackStatusSearchTable() {
-    // TODO
+    super.dropTable(MONSTERS_ATTACKS_STATUSES_SEARCH);
   }
 
   /**

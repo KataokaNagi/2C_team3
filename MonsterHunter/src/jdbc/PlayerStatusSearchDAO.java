@@ -132,7 +132,7 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    * @brief 「プレイヤーステータス検索」テーブルの削除
    */
   public void dropPlayerStatusSearchTable() {
-    // TODO
+    super.dropTable(PLAYERS_STATUSES_SEARCH);
   }
 
   /**

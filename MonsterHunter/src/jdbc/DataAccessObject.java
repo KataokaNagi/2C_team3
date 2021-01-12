@@ -62,7 +62,7 @@ abstract class DataAccessObject<T extends Enum<T> & TableName> extends DBConnect
     try {
       // DBの接続と実行
       resultSet = this.exeSQL(connection, statement, createTableSQL);
-      System.out.println("Table \"" + tableName.toLowerCase() + "\" is created.");
+      System.out.println("Table \"" + tableName.toLowerCase() + "\" was created.");
 
       // 例外処理
     } catch (SQLException e) {
@@ -80,7 +80,30 @@ abstract class DataAccessObject<T extends Enum<T> & TableName> extends DBConnect
    * @param[in] tableName 削除するテーブル名
    */
   protected void dropTable(DenormalizedTableName tableName) {
-    // TODO
+    Connection connection = null; // ! DBコネクション
+    Statement statement = null; // ! SQLステートメント
+    ResultSet resultSet = null; // ! SQLリザルトセット
+    String dropTableSQL = ""; // ! 実行SQL文
+
+    // SQL文の作成
+    dropTableSQL += "DROP TABLE ";
+    dropTableSQL += tableName.toLowerCase();
+    System.out.println(dropTableSQL);
+
+    // 実行
+    try {
+      // DBの接続と実行
+      resultSet = this.exeSQL(connection, statement, dropTableSQL);
+      System.out.println("Table \"" + tableName.toLowerCase() + "\" was droped.");
+
+      // 例外処理
+    } catch (SQLException e) {
+      System.err.println(e.getMessage());
+
+      // 後処理
+    } finally {
+      this.closeDBResources(resultSet, statement, connection);
+    }
   }
 
   /**
