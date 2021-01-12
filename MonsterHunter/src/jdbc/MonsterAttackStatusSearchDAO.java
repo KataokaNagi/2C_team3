@@ -20,7 +20,7 @@ import jdbc.consts.IdxName;
 import static jdbc.consts.NormalizedTableName.MONSTERS_ATTACKS;
 import static jdbc.consts.DenormalizedTableName.MONSTERS_ATTACKS_STATUSES_SEARCH;
 import static jdbc.consts.ColumnName.*;
-import static jdbc.consts.IdxName.*;
+import static jdbc.consts.IdxName.IDX_MONSTERS_ATTACKS_STATUSES_SEARCH;
 
 /**
  * @class MonsterAttackStatusSearchDAO
@@ -91,7 +91,7 @@ public class MonsterAttackStatusSearchDAO extends BattleDAO {
    * @brief テーブルのインデックスを張る
    */
   private void createMonsterAttackStatusSearchIdx() {
-    super.createIdx(TODO, MONSTERS_ATTACKS_STATUSES_SEARCH, MONSTER_ATTACK_CODE);
+    super.createIdx(IDX_MONSTERS_ATTACKS_STATUSES_SEARCH, MONSTERS_ATTACKS_STATUSES_SEARCH, MONSTER_ATTACK_CODE);
   }
 
   //////////////////////////////////////////////////

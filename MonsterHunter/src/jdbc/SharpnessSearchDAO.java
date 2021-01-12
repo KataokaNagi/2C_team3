@@ -21,7 +21,7 @@ import static jdbc.consts.NormalizedTableName.WEAPONS_SHARPNESS;
 import static jdbc.consts.NormalizedTableName.WEAPONS_SHARPNESS_COLORS;
 import static jdbc.consts.DenormalizedTableName.SHARPNESS_COLORS_SEARCH;
 import static jdbc.consts.ColumnName.*;
-import static jdbc.consts.IdxName.*;
+import static jdbc.consts.IdxName.IDX_SHARPNESS_COLORS_SEARCH;
 
 /**
  * @class SharpnessSearchDAO
@@ -103,7 +103,7 @@ public class SharpnessSearchDAO extends BattleDAO {
    * @brief テーブルのインデックスを張る
    */
   private void createSharpnessSearchIdx() {
-    super.createIdx(TODO, SHARPNESS_COLORS_SEARCH, WEAPON_SHARPNESS_COLOR_CODE);
+    super.createIdx(IDX_SHARPNESS_COLORS_SEARCH, SHARPNESS_COLORS_SEARCH, WEAPON_SHARPNESS_COLOR_CODE);
   }
 
   //////////////////////////////////////////////////

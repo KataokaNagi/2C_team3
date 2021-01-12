@@ -15,7 +15,7 @@ package jdbc;
 import static jdbc.consts.NormalizedTableName.MONSTERS;
 import static jdbc.consts.DenormalizedTableName.MONSTERS_MAIN_HITPOINTS;
 import static jdbc.consts.ColumnName.*;
-import static jdbc.consts.IdxName.*;
+import static jdbc.consts.IdxName.IDX_MONSTERS_MAIN_HITPOINTS;
 
 /**
  * @class MonsterMainHpDAO
@@ -81,7 +81,7 @@ public class MonsterMainHpDAO extends BattleDAO {
    * @brief テーブルのインデックスを張る
    */
   private void createMonsterMainHpIdx() {
-    super.createIdx(TODO, MONSTERS_MAIN_HITPOINTS, MONSTER_CODE);
+    super.createIdx(IDX_MONSTERS_MAIN_HITPOINTS, MONSTERS_MAIN_HITPOINTS, MONSTER_CODE);
   }
 
   /**

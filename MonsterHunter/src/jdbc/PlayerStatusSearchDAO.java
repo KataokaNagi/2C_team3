@@ -21,7 +21,7 @@ import static jdbc.consts.NormalizedTableName.ARMORS_ELEMENTS_RESISTANCES;
 import static jdbc.consts.NormalizedTableName.ARMORS_SKILLS;
 import static jdbc.consts.DenormalizedTableName.PLAYERS_STATUSES_SEARCH;
 import static jdbc.consts.ColumnName.*;
-import static jdbc.consts.IdxName.*;
+import static jdbc.consts.IdxName.IDX_PLAYERS_STATUSES_SEARCH;
 
 /**
  * @class PlayerStatusSearchDAO
@@ -140,7 +140,7 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    * @brief テーブルのインデックスを張る
    */
   private void createPlayerStatusSearchIdx() {
-    super.createIdx(TODO, PLAYERS_STATUSES_SEARCH, PLAYER_CODE);
+    super.createIdx(IDX_PLAYERS_STATUSES_SEARCH, PLAYERS_STATUSES_SEARCH, PLAYER_CODE);
   }
 
   //////////////////////////////////////////////////

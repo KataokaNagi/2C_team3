@@ -3,11 +3,10 @@
 * @brief     DAOの汎用部分を実装する抽象クラス
 * @note      高度情報演習2C 後半 木村教授担当分 Team3
 * @auther    AL18036 Kataoka Nagi
-* @date      2021-01-10 08:45:52
+* @date      2021-01-13 02:41:09
 * $Version   1.1
-* $Revision  1.3
-* @par       リファクタリング：exeSQLメソッドを作成して分離するなど
-* @par       追加：WHERE用のselectColumn()オーバーロードの追加
+* $Revision  1.4
+* @par       変更点：IdxName
 * @par       メモ：SQL文の最後に;が必要である可能性がある
 * @see       https://www.kenschool.jp/blog/?p=1644
  */
@@ -113,8 +112,36 @@ abstract class DataAccessObject<T extends Enum<T> & TableName> extends DBConnect
    * @param[in] columnName インデックスを張るコラム名
    * @brief テーブルのインデックスを張る
    */
-  protected void createIdx(IdxName idxName, DenormalizedTableName tableName, ColumnName columnName) {
-    // TODO
+  protected void createIdx(IdxName idxName, DenormalizedTableName tableName, ColumnName idxColumnName) {
+    Connection connection = null; // ! DBコネクション
+    Statement statement = null; // ! SQLステートメント
+    ResultSet resultSet = null; // ! SQLリザルトセット
+    String createIdxSQL = ""; // ! 実行SQL文
+
+    // SQL文の作成
+    createIdxSQL += "CREATE INDEX ";
+    createIdxSQL += idxName.toLowerCase();
+    createIdxSQL += " ON ";
+    createIdxSQL += tableName.toLowerCase();
+    createIdxSQL += " ( ";
+    createIdxSQL += idxColumnName.toLowerCase();
+    createIdxSQL += " )";
+    System.out.println(createIdxSQL);
+
+    // 実行
+    try {
+      // DBの接続と実行
+      resultSet = this.exeSQL(connection, statement, createIdxSQL);
+      System.out.println("Table \"" + tableName.toLowerCase() + "\" was droped.");
+
+      // 例外処理
+    } catch (SQLException e) {
+      System.err.println(e.getMessage());
+
+      // 後処理
+    } finally {
+      this.closeDBResources(resultSet, statement, connection);
+    }
   }
 
   /**

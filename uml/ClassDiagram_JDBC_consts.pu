@@ -2,10 +2,10 @@
 ' @brief     クラス図出力用のファイル（DB定数）
 ' @note      高度情報演習2C 後半 木村教授担当分 Team3
 ' @auther    AL18036 Kataoka Nagi
-' @date      2021-01-11 06:18:14
+' @date      2021-01-13 02:40:42
 ' $Version   1.0
-' $Revision  1.0
-' @par       変更点：新規作成
+' $Revision  1.1
+' @par       変更点：IdxName
 ' @note      java -jar plantuml.jar -graphvizdot C:\Graphviz\bin\dot.exe ClassDiagram_JDBC_consts.pu -charset UTF-8
 ' @see       https://qiita.com/opengl-8080/items/98c510b8ca060bdd2ea3
 
@@ -21,8 +21,8 @@ skinparam classAttributeIconSize 0
 
 header 
 Team 3 : AL18036 Kataoka Nagi
-2021-01-11 06:19:29
-変更点：新規作成
+2021-01-13 02:40:36
+変更点：IdxName
 end header
 
 ''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -156,7 +156,18 @@ package src.jdbc {
 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  
 
   enum IdxName implements Consts {
-    TODO
+    ' // ユーザー選択関係
+    ' // なし
+
+    ' // プレイヤー関係
+    IDX_PLAYERS_HITPOINTS
+    IDX_PLAYERS_STATUSES_SEARCH
+    IDX_SHARPNESS_COLORS_SEARCH
+
+    ' // モンスター関係
+    IDX_MONSTERS_MAIN_HITPOINTS
+    IDX_MONSTERS_PARTS_HITPOINTS
+    IDX_MONSTERS_ATTACKS_STATUSES_SEARCH
 
     - IdxName()
     + toLowerCase(): String

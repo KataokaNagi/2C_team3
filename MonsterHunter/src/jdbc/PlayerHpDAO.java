@@ -15,7 +15,7 @@ package jdbc;
 import static jdbc.consts.NormalizedTableName.PLAYERS;
 import static jdbc.consts.DenormalizedTableName.PLAYERS_HITPOINTS;
 import static jdbc.consts.ColumnName.*;
-import static jdbc.consts.IdxName.*;
+import static jdbc.consts.IdxName.IDX_PLAYERS_HITPOINTS;
 
 /**
  * @class PlayerHpDAO
@@ -80,7 +80,7 @@ public class PlayerHpDAO extends BattleDAO {
    * @brief テーブルのインデックスを張る
    */
   private void createPlayerHpIdx() {
-    super.createIdx(TODO, PLAYERS_HITPOINTS, PLAYER_CODE);
+    super.createIdx(IDX_PLAYERS_HITPOINTS, PLAYERS_HITPOINTS, PLAYER_CODE);
   }
 
   /**

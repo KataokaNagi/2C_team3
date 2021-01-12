@@ -18,8 +18,18 @@ import jdbc.utils.DebugUtil;
 
 public enum IdxName implements Consts {
 
-  // TODO
-  TODO;
+  // ユーザー選択関係
+  // なし
+
+  // プレイヤー関係
+  IDX_PLAYERS_HITPOINTS, // プレイヤー体力
+  IDX_PLAYERS_STATUSES_SEARCH, // プレイヤーステータス検索
+  IDX_SHARPNESS_COLORS_SEARCH, // 切れ味色ごと検索 ※SHARPNESSは負可算名詞
+
+  // モンスター関係
+  IDX_MONSTERS_MAIN_HITPOINTS, // モンスター総合体力
+  IDX_MONSTERS_PARTS_HITPOINTS, // モンスター部位体力
+  IDX_MONSTERS_ATTACKS_STATUSES_SEARCH; // モンスター攻撃ステータス検索
 
   /**
    * @fn IdxName
