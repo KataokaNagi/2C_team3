@@ -2,12 +2,10 @@
 ' @brief     クラス図出力用のファイル
 ' @note      高度情報演習2C 後半 木村教授担当分 Team3
 ' @auther    AL18036 Kataoka Nagi
-' @date      2021-01-10 08:46:34
+' @date      2021-01-12 11:36:31
 ' $Version   1.2
-' $Revision  1.4
-' @par       追加：WHERE用のselectColumn()オーバーロードの追加
-' @par       追加：get*Code(), set*Code()
-' @par       追加：select*Code()
+' $Revision  1.5
+' @par       追加：playerCode関係
 ' @note      java -jar plantuml.jar -graphvizdot C:\Graphviz\bin\dot.exe ClassDiagram_JDBC_parents.pu -charset UTF-8
 ' @see       https://qiita.com/opengl-8080/items/98c510b8ca060bdd2ea3
 
@@ -155,7 +153,7 @@ package src.jdbc {
   }
 
   abstract class DataAccessObject extends DBConnector {
-    # createTable(tableName: DenormalizedTableName, tableRecordDetailSQL: String, primaryKeyColumnName: ColumnName): void
+    # createTable(tableName: DenormalizedTableName, tableRecordDetailSQL: String): void
     # dropTable(tableName: DenormalizedTableName): void
     # createIdx(tableName: String, columnInfoList: ArrayList<String>, primaryKeyColumnName: String): void
     # selectColumn(columnName: String, tableName: String, primaryKeyColumnName: String): ArrayList<String>
@@ -179,6 +177,13 @@ package src.jdbc {
   }
 
   abstract class BattleDAO extends DataAccessObject {
+  - weaponName: String
+  - weaponCode: String
+  - armorName: String
+  - armorCode: String
+  - monsterName: String
+  - monsterCode: String
+  - playerCode: String
   - selectWeaponCode(weaponName: String): String
   - selectArmorCode(armorName: String): String
   - selectMonsterCode(monsterName: String): String
@@ -189,12 +194,14 @@ package src.jdbc {
   - setArmorCode(armorCode: String): void
   - setMonsterName(monsterName: String): void
   - setMonsterCode(monsterCode: String): void
+  - setPlayerCode(PlayerCode: String): void
   + getWeaponName(): String
   + getWeaponCode(): String
   + getArmorName(): String
   + getArmorCode(): String
   + getMonsterName(): String
   + getMonsterCode(): String
+  + getPlayerCode(): String
   }
 }
 

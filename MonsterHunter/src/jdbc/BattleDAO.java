@@ -3,10 +3,10 @@
 * @brief     バトル画面で用いるデータアクセスオブジェクト
 * @note      高度情報演習2C 後半 木村教授担当分 Team3
 * @auther    AL18036 Kataoka Nagi
-* @date      2021-01-11 11:27:42
+* @date      2021-01-12 10:53:20
 * $Version   1.2
-* $Revision  1.1
-* @par       修正：アクセス修飾子を変更（getter以外はprivateに）
+* $Revision  1.2
+* @par       追加：playerCode関係
 * @see       https://www.kenschool.jp/blog/?p=1644
 */
 
@@ -27,6 +27,7 @@ abstract class BattleDAO extends DataAccessObject {
   private String armorCode;
   private String monsterName;
   private String monsterCode;
+  private String playerCode;
 
   /**
    * @fn BattleDAO
@@ -39,6 +40,7 @@ abstract class BattleDAO extends DataAccessObject {
     this.setWeaponCode(this.selectWeaponCode(weaponName));
     this.setArmorCode(this.selectArmorCode(armorName));
     this.setMonsterCode(this.selectMonsterCode(monsterName));
+    this.setPlayerCode("0"); // tmp
   }
 
   //////////////////////////////////////////////////
@@ -127,6 +129,10 @@ abstract class BattleDAO extends DataAccessObject {
     this.monsterCode = monsterCode;
   }
 
+  public void setPlayerCode(String playerCode) {
+    this.playerCode = playerCode;
+  }
+
   //////////////////////////////////////////////////
   // Getter
   //////////////////////////////////////////////////
@@ -153,5 +159,9 @@ abstract class BattleDAO extends DataAccessObject {
 
   public String getMonsterCode() {
     return monsterCode;
+  }
+
+  public String getPlayerCode() {
+    return playerCode;
   }
 }

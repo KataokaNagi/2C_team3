@@ -53,8 +53,8 @@ abstract class DataAccessObject<T extends Enum<T> & TableName> extends DBConnect
     // createTableSQL += ")";
 
     createTableSQL += "CREATE TABLE " + tableName.toLowerCase();
+    createTableSQL += "( ";
     createTableSQL += tableRecordDetailSQL;
-    createTableSQL += "PRIMARY KEY (" + primaryKeyColumnName.toLowerCase() + ") ";
     createTableSQL += ")";
     System.out.println(createTableSQL);
 

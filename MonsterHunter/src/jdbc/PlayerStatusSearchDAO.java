@@ -3,17 +3,24 @@
 * @brief     「プレイヤーステータス検索」テーブルのDAO
 * @note      高度情報演習2C 後半 木村教授担当分 Team3
 * @auther    AL18036 Kataoka Nagi
-* @date      2021-01-11 12:06:55
+* @date      2021-01-12 11:57:25
 * $Version   1.0
 * $Revision  1.4
-* @par       追加：codeのselectメソッド
+* @par       追加：createTable関係
+* @par       変更予定：createTable関係の結合検索を複数プレイヤーに対応（発表時点では未実装でよい）
 * @see       https://www.kenschool.jp/blog/?p=1644
 */
 
 package jdbc;
 
+import static jdbc.consts.NormalizedTableName.PLAYERS;
+import static jdbc.consts.NormalizedTableName.WEAPONS;
+import static jdbc.consts.NormalizedTableName.WEAPONS_ELEMENTS;
+import static jdbc.consts.NormalizedTableName.ARMORS;
+import static jdbc.consts.NormalizedTableName.ARMORS_ELEMENTS_RESISTANCES;
+import static jdbc.consts.NormalizedTableName.ARMORS_SKILLS;
+import static jdbc.consts.DenormalizedTableName.PLAYERS_STATUSES_SEARCH;
 import static jdbc.consts.ColumnName.*;
-import static jdbc.consts.DenormalizedTableName.*;
 import static jdbc.consts.IdxName.*;
 
 /**
@@ -37,7 +44,87 @@ public class PlayerStatusSearchDAO extends BattleDAO {
    * @brief 「プレイヤーステータス検索」テーブルの作成
    */
   private void createPlayerStatusSearchTable() {
-    // TODO
+    String tableRecordDetailSQL = ""; // ! CREATE TABLE () の中身
+
+    // SQLの作成
+
+    // 作成する非正規化テーブルのカラムを指定
+    // プレイヤーコード、
+    // 武器コード、武器名、武器攻撃力、武器会心率、武器属性数値、武器属性コード
+    // 武器属性名、
+    // 防具コード、防具名、防具防御力、防具スキルコード、
+    // 防具スキル名、防具スキル上昇対象、防具スキル上昇数値、
+    // 防具属性耐性コード、
+    // 防具火耐性、防具水耐性、防具雷耐性、防具氷耐性、防具龍耐性
+    tableRecordDetailSQL += "AS ";
+    tableRecordDetailSQL += "SELECT ";
+    tableRecordDetailSQL += "PRIMARY KEY ";
+    tableRecordDetailSQL += "( ";
+    tableRecordDetailSQL += "PLAYERS." + PLAYER_CODE.toLowerCase();
+    tableRecordDetailSQL += " )";
+    tableRecordDetailSQL += ", WEAPONS." + WEAPON_CODE.toLowerCase();
+    tableRecordDetailSQL += ", WEAPONS." + WEAPON_NAME.toLowerCase();
+    tableRecordDetailSQL += ", WEAPONS." + WEAPON_ATTACK_VALUE.toLowerCase();
+    tableRecordDetailSQL += ", WEAPONS." + WEAPON_CRITIVAL_RATE.toLowerCase();
+    tableRecordDetailSQL += ", WEAPONS." + WEAPON_ELEMENT_VALUE.toLowerCase();
+    tableRecordDetailSQL += ", WEAPONS." + WEAPON_ELEMENT_CODE.toLowerCase();
+    tableRecordDetailSQL += ", WEAPONS_ELEMS." + WEAPON_ELEMENT_NAME.toLowerCase();
+    tableRecordDetailSQL += ", ARMORS." + ARMOR_CODE.toLowerCase();
+    tableRecordDetailSQL += ", ARMORS." + ARMOR_NAME.toLowerCase();
+    tableRecordDetailSQL += ", ARMORS." + ARMOR_DIFFENCE_VALUE.toLowerCase();
+    tableRecordDetailSQL += ", ARMORS." + ARMOR_SKILL_CODE.toLowerCase();
+    tableRecordDetailSQL += ", ARMORS_SKILLS." + ARMOR_SKILL_NAME.toLowerCase();
+    tableRecordDetailSQL += ", ARMORS_SKILLS." + ARMOR_SKILL_INCREASE_TARGET.toLowerCase();
+    tableRecordDetailSQL += ", ARMORS_SKILLS." + ARMOR_SKILL_INCREASE_VALUE.toLowerCase();
+    tableRecordDetailSQL += ", ARMORS." + ARMOR_ELEMENT_RESISTANCE_CODE.toLowerCase();
+    tableRecordDetailSQL += ", ARMORS_ELEMS." + ARMOR_FIRE_RESISTANCE.toLowerCase();
+    tableRecordDetailSQL += ", ARMORS_ELEMS." + ARMOR_WATER_RESISTANCE.toLowerCase();
+    tableRecordDetailSQL += ", ARMORS_ELEMS." + ARMOR_THUNDER_RESISTANCE.toLowerCase();
+    tableRecordDetailSQL += ", ARMORS_ELEMS." + ARMOR_ICE_RESISTANCE.toLowerCase();
+    tableRecordDetailSQL += ", ARMORS_ELEMS." + ARMOR_DRAGON_RESISTANCE.toLowerCase();
+
+    // 結合検索の基となる正規化テーブルの名前を指定
+    // 「プレイヤー」「武器」「武器属性」「防具」「防具属性耐性」「防具スキル」テーブル
+    tableRecordDetailSQL += "FROM ";
+    tableRecordDetailSQL += PLAYERS.toLowerCase() + " PLAYERS";
+    tableRecordDetailSQL += ", " + WEAPONS.toLowerCase() + " WEAPONS";
+    tableRecordDetailSQL += ", " + WEAPONS_ELEMENTS.toLowerCase() + " WEAPONS_ELEMS";
+    tableRecordDetailSQL += ", " + ARMORS.toLowerCase() + " ARMORS";
+    tableRecordDetailSQL += ", " + ARMORS_ELEMENTS_RESISTANCES.toLowerCase() + " ARMORS_ELEMS";
+    tableRecordDetailSQL += ", " + ARMORS_SKILLS.toLowerCase() + " ARMORS_SKILLS";
+
+    // ※※※※以下、複数テーブルの結合検索がうまく噛み合うかが少しあやしい※※※※
+
+    // ユーザーが選択したプレイヤーコード、武器コード、防具コード、モンスターコードのみを含むレコードを使用し、
+    tableRecordDetailSQL += " WHERE ";
+    tableRecordDetailSQL += "PLAYERS." + PLAYER_CODE.toLowerCase();
+    tableRecordDetailSQL += " = " + super.getPlayerCode();
+    tableRecordDetailSQL += " AND ";
+    tableRecordDetailSQL += "WEAPONS." + WEAPON_CODE.toLowerCase();
+    tableRecordDetailSQL += " = " + super.getWeaponCode();
+    tableRecordDetailSQL += " AND ";
+    tableRecordDetailSQL += "ARMORS." + ARMOR_CODE.toLowerCase();
+    tableRecordDetailSQL += " = " + super.getArmorCode();
+    tableRecordDetailSQL += " AND ";
+    tableRecordDetailSQL += "MONSTERS." + MONSTER_CODE.toLowerCase();
+    tableRecordDetailSQL += " = " + super.getMonsterCode();
+
+    // テーブル「武器」「武器属性」を主キー「武器属性コード」で結合
+    // テーブル「防具」「防具属性耐性」を主キー「防具属性耐性コード」で結合
+    // テーブル「防具」「防具スキル」を主キー「防具スキルコード」で結合
+    tableRecordDetailSQL += " AND ";
+    tableRecordDetailSQL += "WEAPONS." + WEAPON_CODE.toLowerCase();
+    tableRecordDetailSQL += " = WEAPONS_ELEMS." + WEAPON_ELEMENT_CODE.toLowerCase();
+    tableRecordDetailSQL += " AND ";
+    tableRecordDetailSQL += "ARMORS." + ARMOR_CODE.toLowerCase();
+    tableRecordDetailSQL += " = ARMORS_ELEMS." + ARMOR_ELEMENT_RESISTANCE_CODE.toLowerCase();
+    tableRecordDetailSQL += " AND ";
+    tableRecordDetailSQL += "ARMORS." + ARMOR_CODE.toLowerCase();
+    tableRecordDetailSQL += " = ARMORS_SKILLS." + ARMOR_SKILL_CODE.toLowerCase();
+
+    // テーブル名を指定して非正規化テーブルを作成
+    // 「プレイヤーステータス検索」テーブル
+    super.createTable(PLAYERS_STATUSES_SEARCH, tableRecordDetailSQL, MONSTER_ATTACK_CODE);
   }
 
   /**
